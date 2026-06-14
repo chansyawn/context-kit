@@ -12,89 +12,340 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/index.tsx:35
+#: src/routes/-features/sidebar/app-sidebar.tsx:483
+#: src/routes/-features/sidebar/app-sidebar.tsx:607
+#: src/routes/-features/sidebar/app-sidebar.tsx:696
+msgid "common.cancel"
+msgstr "Cancel"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:318
+#: src/routes/-features/sidebar/app-sidebar.tsx:521
+#: src/routes/-features/sidebar/app-sidebar.tsx:632
+#: src/routes/-features/workspaces/workspace-shell.tsx:36
 msgid "common.close"
 msgstr "Close"
 
 #. js-lingui-explicit-id
-#: src/routes/index.tsx:51
-msgid "home.breadcrumb.aria"
-msgstr "Breadcrumb"
+#: src/routes/-features/sidebar/app-sidebar.tsx:489
+#: src/routes/-features/sidebar/app-sidebar.tsx:610
+msgid "common.save"
+msgstr "Save"
 
 #. js-lingui-explicit-id
 #: src/app/i18n.test.tsx:24
-#: src/routes/index.tsx:65
 msgid "home.breadcrumb.page"
-msgstr "Data Fetching"
+msgstr "Skills"
 
 #. js-lingui-explicit-id
-#: src/routes/index.tsx:59
-msgid "home.breadcrumb.section"
-msgstr "Build Your Application"
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:95
 #: src/routes/-features/sidebar/app-sidebar.tsx:102
+#: src/routes/-features/sidebar/app-sidebar.tsx:109
 msgid "settings.language.title"
 msgstr "Language"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:75
+#: src/routes/-features/sidebar/app-sidebar.tsx:82
 msgid "settings.theme.dark"
 msgstr "Dark"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:77
+#: src/routes/-features/sidebar/app-sidebar.tsx:84
 msgid "settings.theme.light"
 msgstr "Light"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:79
+#: src/routes/-features/sidebar/app-sidebar.tsx:86
 msgid "settings.theme.system"
 msgstr "System"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:126
-#: src/routes/-features/sidebar/app-sidebar.tsx:135
+#: src/routes/-features/sidebar/app-sidebar.tsx:133
+#: src/routes/-features/sidebar/app-sidebar.tsx:142
 msgid "settings.theme.title"
 msgstr "Theme"
 
 #. js-lingui-explicit-id
-#: src/routes/index.tsx:31
+#: src/routes/-features/workspaces/workspace-shell.tsx:32
 msgid "sidebar.mobile.description"
 msgstr "Displays the mobile sidebar."
 
 #. js-lingui-explicit-id
-#: src/routes/index.tsx:27
+#: src/routes/-features/workspaces/workspace-shell.tsx:28
 msgid "sidebar.mobile.title"
 msgstr "Sidebar"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:50
-msgid "sidebar.nav.dashboard"
-msgstr "Dashboard"
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:66
-msgid "sidebar.nav.docs"
-msgstr "Docs"
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:61
-msgid "sidebar.nav.skills"
-msgstr "Skills"
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:56
-msgid "sidebar.nav.tags"
-msgstr "Tags"
-
-#. js-lingui-explicit-id
-#: src/routes/index.tsx:23
+#: src/routes/-features/workspaces/workspace-shell.tsx:24
 msgid "sidebar.toggle"
 msgstr "Toggle Sidebar"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:173
+#: src/routes/-features/sidebar/app-sidebar.tsx:189
 msgid "sidebar.workspace.description"
 msgstr "Skill library"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:211
+msgid "skills.actions.requestPermission"
+msgstr "Request folder access"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:155
+msgid "skills.actions.rescan"
+msgstr "Rescan"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:181
+msgid "skills.detail.description"
+msgstr "Description"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:197
+msgid "skills.detail.diagnostics"
+msgstr "Diagnostics"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:177
+msgid "skills.detail.empty"
+msgstr "Select a skill to view its metadata and SKILL.md source."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:201
+msgid "skills.detail.noDescription"
+msgstr "No description available."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:185
+msgid "skills.detail.path"
+msgstr "Local path"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:189
+msgid "skills.detail.sourcePreview"
+msgstr "SKILL.md preview"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:173
+msgid "skills.detail.title"
+msgstr "Skill detail"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:205
+msgid "skills.detail.unreadableSource"
+msgstr "SKILL.md could not be read."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:73
+#: src/routes/-features/skills/skills-manager.tsx:99
+msgid "skills.error.permissionRequired"
+msgstr "The saved folder permission is no longer available. Request access again from the browser prompt, or delete and recreate this workspace."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:109
+msgid "skills.error.scan"
+msgstr "Unable to scan the selected directory."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:473
+#: src/routes/-features/sidebar/app-sidebar.tsx:742
+msgid "skills.error.unsupported"
+msgstr "This browser does not support selecting local directories."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:137
+msgid "skills.filters.all"
+msgstr "All"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:133
+msgid "skills.filters.title"
+msgstr "Filters"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:159
+#: src/routes/-features/skills/skills-manager.tsx:193
+msgid "skills.invalidMetadata"
+msgstr "Invalid metadata"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:163
+msgid "skills.list.empty"
+msgstr "No skills were found in this directory."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:167
+msgid "skills.list.noMatches"
+msgstr "No skills match your search."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:147
+msgid "skills.list.rootDirectory"
+msgstr "Root"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:143
+msgid "skills.list.title"
+msgstr "Skills"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:151
+msgid "skills.search.placeholder"
+msgstr "Search skills"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/workspace-shell.tsx:52
+msgid "workspace.breadcrumb.aria"
+msgstr "Breadcrumb"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/workspace-shell.tsx:65
+msgid "workspace.breadcrumb.empty"
+msgstr "No workspace"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/workspace-shell.tsx:60
+msgid "workspace.breadcrumb.section"
+msgstr "Workspaces"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:314
+msgid "workspaces.actions.add"
+msgstr "Add workspace"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:261
+#: src/routes/-features/sidebar/app-sidebar.tsx:704
+msgid "workspaces.actions.delete"
+msgstr "Delete"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:251
+msgid "workspaces.actions.rename"
+msgstr "Rename"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:461
+msgid "workspaces.actions.selectDirectory"
+msgstr "Select directory"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:429
+msgid "workspaces.create.description"
+msgstr "Name the workspace and select its local skills root directory."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:426
+msgid "workspaces.create.title"
+msgstr "Add workspace"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:682
+msgid "workspaces.delete.description"
+msgstr "This removes the workspace record from tagskills. Local files are not deleted."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:679
+msgid "workspaces.delete.title"
+msgstr "Delete workspace?"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/no-workspaces-state.tsx:19
+msgid "workspaces.empty.description"
+msgstr "Add a workspace from the sidebar to connect a local skills root."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/no-workspaces-state.tsx:16
+msgid "workspaces.empty.title"
+msgstr "No workspaces yet"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:380
+msgid "workspaces.error.directoryRequired"
+msgstr "Select a skills directory before saving."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:732
+msgid "workspaces.error.directoryUnique"
+msgstr "This skills directory has already been added."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:754
+msgid "workspaces.error.generic"
+msgstr "Unable to save workspace."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:737
+msgid "workspaces.error.indexedDbUnavailable"
+msgstr "This browser cannot persist workspace records."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:360
+#: src/routes/-features/sidebar/app-sidebar.tsx:549
+#: src/routes/-features/sidebar/app-sidebar.tsx:722
+msgid "workspaces.error.nameRequired"
+msgstr "Workspace name is required."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:325
+#: src/routes/-features/sidebar/app-sidebar.tsx:370
+#: src/routes/-features/sidebar/app-sidebar.tsx:528
+#: src/routes/-features/sidebar/app-sidebar.tsx:559
+#: src/routes/-features/sidebar/app-sidebar.tsx:727
+msgid "workspaces.error.nameUnique"
+msgstr "Workspace name must be unique."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:747
+msgid "workspaces.error.notFound"
+msgstr "Workspace was not found."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:451
+msgid "workspaces.form.directory"
+msgstr "Skills directory"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:465
+msgid "workspaces.form.directory.none"
+msgstr "No folder selected"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:437
+#: src/routes/-features/sidebar/app-sidebar.tsx:596
+msgid "workspaces.form.name"
+msgstr "Workspace name"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:443
+msgid "workspaces.form.name.placeholder"
+msgstr "My skills"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/workspace-loading-state.tsx:9
+msgid "workspaces.loading"
+msgstr "Loading workspaces..."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:172
+msgid "workspaces.menu.label"
+msgstr "Workspace actions"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:589
+msgid "workspaces.rename.description"
+msgstr "This changes only the workspace name in tagskills."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:586
+msgid "workspaces.rename.title"
+msgstr "Rename workspace"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:215
+msgid "workspaces.sidebar.empty"
+msgstr "No workspaces"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:199
+msgid "workspaces.sidebar.title"
+msgstr "Workspaces"

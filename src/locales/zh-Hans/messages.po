@@ -12,89 +12,340 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/index.tsx:35
+#: src/routes/-features/sidebar/app-sidebar.tsx:483
+#: src/routes/-features/sidebar/app-sidebar.tsx:607
+#: src/routes/-features/sidebar/app-sidebar.tsx:696
+msgid "common.cancel"
+msgstr "取消"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:318
+#: src/routes/-features/sidebar/app-sidebar.tsx:521
+#: src/routes/-features/sidebar/app-sidebar.tsx:632
+#: src/routes/-features/workspaces/workspace-shell.tsx:36
 msgid "common.close"
 msgstr "关闭"
 
 #. js-lingui-explicit-id
-#: src/routes/index.tsx:51
-msgid "home.breadcrumb.aria"
-msgstr "面包屑导航"
+#: src/routes/-features/sidebar/app-sidebar.tsx:489
+#: src/routes/-features/sidebar/app-sidebar.tsx:610
+msgid "common.save"
+msgstr "保存"
 
 #. js-lingui-explicit-id
 #: src/app/i18n.test.tsx:24
-#: src/routes/index.tsx:65
 msgid "home.breadcrumb.page"
-msgstr "数据获取"
+msgstr "技能"
 
 #. js-lingui-explicit-id
-#: src/routes/index.tsx:59
-msgid "home.breadcrumb.section"
-msgstr "构建你的应用"
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:95
 #: src/routes/-features/sidebar/app-sidebar.tsx:102
+#: src/routes/-features/sidebar/app-sidebar.tsx:109
 msgid "settings.language.title"
 msgstr "语言"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:75
+#: src/routes/-features/sidebar/app-sidebar.tsx:82
 msgid "settings.theme.dark"
 msgstr "深色"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:77
+#: src/routes/-features/sidebar/app-sidebar.tsx:84
 msgid "settings.theme.light"
 msgstr "浅色"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:79
+#: src/routes/-features/sidebar/app-sidebar.tsx:86
 msgid "settings.theme.system"
 msgstr "跟随系统"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:126
-#: src/routes/-features/sidebar/app-sidebar.tsx:135
+#: src/routes/-features/sidebar/app-sidebar.tsx:133
+#: src/routes/-features/sidebar/app-sidebar.tsx:142
 msgid "settings.theme.title"
 msgstr "主题"
 
 #. js-lingui-explicit-id
-#: src/routes/index.tsx:31
+#: src/routes/-features/workspaces/workspace-shell.tsx:32
 msgid "sidebar.mobile.description"
 msgstr "显示移动端侧边栏。"
 
 #. js-lingui-explicit-id
-#: src/routes/index.tsx:27
+#: src/routes/-features/workspaces/workspace-shell.tsx:28
 msgid "sidebar.mobile.title"
 msgstr "侧边栏"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:50
-msgid "sidebar.nav.dashboard"
-msgstr "仪表盘"
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:66
-msgid "sidebar.nav.docs"
-msgstr "文档"
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:61
-msgid "sidebar.nav.skills"
-msgstr "技能"
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:56
-msgid "sidebar.nav.tags"
-msgstr "标签"
-
-#. js-lingui-explicit-id
-#: src/routes/index.tsx:23
+#: src/routes/-features/workspaces/workspace-shell.tsx:24
 msgid "sidebar.toggle"
 msgstr "切换侧边栏"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:173
+#: src/routes/-features/sidebar/app-sidebar.tsx:189
 msgid "sidebar.workspace.description"
 msgstr "技能库"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:211
+msgid "skills.actions.requestPermission"
+msgstr "请求文件夹访问权限"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:155
+msgid "skills.actions.rescan"
+msgstr "重新扫描"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:181
+msgid "skills.detail.description"
+msgstr "描述"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:197
+msgid "skills.detail.diagnostics"
+msgstr "诊断"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:177
+msgid "skills.detail.empty"
+msgstr "选择一个 skill 查看元数据和 SKILL.md 原文。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:201
+msgid "skills.detail.noDescription"
+msgstr "暂无描述。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:185
+msgid "skills.detail.path"
+msgstr "本地路径"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:189
+msgid "skills.detail.sourcePreview"
+msgstr "SKILL.md 预览"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:173
+msgid "skills.detail.title"
+msgstr "Skill 详情"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:205
+msgid "skills.detail.unreadableSource"
+msgstr "无法读取 SKILL.md。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:73
+#: src/routes/-features/skills/skills-manager.tsx:99
+msgid "skills.error.permissionRequired"
+msgstr "已保存的文件夹权限不再可用。请通过浏览器提示重新请求访问权限，或删除并重新创建此 workspace。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:109
+msgid "skills.error.scan"
+msgstr "无法扫描所选目录。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:473
+#: src/routes/-features/sidebar/app-sidebar.tsx:742
+msgid "skills.error.unsupported"
+msgstr "当前浏览器不支持选择本地目录。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:137
+msgid "skills.filters.all"
+msgstr "全部"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:133
+msgid "skills.filters.title"
+msgstr "筛选"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:159
+#: src/routes/-features/skills/skills-manager.tsx:193
+msgid "skills.invalidMetadata"
+msgstr "元数据无效"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:163
+msgid "skills.list.empty"
+msgstr "该目录中未找到 skills。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:167
+msgid "skills.list.noMatches"
+msgstr "没有匹配搜索的 skills。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:147
+msgid "skills.list.rootDirectory"
+msgstr "根目录"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:143
+msgid "skills.list.title"
+msgstr "Skills"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skills/skills-manager.tsx:151
+msgid "skills.search.placeholder"
+msgstr "搜索 skills"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/workspace-shell.tsx:52
+msgid "workspace.breadcrumb.aria"
+msgstr "面包屑"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/workspace-shell.tsx:65
+msgid "workspace.breadcrumb.empty"
+msgstr "无 workspace"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/workspace-shell.tsx:60
+msgid "workspace.breadcrumb.section"
+msgstr "Workspaces"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:314
+msgid "workspaces.actions.add"
+msgstr "添加 workspace"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:261
+#: src/routes/-features/sidebar/app-sidebar.tsx:704
+msgid "workspaces.actions.delete"
+msgstr "删除"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:251
+msgid "workspaces.actions.rename"
+msgstr "重命名"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:461
+msgid "workspaces.actions.selectDirectory"
+msgstr "选择目录"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:429
+msgid "workspaces.create.description"
+msgstr "为 workspace 命名，并选择它对应的本地 skills 根目录。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:426
+msgid "workspaces.create.title"
+msgstr "添加 workspace"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:682
+msgid "workspaces.delete.description"
+msgstr "这只会从 tagskills 移除 workspace 记录，不会删除本地文件。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:679
+msgid "workspaces.delete.title"
+msgstr "删除 workspace？"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/no-workspaces-state.tsx:19
+msgid "workspaces.empty.description"
+msgstr "从侧边栏添加 workspace，以连接本地 skills 根目录。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/no-workspaces-state.tsx:16
+msgid "workspaces.empty.title"
+msgstr "暂无 workspace"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:380
+msgid "workspaces.error.directoryRequired"
+msgstr "保存前请选择一个 skills 目录。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:732
+msgid "workspaces.error.directoryUnique"
+msgstr "这个 skills 目录已经添加过。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:754
+msgid "workspaces.error.generic"
+msgstr "无法保存 workspace。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:737
+msgid "workspaces.error.indexedDbUnavailable"
+msgstr "当前浏览器无法持久化 workspace 记录。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:360
+#: src/routes/-features/sidebar/app-sidebar.tsx:549
+#: src/routes/-features/sidebar/app-sidebar.tsx:722
+msgid "workspaces.error.nameRequired"
+msgstr "Workspace 名称为必填项。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:325
+#: src/routes/-features/sidebar/app-sidebar.tsx:370
+#: src/routes/-features/sidebar/app-sidebar.tsx:528
+#: src/routes/-features/sidebar/app-sidebar.tsx:559
+#: src/routes/-features/sidebar/app-sidebar.tsx:727
+msgid "workspaces.error.nameUnique"
+msgstr "Workspace 名称不能重复。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:747
+msgid "workspaces.error.notFound"
+msgstr "未找到 workspace。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:451
+msgid "workspaces.form.directory"
+msgstr "Skills 目录"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:465
+msgid "workspaces.form.directory.none"
+msgstr "未选择文件夹"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:437
+#: src/routes/-features/sidebar/app-sidebar.tsx:596
+msgid "workspaces.form.name"
+msgstr "Workspace 名称"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:443
+msgid "workspaces.form.name.placeholder"
+msgstr "我的 skills"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/workspaces/workspace-loading-state.tsx:9
+msgid "workspaces.loading"
+msgstr "正在加载 workspaces..."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:172
+msgid "workspaces.menu.label"
+msgstr "Workspace 操作"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:589
+msgid "workspaces.rename.description"
+msgstr "这只会修改 tagskills 中的 workspace 名称。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:586
+msgid "workspaces.rename.title"
+msgstr "重命名 workspace"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:215
+msgid "workspaces.sidebar.empty"
+msgstr "暂无 workspaces"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/sidebar/app-sidebar.tsx:199
+msgid "workspaces.sidebar.title"
+msgstr "Workspaces"

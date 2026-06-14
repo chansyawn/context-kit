@@ -21,7 +21,7 @@ function I18nProbe() {
 
   return (
     <section aria-label="I18n State">
-      <p>{`${locale}:${i18n._({ id: "home.breadcrumb.page", message: "Data Fetching" })}`}</p>
+      <p>{`${locale}:${i18n._({ id: "home.breadcrumb.page", message: "Skills" })}`}</p>
       <button type="button" onClick={() => setLocale("zh-Hans")}>
         Use Simplified Chinese
       </button>
@@ -50,7 +50,7 @@ describe("I18nStateProvider", () => {
 
     await waitFor(() => {
       expect(document.documentElement.lang).toBe("en");
-      expect(screen.getByLabelText("I18n State")).toHaveTextContent("en:Data Fetching");
+      expect(screen.getByLabelText("I18n State")).toHaveTextContent("en:Skills");
     });
   });
 
@@ -65,7 +65,7 @@ describe("I18nStateProvider", () => {
 
     await waitFor(() => {
       expect(document.documentElement.lang).toBe("zh-Hans");
-      expect(screen.getByLabelText("I18n State")).toHaveTextContent("zh-Hans:数据获取");
+      expect(screen.getByLabelText("I18n State")).toHaveTextContent("zh-Hans:技能");
     });
   });
 
@@ -80,7 +80,7 @@ describe("I18nStateProvider", () => {
 
     await waitFor(() => {
       expect(document.documentElement.lang).toBe("zh-Hans");
-      expect(screen.getByLabelText("I18n State")).toHaveTextContent("zh-Hans:数据获取");
+      expect(screen.getByLabelText("I18n State")).toHaveTextContent("zh-Hans:技能");
     });
   });
 });

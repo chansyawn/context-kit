@@ -1,6 +1,7 @@
 import { DirectionStateProvider } from "@/app/direction";
 import { I18nStateProvider } from "@/app/i18n";
 import { ThemeStateProvider } from "@/app/theme";
+import { WorkspaceProvider } from "@/features/workspaces/workspace-provider";
 import { routeTree } from "@/routeTree.gen";
 import { TooltipProvider } from "@/ui/components/tooltip";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
@@ -19,7 +20,9 @@ export function App() {
       <I18nStateProvider>
         <DirectionStateProvider>
           <TooltipProvider>
-            <RouterProvider router={router} />
+            <WorkspaceProvider>
+              <RouterProvider router={router} />
+            </WorkspaceProvider>
           </TooltipProvider>
         </DirectionStateProvider>
       </I18nStateProvider>
