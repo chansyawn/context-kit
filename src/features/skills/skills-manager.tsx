@@ -1,7 +1,7 @@
 import { scanSkillsRoot } from "@/features/skills/scan-skills";
 import type { LocalSkill } from "@/features/skills/skill-types";
-import { ensureReadWritePermission } from "@/features/workspaces/workspace-permissions";
-import type { WorkspaceRecord } from "@/features/workspaces/workspace-types";
+import { ensureReadWritePermission } from "@/features/skill-libraries/skill-library-permissions";
+import type { SkillLibraryRecord } from "@/features/skill-libraries/skill-library-types";
 import { Button } from "@/ui/components/button";
 import { useLingui } from "@lingui/react";
 import { KeyRoundIcon } from "lucide-react";
@@ -14,10 +14,10 @@ import { SkillList } from "./skill-list";
 type ScanStatus = "idle" | "scanning" | "permission-required";
 
 type SkillsManagerProps = {
-  workspace: WorkspaceRecord;
+  skillLibrary: SkillLibraryRecord;
 };
 
-export function SkillsManager({ workspace }: SkillsManagerProps) {
+export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
   const { i18n } = useLingui();
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
@@ -62,7 +62,7 @@ export function SkillsManager({ workspace }: SkillsManagerProps) {
     setError(null);
 
     try {
-      const hasPermission = await ensureReadWritePermission(workspace.directoryHandle);
+      const hasPermission = await ensureReadWritePermission(skillLibrary.directoryHandle);
 
       if (!hasPermission) {
         setSkills([]);
@@ -72,13 +72,13 @@ export function SkillsManager({ workspace }: SkillsManagerProps) {
           i18n._({
             id: "skills.error.permissionRequired",
             message:
-              "The saved folder permission is no longer available. Request access again from the browser prompt, or delete and recreate this workspace.",
+              "The saved folder permission is no longer available. Request access again from the browser prompt, or delete and recreate this skill library.",
           }),
         );
         return;
       }
 
-      const nextSkills = await scanSkillsRoot(workspace.directoryHandle);
+      const nextSkills = await scanSkillsRoot(skillLibrary.directoryHandle);
 
       setSkills(nextSkills);
       setSelectedSkillId((currentSkillId) => {
@@ -98,7 +98,7 @@ export function SkillsManager({ workspace }: SkillsManagerProps) {
           `${i18n._({
             id: "skills.error.permissionRequired",
             message:
-              "The saved folder permission is no longer available. Request access again from the browser prompt, or delete and recreate this workspace.",
+              "The saved folder permission is no longer available. Request access again from the browser prompt, or delete and recreate this skill library.",
           })} ${formatUnknownError(scanError)}`,
         );
         return;
@@ -112,14 +112,14 @@ export function SkillsManager({ workspace }: SkillsManagerProps) {
       );
       setStatus("idle");
     }
-  }, [i18n, workspace.directoryHandle]);
+  }, [i18n, skillLibrary.directoryHandle]);
 
   useEffect(() => {
     setQuery("");
     setSkills([]);
     setSelectedSkillId(null);
     void scanDirectory();
-  }, [scanDirectory, workspace.id]);
+  }, [scanDirectory, skillLibrary.id]);
 
   const handleRescan = useCallback(() => {
     void scanDirectory();
@@ -234,7 +234,7 @@ export function SkillsManager({ workspace }: SkillsManagerProps) {
           onRescan={handleRescan}
           onSelectSkill={setSelectedSkillId}
           query={query}
-          rootName={workspace.rootName}
+          rootName={skillLibrary.rootName}
           selectedSkillId={selectedSkillId}
           skills={visibleSkills}
           totalCount={skills.length}

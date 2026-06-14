@@ -6,21 +6,21 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/ui/components/breadcrumb";
+import { useSkillLibraries } from "@/features/skill-libraries/skill-library-provider";
 import { Separator } from "@/ui/components/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/ui/components/sidebar";
 import { useLingui } from "@lingui/react";
 import { Trans } from "@lingui/react/macro";
-import type { ReactNode } from "react";
+import { Outlet, useLocation } from "@tanstack/react-router";
 
-import { AppSidebar } from "../sidebar/app-sidebar";
+import { AppSidebar } from "./app-sidebar";
 
-type WorkspaceShellProps = {
-  children: ReactNode;
-  breadcrumbPage?: ReactNode;
-};
-
-export function WorkspaceShell({ breadcrumbPage, children }: WorkspaceShellProps) {
+export function AppLayout() {
   const { i18n } = useLingui();
+  const { getSkillLibrary } = useSkillLibraries();
+  const location = useLocation();
+  const activeSkillLibraryId = getActiveSkillLibraryId(location.pathname);
+  const breadcrumbPage = activeSkillLibraryId ? getSkillLibrary(activeSkillLibraryId)?.name : null;
   const sidebarToggleLabel = i18n._({
     id: "sidebar.toggle",
     message: "Toggle Sidebar",
@@ -50,28 +50,36 @@ export function WorkspaceShell({ breadcrumbPage, children }: WorkspaceShellProps
             <Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
             <Breadcrumb
               aria-label={i18n._({
-                id: "workspace.breadcrumb.aria",
+                id: "app.breadcrumb.aria",
                 message: "Breadcrumb",
               })}
             >
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="/">
-                    <Trans id="workspace.breadcrumb.section">Workspaces</Trans>
+                  <BreadcrumbLink href="/skill-libraries">
+                    <Trans id="app.breadcrumb.section">Skill Libraries</Trans>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
                   <BreadcrumbPage>
-                    {breadcrumbPage ?? <Trans id="workspace.breadcrumb.empty">No workspace</Trans>}
+                    {breadcrumbPage ?? <Trans id="app.breadcrumb.empty">No skill library</Trans>}
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col p-4 pt-0">{children}</div>
+        <div className="flex flex-1 flex-col p-4 pt-0">
+          <Outlet />
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );
+}
+
+function getActiveSkillLibraryId(pathname: string): string | null {
+  const match = /^\/skill-libraries\/([^/]+)/.exec(pathname);
+
+  return match ? decodeURIComponent(match[1] ?? "") : null;
 }

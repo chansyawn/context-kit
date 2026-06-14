@@ -1,5 +1,5 @@
 import { I18nStateProvider } from "@/app/i18n";
-import type { WorkspaceRecord } from "@/features/workspaces/workspace-types";
+import type { SkillLibraryRecord } from "@/features/skill-libraries/skill-library-types";
 import { renderWithProviders } from "@/test/render";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vite-plus/test";
@@ -11,7 +11,7 @@ describe("SkillsManager", () => {
     vi.restoreAllMocks();
   });
 
-  it("auto-scans the selected workspace, shows invalid metadata, and filters by search", async () => {
+  it("auto-scans the selected skill library, shows invalid metadata, and filters by search", async () => {
     const rootHandle = createRootDirectoryHandle("skills", [
       createChildDirectoryHandle(
         "code-review",
@@ -64,7 +64,7 @@ name: broken-skill
     });
   });
 
-  it("rescans the selected workspace directory handle", async () => {
+  it("rescans the selected skill library directory handle", async () => {
     const rootHandle = createRootDirectoryHandle("skills", [
       createChildDirectoryHandle(
         "code-review",
@@ -97,7 +97,7 @@ description: Read PDF files.
     expect(screen.queryAllByText("code-review")).toHaveLength(0);
   });
 
-  it("shows recovery state when saved workspace permission is missing", async () => {
+  it("shows recovery state when saved skill library permission is missing", async () => {
     const rootHandle = createRootDirectoryHandle("skills", [], "denied");
 
     renderSkillsManager(rootHandle);
@@ -133,15 +133,15 @@ type MutableRootDirectoryHandle = FileSystemDirectoryHandle & {
 function renderSkillsManager(rootHandle: FileSystemDirectoryHandle) {
   renderWithProviders(
     <I18nStateProvider>
-      <SkillsManager workspace={createWorkspace(rootHandle)} />
+      <SkillsManager skillLibrary={createSkillLibrary(rootHandle)} />
     </I18nStateProvider>,
   );
 }
 
-function createWorkspace(directoryHandle: FileSystemDirectoryHandle): WorkspaceRecord {
+function createSkillLibrary(directoryHandle: FileSystemDirectoryHandle): SkillLibraryRecord {
   return {
-    id: "workspace-1",
-    name: "Test workspace",
+    id: "skill-library-1",
+    name: "Test skill library",
     rootName: directoryHandle.name,
     createdAt: "2026-06-14T00:00:00.000Z",
     updatedAt: "2026-06-14T00:00:00.000Z",

@@ -9,48 +9,82 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SkillLibrariesRouteRouteImport } from './routes/skill-libraries/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as WorkspacesWorkspaceIdRouteImport } from './routes/workspaces.$workspaceId'
+import { Route as SkillLibrariesIndexRouteImport } from './routes/skill-libraries/index'
+import { Route as SkillLibrariesSkillLibraryIdRouteImport } from './routes/skill-libraries/$skillLibraryId'
 
+const SkillLibrariesRouteRoute = SkillLibrariesRouteRouteImport.update({
+  id: '/skill-libraries',
+  path: '/skill-libraries',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WorkspacesWorkspaceIdRoute = WorkspacesWorkspaceIdRouteImport.update({
-  id: '/workspaces/$workspaceId',
-  path: '/workspaces/$workspaceId',
-  getParentRoute: () => rootRouteImport,
+const SkillLibrariesIndexRoute = SkillLibrariesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SkillLibrariesRouteRoute,
 } as any)
+const SkillLibrariesSkillLibraryIdRoute =
+  SkillLibrariesSkillLibraryIdRouteImport.update({
+    id: '/$skillLibraryId',
+    path: '/$skillLibraryId',
+    getParentRoute: () => SkillLibrariesRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/workspaces/$workspaceId': typeof WorkspacesWorkspaceIdRoute
+  '/skill-libraries': typeof SkillLibrariesRouteRouteWithChildren
+  '/skill-libraries/$skillLibraryId': typeof SkillLibrariesSkillLibraryIdRoute
+  '/skill-libraries/': typeof SkillLibrariesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/workspaces/$workspaceId': typeof WorkspacesWorkspaceIdRoute
+  '/skill-libraries/$skillLibraryId': typeof SkillLibrariesSkillLibraryIdRoute
+  '/skill-libraries': typeof SkillLibrariesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/workspaces/$workspaceId': typeof WorkspacesWorkspaceIdRoute
+  '/skill-libraries': typeof SkillLibrariesRouteRouteWithChildren
+  '/skill-libraries/$skillLibraryId': typeof SkillLibrariesSkillLibraryIdRoute
+  '/skill-libraries/': typeof SkillLibrariesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/workspaces/$workspaceId'
+  fullPaths:
+    | '/'
+    | '/skill-libraries'
+    | '/skill-libraries/$skillLibraryId'
+    | '/skill-libraries/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/workspaces/$workspaceId'
-  id: '__root__' | '/' | '/workspaces/$workspaceId'
+  to: '/' | '/skill-libraries/$skillLibraryId' | '/skill-libraries'
+  id:
+    | '__root__'
+    | '/'
+    | '/skill-libraries'
+    | '/skill-libraries/$skillLibraryId'
+    | '/skill-libraries/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  WorkspacesWorkspaceIdRoute: typeof WorkspacesWorkspaceIdRoute
+  SkillLibrariesRouteRoute: typeof SkillLibrariesRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/skill-libraries': {
+      id: '/skill-libraries'
+      path: '/skill-libraries'
+      fullPath: '/skill-libraries'
+      preLoaderRoute: typeof SkillLibrariesRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -58,19 +92,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/workspaces/$workspaceId': {
-      id: '/workspaces/$workspaceId'
-      path: '/workspaces/$workspaceId'
-      fullPath: '/workspaces/$workspaceId'
-      preLoaderRoute: typeof WorkspacesWorkspaceIdRouteImport
-      parentRoute: typeof rootRouteImport
+    '/skill-libraries/': {
+      id: '/skill-libraries/'
+      path: '/'
+      fullPath: '/skill-libraries/'
+      preLoaderRoute: typeof SkillLibrariesIndexRouteImport
+      parentRoute: typeof SkillLibrariesRouteRoute
+    }
+    '/skill-libraries/$skillLibraryId': {
+      id: '/skill-libraries/$skillLibraryId'
+      path: '/$skillLibraryId'
+      fullPath: '/skill-libraries/$skillLibraryId'
+      preLoaderRoute: typeof SkillLibrariesSkillLibraryIdRouteImport
+      parentRoute: typeof SkillLibrariesRouteRoute
     }
   }
 }
 
+interface SkillLibrariesRouteRouteChildren {
+  SkillLibrariesSkillLibraryIdRoute: typeof SkillLibrariesSkillLibraryIdRoute
+  SkillLibrariesIndexRoute: typeof SkillLibrariesIndexRoute
+}
+
+const SkillLibrariesRouteRouteChildren: SkillLibrariesRouteRouteChildren = {
+  SkillLibrariesSkillLibraryIdRoute: SkillLibrariesSkillLibraryIdRoute,
+  SkillLibrariesIndexRoute: SkillLibrariesIndexRoute,
+}
+
+const SkillLibrariesRouteRouteWithChildren =
+  SkillLibrariesRouteRoute._addFileChildren(SkillLibrariesRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  WorkspacesWorkspaceIdRoute: WorkspacesWorkspaceIdRoute,
+  SkillLibrariesRouteRoute: SkillLibrariesRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

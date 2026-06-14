@@ -12,23 +12,38 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:483
-#: src/routes/-features/sidebar/app-sidebar.tsx:607
-#: src/routes/-features/sidebar/app-sidebar.tsx:696
+#: src/routes/-layouts/app-layout.tsx:52
+msgid "app.breadcrumb.aria"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/routes/-layouts/app-layout.tsx:66
+msgid "app.breadcrumb.empty"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/routes/-layouts/app-layout.tsx:60
+msgid "app.breadcrumb.section"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:217
+#: src/features/skill-libraries/skill-library-delete-dialog.tsx:104
+#: src/features/skill-libraries/skill-library-rename-dialog.tsx:134
 msgid "common.cancel"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:318
-#: src/routes/-features/sidebar/app-sidebar.tsx:521
-#: src/routes/-features/sidebar/app-sidebar.tsx:632
-#: src/routes/-features/workspaces/workspace-shell.tsx:36
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:52
+#: src/features/skill-libraries/skill-library-delete-dialog.tsx:38
+#: src/features/skill-libraries/skill-library-rename-dialog.tsx:48
+#: src/routes/-layouts/app-layout.tsx:36
 msgid "common.close"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:489
-#: src/routes/-features/sidebar/app-sidebar.tsx:610
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:223
+#: src/features/skill-libraries/skill-library-rename-dialog.tsx:137
 msgid "common.save"
 msgstr ""
 
@@ -38,314 +53,299 @@ msgid "home.breadcrumb.page"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:102
-#: src/routes/-features/sidebar/app-sidebar.tsx:109
+#: src/features/preferences/sidebar-settings.tsx:36
+#: src/features/preferences/sidebar-settings.tsx:43
 msgid "settings.language.title"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:82
+#: src/features/preferences/sidebar-settings.tsx:102
 msgid "settings.theme.dark"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:84
+#: src/features/preferences/sidebar-settings.tsx:104
 msgid "settings.theme.light"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:86
+#: src/features/preferences/sidebar-settings.tsx:106
 msgid "settings.theme.system"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:133
-#: src/routes/-features/sidebar/app-sidebar.tsx:142
+#: src/features/preferences/sidebar-settings.tsx:67
+#: src/features/preferences/sidebar-settings.tsx:76
 msgid "settings.theme.title"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/workspaces/workspace-shell.tsx:32
+#: src/routes/-layouts/app-layout.tsx:32
 msgid "sidebar.mobile.description"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/workspaces/workspace-shell.tsx:28
+#: src/routes/-layouts/app-layout.tsx:28
 msgid "sidebar.mobile.title"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/workspaces/workspace-shell.tsx:24
+#: src/routes/-layouts/product-sidebar-header.tsx:17
+msgid "sidebar.skillLibrary.description"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/routes/-layouts/app-layout.tsx:24
 msgid "sidebar.toggle"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:189
-msgid "sidebar.workspace.description"
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:48
+msgid "skillLibraries.actions.add"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:211
+#: src/features/skill-libraries/skill-library-delete-dialog.tsx:112
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:108
+msgid "skillLibraries.actions.delete"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:98
+msgid "skillLibraries.actions.rename"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:195
+msgid "skillLibraries.actions.selectDirectory"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:163
+msgid "skillLibraries.create.description"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:160
+msgid "skillLibraries.create.title"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-delete-dialog.tsx:90
+msgid "skillLibraries.delete.description"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-delete-dialog.tsx:87
+msgid "skillLibraries.delete.title"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-route-states.tsx:20
+msgid "skillLibraries.empty.description"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-route-states.tsx:17
+msgid "skillLibraries.empty.title"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:114
+msgid "skillLibraries.error.directoryRequired"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-ui-errors.ts:21
+msgid "skillLibraries.error.directoryUnique"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-ui-errors.ts:43
+msgid "skillLibraries.error.generic"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-ui-errors.ts:26
+msgid "skillLibraries.error.indexedDbUnavailable"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:94
+#: src/features/skill-libraries/skill-library-rename-dialog.tsx:76
+#: src/features/skill-libraries/skill-library-ui-errors.ts:11
+msgid "skillLibraries.error.nameRequired"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:59
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:104
+#: src/features/skill-libraries/skill-library-rename-dialog.tsx:55
+#: src/features/skill-libraries/skill-library-rename-dialog.tsx:86
+#: src/features/skill-libraries/skill-library-ui-errors.ts:16
+msgid "skillLibraries.error.nameUnique"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-ui-errors.ts:36
+msgid "skillLibraries.error.notFound"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:185
+msgid "skillLibraries.form.directory"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:199
+msgid "skillLibraries.form.directory.none"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:171
+#: src/features/skill-libraries/skill-library-rename-dialog.tsx:123
+msgid "skillLibraries.form.name"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:177
+msgid "skillLibraries.form.name.placeholder"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-route-states.tsx:39
+msgid "skillLibraries.loading"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:39
+msgid "skillLibraries.menu.label"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-rename-dialog.tsx:116
+msgid "skillLibraries.rename.description"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-rename-dialog.tsx:113
+msgid "skillLibraries.rename.title"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:62
+msgid "skillLibraries.sidebar.empty"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:48
+msgid "skillLibraries.sidebar.title"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:208
 msgid "skills.actions.requestPermission"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:155
+#: src/features/skills/skills-manager.tsx:152
 msgid "skills.actions.rescan"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:181
+#: src/features/skills/skills-manager.tsx:178
 msgid "skills.detail.description"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:197
+#: src/features/skills/skills-manager.tsx:194
 msgid "skills.detail.diagnostics"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:177
+#: src/features/skills/skills-manager.tsx:174
 msgid "skills.detail.empty"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:201
+#: src/features/skills/skills-manager.tsx:198
 msgid "skills.detail.noDescription"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:185
+#: src/features/skills/skills-manager.tsx:182
 msgid "skills.detail.path"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:189
+#: src/features/skills/skills-manager.tsx:186
 msgid "skills.detail.sourcePreview"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:173
+#: src/features/skills/skills-manager.tsx:170
 msgid "skills.detail.title"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:205
+#: src/features/skills/skills-manager.tsx:202
 msgid "skills.detail.unreadableSource"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:73
-#: src/routes/-features/skills/skills-manager.tsx:99
+#: src/features/skills/skills-manager.tsx:72
+#: src/features/skills/skills-manager.tsx:98
 msgid "skills.error.permissionRequired"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:109
+#: src/features/skills/skills-manager.tsx:108
 msgid "skills.error.scan"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:473
-#: src/routes/-features/sidebar/app-sidebar.tsx:742
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:207
+#: src/features/skill-libraries/skill-library-ui-errors.ts:31
 msgid "skills.error.unsupported"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:137
+#: src/features/skills/skills-manager.tsx:134
 msgid "skills.filters.all"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:133
+#: src/features/skills/skills-manager.tsx:130
 msgid "skills.filters.title"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:159
-#: src/routes/-features/skills/skills-manager.tsx:193
+#: src/features/skills/skills-manager.tsx:156
+#: src/features/skills/skills-manager.tsx:190
 msgid "skills.invalidMetadata"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:163
+#: src/features/skills/skills-manager.tsx:160
 msgid "skills.list.empty"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:167
+#: src/features/skills/skills-manager.tsx:164
 msgid "skills.list.noMatches"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:147
+#: src/features/skills/skills-manager.tsx:144
 msgid "skills.list.rootDirectory"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:143
+#: src/features/skills/skills-manager.tsx:140
 msgid "skills.list.title"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skills-manager.tsx:151
+#: src/features/skills/skills-manager.tsx:148
 msgid "skills.search.placeholder"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/workspaces/workspace-shell.tsx:52
-msgid "workspace.breadcrumb.aria"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/workspaces/workspace-shell.tsx:65
-msgid "workspace.breadcrumb.empty"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/workspaces/workspace-shell.tsx:60
-msgid "workspace.breadcrumb.section"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:314
-msgid "workspaces.actions.add"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:261
-#: src/routes/-features/sidebar/app-sidebar.tsx:704
-msgid "workspaces.actions.delete"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:251
-msgid "workspaces.actions.rename"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:461
-msgid "workspaces.actions.selectDirectory"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:429
-msgid "workspaces.create.description"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:426
-msgid "workspaces.create.title"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:682
-msgid "workspaces.delete.description"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:679
-msgid "workspaces.delete.title"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/workspaces/no-workspaces-state.tsx:19
-msgid "workspaces.empty.description"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/workspaces/no-workspaces-state.tsx:16
-msgid "workspaces.empty.title"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:380
-msgid "workspaces.error.directoryRequired"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:732
-msgid "workspaces.error.directoryUnique"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:754
-msgid "workspaces.error.generic"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:737
-msgid "workspaces.error.indexedDbUnavailable"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:360
-#: src/routes/-features/sidebar/app-sidebar.tsx:549
-#: src/routes/-features/sidebar/app-sidebar.tsx:722
-msgid "workspaces.error.nameRequired"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:325
-#: src/routes/-features/sidebar/app-sidebar.tsx:370
-#: src/routes/-features/sidebar/app-sidebar.tsx:528
-#: src/routes/-features/sidebar/app-sidebar.tsx:559
-#: src/routes/-features/sidebar/app-sidebar.tsx:727
-msgid "workspaces.error.nameUnique"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:747
-msgid "workspaces.error.notFound"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:451
-msgid "workspaces.form.directory"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:465
-msgid "workspaces.form.directory.none"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:437
-#: src/routes/-features/sidebar/app-sidebar.tsx:596
-msgid "workspaces.form.name"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:443
-msgid "workspaces.form.name.placeholder"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/workspaces/workspace-loading-state.tsx:9
-msgid "workspaces.loading"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:172
-msgid "workspaces.menu.label"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:589
-msgid "workspaces.rename.description"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:586
-msgid "workspaces.rename.title"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:215
-msgid "workspaces.sidebar.empty"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/sidebar/app-sidebar.tsx:199
-msgid "workspaces.sidebar.title"
 msgstr ""

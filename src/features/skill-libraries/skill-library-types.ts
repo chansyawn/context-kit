@@ -1,4 +1,4 @@
-export type WorkspaceRecord = {
+export type SkillLibraryRecord = {
   id: string;
   name: string;
   rootName: string;
@@ -7,15 +7,15 @@ export type WorkspaceRecord = {
   directoryHandle: FileSystemDirectoryHandle;
 };
 
-export type WorkspaceCreateInput = {
+export type SkillLibraryCreateInput = {
   name: string;
   directoryHandle: FileSystemDirectoryHandle;
 };
 
-export type WorkspaceUpdateInput = {
+export type SkillLibraryUpdateInput = {
   name: string;
 };
 
-export type WorkspaceValidationResult =
+export type SkillLibraryValidationResult =
   | { valid: true; name: string }
   | { valid: false; message: string };

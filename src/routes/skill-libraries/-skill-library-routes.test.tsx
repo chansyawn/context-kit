@@ -1,6 +1,6 @@
 import { App } from "@/app/app";
-import { createIndexedDbWorkspaceRepository } from "@/features/workspaces/workspace-store";
-import type { WorkspaceRecord } from "@/features/workspaces/workspace-types";
+import { createIndexedDbSkillLibraryRepository } from "@/features/skill-libraries/skill-library-store";
+import type { SkillLibraryRecord } from "@/features/skill-libraries/skill-library-types";
 import { mockMatchMedia } from "@/test/events";
 import { renderWithProviders } from "@/test/render";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
@@ -10,7 +10,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test"
 let indexedDb: IDBFactory;
 let uuidCounter: number;
 
-describe("workspace routes", () => {
+describe("skill library routes", () => {
   beforeEach(() => {
     indexedDb = new IDBFactory();
     uuidCounter = 0;
@@ -35,20 +35,28 @@ describe("workspace routes", () => {
     window.history.replaceState(null, "", "/");
   });
 
-  it("shows an empty workspace state without the old main directory picker CTA", async () => {
+  it("redirects root to the skill library landing route", async () => {
     renderApp();
 
-    expect(await screen.findByText("No workspaces yet")).toBeVisible();
-    expect(screen.getByText("No workspaces")).toBeVisible();
+    await waitFor(() => {
+      expect(window.location.pathname).toBe("/skill-libraries");
+    });
+  });
+
+  it("shows an empty skill library state without the old main directory picker CTA", async () => {
+    renderApp("/skill-libraries");
+
+    expect(await screen.findByText("No skill libraries yet")).toBeVisible();
+    expect(screen.getByText("No skill libraries")).toBeVisible();
     expect(
       screen.queryByRole("button", { name: "Choose skills directory" }),
     ).not.toBeInTheDocument();
   });
 
-  it("requires a workspace name and directory before saving", async () => {
+  it("requires a skill library name and directory before saving", async () => {
     window.showDirectoryPicker = vi.fn(async () => createCloneableDirectoryHandle("skills"));
 
-    renderApp();
+    renderApp("/skill-libraries");
     await openCreateDialog();
 
     const saveButton = screen.getByRole("button", { name: "Save" });
@@ -68,29 +76,29 @@ describe("workspace routes", () => {
     expect(saveButton).toBeEnabled();
   });
 
-  it("persists a workspace after provider remount", async () => {
+  it("persists a skill library after provider remount", async () => {
     window.showDirectoryPicker = vi.fn(async () => createCloneableDirectoryHandle("skills"));
 
-    const { unmount } = renderApp();
+    const { unmount } = renderApp("/skill-libraries");
 
-    await createWorkspaceThroughUi("Primary", "skills");
+    await createSkillLibraryThroughUi("Primary", "skills");
 
     expect((await screen.findAllByText("Primary"))[0]).toBeVisible();
 
     unmount();
-    renderApp();
+    renderApp("/skill-libraries");
 
     expect((await screen.findAllByText("Primary"))[0]).toBeVisible();
   });
 
-  it("renames a workspace without changing the route", async () => {
-    const workspace = await seedWorkspace("Primary", "skills");
+  it("renames a skill library without changing the route", async () => {
+    const skillLibrary = await seedSkillLibrary("Primary", "skills");
 
-    renderApp(`/workspaces/${workspace.id}`);
+    renderApp(`/skill-libraries/${skillLibrary.id}`);
 
     expect((await screen.findAllByText("Primary"))[0]).toBeVisible();
 
-    fireEvent.click(await screen.findByRole("button", { name: "Workspace actions" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Skill library actions" }));
     fireEvent.click(await screen.findByRole("menuitem", { name: "Rename" }));
     fireEvent.change(screen.getByDisplayValue("Primary"), {
       target: { value: "Renamed" },
@@ -98,36 +106,46 @@ describe("workspace routes", () => {
     fireEvent.click(screen.getByRole("button", { name: "Save" }));
 
     expect((await screen.findAllByText("Renamed"))[0]).toBeVisible();
-    expect(window.location.pathname).toBe(`/workspaces/${workspace.id}`);
+    expect(window.location.pathname).toBe(`/skill-libraries/${skillLibrary.id}`);
   });
 
-  it("deletes only the workspace record and navigates to the first remaining workspace", async () => {
-    const firstWorkspace = await seedWorkspace("First", "first-root");
-    const secondWorkspace = await seedWorkspace("Second", "second-root");
+  it("deletes only the skill library record and navigates to the first remaining skill library", async () => {
+    const firstSkillLibrary = await seedSkillLibrary("First", "first-root");
+    const secondSkillLibrary = await seedSkillLibrary("Second", "second-root");
 
-    renderApp(`/workspaces/${secondWorkspace.id}`);
+    renderApp(`/skill-libraries/${secondSkillLibrary.id}`);
 
     expect((await screen.findAllByText("Second"))[0]).toBeVisible();
 
-    const actionButtons = await screen.findAllByRole("button", { name: "Workspace actions" });
+    const actionButtons = await screen.findAllByRole("button", { name: "Skill library actions" });
 
     fireEvent.click(actionButtons[1] as HTMLElement);
     fireEvent.click(await screen.findByRole("menuitem", { name: "Delete" }));
     fireEvent.click(screen.getByRole("button", { name: "Delete" }));
 
     await waitFor(() => {
-      expect(window.location.pathname).toBe(`/workspaces/${firstWorkspace.id}`);
+      expect(window.location.pathname).toBe(`/skill-libraries/${firstSkillLibrary.id}`);
       expect(screen.queryByText("Second")).not.toBeInTheDocument();
     });
   });
 
-  it("redirects an invalid workspace id to the first workspace", async () => {
-    const workspace = await seedWorkspace("Primary", "skills");
+  it("redirects an invalid skill library id to the first skill library", async () => {
+    const skillLibrary = await seedSkillLibrary("Primary", "skills");
 
-    renderApp("/workspaces/missing");
+    renderApp("/skill-libraries/missing");
 
     await waitFor(() => {
-      expect(window.location.pathname).toBe(`/workspaces/${workspace.id}`);
+      expect(window.location.pathname).toBe(`/skill-libraries/${skillLibrary.id}`);
+    });
+  });
+
+  it("redirects the skill library landing route to the first skill library", async () => {
+    const skillLibrary = await seedSkillLibrary("Primary", "skills");
+
+    renderApp("/skill-libraries");
+
+    await waitFor(() => {
+      expect(window.location.pathname).toBe(`/skill-libraries/${skillLibrary.id}`);
     });
   });
 });
@@ -139,11 +157,11 @@ function renderApp(path = "/") {
 }
 
 async function openCreateDialog() {
-  fireEvent.click(await screen.findByRole("button", { name: "Add workspace" }));
-  expect(await screen.findByRole("heading", { name: "Add workspace" })).toBeVisible();
+  fireEvent.click(await screen.findByRole("button", { name: "Add skill library" }));
+  expect(await screen.findByRole("heading", { name: "Add skill library" })).toBeVisible();
 }
 
-async function createWorkspaceThroughUi(name: string, rootName: string) {
+async function createSkillLibraryThroughUi(name: string, rootName: string) {
   await openCreateDialog();
   fireEvent.change(screen.getByPlaceholderText("My skills"), {
     target: { value: name },
@@ -153,8 +171,8 @@ async function createWorkspaceThroughUi(name: string, rootName: string) {
   fireEvent.click(screen.getByRole("button", { name: "Save" }));
 }
 
-async function seedWorkspace(name: string, rootName: string): Promise<WorkspaceRecord> {
-  const repository = createIndexedDbWorkspaceRepository(indexedDb);
+async function seedSkillLibrary(name: string, rootName: string): Promise<SkillLibraryRecord> {
+  const repository = createIndexedDbSkillLibraryRepository(indexedDb);
 
   return repository.create({
     name,

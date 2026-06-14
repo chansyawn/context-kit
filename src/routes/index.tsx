@@ -1,35 +1,9 @@
-import { useWorkspaces } from "@/features/workspaces/workspace-provider";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
-
-import { NoWorkspacesState } from "./-features/workspaces/no-workspaces-state";
-import { WorkspaceLoadingState } from "./-features/workspaces/workspace-loading-state";
-import { WorkspaceShell } from "./-features/workspaces/workspace-shell";
 
 export const Route = createFileRoute("/")({
   component: IndexPage,
 });
 
 function IndexPage() {
-  const { error, isLoading, workspaces } = useWorkspaces();
-  const firstWorkspace = workspaces[0] ?? null;
-
-  if (isLoading) {
-    return (
-      <WorkspaceShell>
-        <WorkspaceLoadingState />
-      </WorkspaceShell>
-    );
-  }
-
-  if (firstWorkspace) {
-    return (
-      <Navigate to="/workspaces/$workspaceId" params={{ workspaceId: firstWorkspace.id }} replace />
-    );
-  }
-
-  return (
-    <WorkspaceShell>
-      <NoWorkspacesState error={error} />
-    </WorkspaceShell>
-  );
+  return <Navigate to="/skill-libraries" replace />;
 }
