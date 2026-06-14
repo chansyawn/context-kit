@@ -1,12 +1,18 @@
 import { I18nStateProvider } from "@/app/i18n";
 import type { SkillLibraryRecord } from "@/features/skill-libraries/skill-library-types";
+import { mockMatchMedia } from "@/test/events";
 import { renderWithProviders } from "@/test/render";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vite-plus/test";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test";
 
 import { SkillsManager } from "./skills-manager";
 
 describe("SkillsManager", () => {
+  beforeEach(() => {
+    setViewportWidth(1024);
+    mockMatchMedia(false);
+  });
+
   afterEach(() => {
     vi.restoreAllMocks();
   });
@@ -51,6 +57,7 @@ name: broken-skill
     expect(screen.getAllByText("broken-skill")[0]).toBeVisible();
     fireEvent.click(screen.getByRole("button", { name: /code-review/i }));
     expect(screen.getByText("skills/code-review/SKILL.md")).toBeVisible();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     expect(screen.getAllByText("Invalid metadata").length).toBeGreaterThan(0);
 
     fireEvent.change(screen.getByPlaceholderText("Search skills"), {
@@ -123,6 +130,79 @@ description: Review code changes.
 
     expect((await screen.findAllByText("code-review"))[0]).toBeVisible();
   });
+
+  it("opens selected skill details in a bottom drawer when the skills layout is a single column", async () => {
+    const rootHandle = createRootDirectoryHandle("skills", [
+      createChildDirectoryHandle(
+        "code-review",
+        `---
+name: code-review
+description: Review code changes.
+---
+
+# Code Review
+`,
+      ),
+    ]);
+
+    renderSkillsManager(rootHandle, { isColumnLayout: true });
+
+    const skillButton = await screen.findByRole("button", { name: /code-review/i });
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+    fireEvent.click(skillButton);
+
+    const drawer = await screen.findByRole("dialog");
+
+    expect(within(drawer).getByText("Skill detail")).toBeVisible();
+    expect(within(drawer).getByText("skills/code-review/SKILL.md")).toBeVisible();
+    expect(within(drawer).getByText("SKILL.md preview")).toBeVisible();
+
+    fireEvent.click(within(drawer).getByRole("button", { name: "Close" }));
+
+    await waitFor(() => {
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
+
+    expect(skillButton).toHaveClass("bg-muted");
+  });
+
+  it("closes the detail drawer when search hides the selected skill in a single-column layout", async () => {
+    const rootHandle = createRootDirectoryHandle("skills", [
+      createChildDirectoryHandle(
+        "code-review",
+        `---
+name: code-review
+description: Review code changes.
+---
+`,
+      ),
+      createChildDirectoryHandle(
+        "pdf-tools",
+        `---
+name: pdf-tools
+description: Read PDF files.
+---
+`,
+      ),
+    ]);
+
+    renderSkillsManager(rootHandle, { isColumnLayout: true });
+
+    fireEvent.click(await screen.findByRole("button", { name: /code-review/i }));
+
+    expect(await screen.findByRole("dialog")).toBeVisible();
+
+    fireEvent.change(screen.getByPlaceholderText("Search skills"), {
+      target: { value: "pdf" },
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
+    expect((await screen.findAllByText("pdf-tools"))[0]).toBeVisible();
+  });
 });
 
 type MutableRootDirectoryHandle = FileSystemDirectoryHandle & {
@@ -130,12 +210,29 @@ type MutableRootDirectoryHandle = FileSystemDirectoryHandle & {
   setPermission: (permission: PermissionState) => void;
 };
 
-function renderSkillsManager(rootHandle: FileSystemDirectoryHandle) {
+type RenderSkillsManagerOptions = {
+  isColumnLayout?: boolean;
+};
+
+function renderSkillsManager(
+  rootHandle: FileSystemDirectoryHandle,
+  { isColumnLayout = false }: RenderSkillsManagerOptions = {},
+) {
+  setViewportWidth(isColumnLayout ? 900 : 1024);
+  mockMatchMedia(isColumnLayout);
+
   renderWithProviders(
     <I18nStateProvider>
       <SkillsManager skillLibrary={createSkillLibrary(rootHandle)} />
     </I18nStateProvider>,
   );
+}
+
+function setViewportWidth(width: number) {
+  Object.defineProperty(window, "innerWidth", {
+    configurable: true,
+    value: width,
+  });
 }
 
 function createSkillLibrary(directoryHandle: FileSystemDirectoryHandle): SkillLibraryRecord {

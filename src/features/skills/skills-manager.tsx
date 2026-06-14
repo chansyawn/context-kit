@@ -3,6 +3,13 @@ import type { LocalSkill } from "@/features/skills/skill-types";
 import { ensureReadWritePermission } from "@/features/skill-libraries/skill-library-permissions";
 import type { SkillLibraryRecord } from "@/features/skill-libraries/skill-library-types";
 import { Button } from "@/ui/components/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/ui/components/sheet";
 import { useLingui } from "@lingui/react";
 import { KeyRoundIcon } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -13,13 +20,17 @@ import { SkillList } from "./skill-list";
 
 type ScanStatus = "idle" | "scanning" | "permission-required";
 
+const COLUMN_LAYOUT_QUERY = "(max-width: 1023px)";
+
 type SkillsManagerProps = {
   skillLibrary: SkillLibraryRecord;
 };
 
 export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
   const { i18n } = useLingui();
+  const isColumnLayout = useIsColumnLayout();
   const [error, setError] = useState<string | null>(null);
+  const [isSkillDetailDrawerOpen, setIsSkillDetailDrawerOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedSkillId, setSelectedSkillId] = useState<string | null>(null);
   const [skills, setSkills] = useState<LocalSkill[]>([]);
@@ -49,13 +60,21 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
   useEffect(() => {
     if (visibleSkills.length === 0) {
       setSelectedSkillId(null);
+      setIsSkillDetailDrawerOpen(false);
       return;
     }
 
     if (!visibleSkills.some((skill) => skill.id === selectedSkillId)) {
       setSelectedSkillId(visibleSkills[0]?.id ?? null);
+      setIsSkillDetailDrawerOpen(false);
     }
   }, [selectedSkillId, visibleSkills]);
+
+  useEffect(() => {
+    if (!isColumnLayout || !selectedSkill) {
+      setIsSkillDetailDrawerOpen(false);
+    }
+  }, [isColumnLayout, selectedSkill]);
 
   const scanDirectory = useCallback(async () => {
     setStatus("scanning");
@@ -118,12 +137,24 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
     setQuery("");
     setSkills([]);
     setSelectedSkillId(null);
+    setIsSkillDetailDrawerOpen(false);
     void scanDirectory();
   }, [scanDirectory, skillLibrary.id]);
 
   const handleRescan = useCallback(() => {
     void scanDirectory();
   }, [scanDirectory]);
+
+  const handleSelectSkill = useCallback(
+    (skillId: string) => {
+      setSelectedSkillId(skillId);
+
+      if (isColumnLayout) {
+        setIsSkillDetailDrawerOpen(true);
+      }
+    },
+    [isColumnLayout],
+  );
 
   const labels = {
     filters: {
@@ -210,6 +241,10 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
         message: "Request folder access",
       }),
     },
+    close: i18n._({
+      id: "common.close",
+      message: "Close",
+    }),
   };
 
   return (
@@ -225,24 +260,69 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
           ) : null}
         </div>
       ) : null}
-      <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[12rem_minmax(18rem,25rem)_minmax(0,1fr)] lg:overflow-hidden">
+      <div className="grid min-h-0 min-w-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[12rem_minmax(18rem,25rem)_minmax(0,1fr)] lg:overflow-hidden">
         <SkillFilters count={skills.length} labels={labels.filters} />
         <SkillList
           isScanning={isScanning}
           labels={labels.list}
           onQueryChange={setQuery}
           onRescan={handleRescan}
-          onSelectSkill={setSelectedSkillId}
+          onSelectSkill={handleSelectSkill}
           query={query}
           rootName={skillLibrary.rootName}
           selectedSkillId={selectedSkillId}
           skills={visibleSkills}
           totalCount={skills.length}
         />
-        <SkillDetail labels={labels.detail} skill={selectedSkill} />
+        <div className="hidden min-h-0 min-w-0 lg:flex">
+          <SkillDetail
+            className="min-h-0 min-w-0 flex-1"
+            labels={labels.detail}
+            skill={selectedSkill}
+          />
+        </div>
       </div>
+      <Sheet
+        open={isColumnLayout && Boolean(selectedSkill) && isSkillDetailDrawerOpen}
+        onOpenChange={setIsSkillDetailDrawerOpen}
+      >
+        <SheetContent
+          side="bottom"
+          closeLabel={labels.close}
+          className="h-[92svh] max-h-[92svh] w-full max-w-full gap-0 overflow-hidden rounded-t-xl p-0"
+        >
+          <SheetHeader className="border-b pe-12 text-start">
+            <SheetTitle>{labels.detail.title}</SheetTitle>
+            <SheetDescription>
+              {selectedSkill?.metadata.name ?? labels.detail.empty}
+            </SheetDescription>
+          </SheetHeader>
+          <SkillDetail
+            className="min-h-0 min-w-0 flex-1"
+            labels={labels.detail}
+            skill={selectedSkill}
+            variant="drawer"
+          />
+        </SheetContent>
+      </Sheet>
     </section>
   );
+}
+
+function useIsColumnLayout() {
+  const [isColumnLayout, setIsColumnLayout] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(COLUMN_LAYOUT_QUERY);
+    const handleChange = () => setIsColumnLayout(mediaQuery.matches);
+
+    handleChange();
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  return isColumnLayout;
 }
 
 function isPermissionError(error: unknown): boolean {
