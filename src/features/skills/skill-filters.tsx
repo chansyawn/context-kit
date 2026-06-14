@@ -10,7 +10,7 @@ type SkillFiltersProps = {
 
 export function SkillFilters({ count, labels }: SkillFiltersProps) {
   return (
-    <aside className="rounded-lg border bg-card p-3">
+    <aside className="min-h-0 overflow-auto rounded-lg border bg-card p-3">
       <div className="mb-3 px-1 text-xs font-medium text-muted-foreground">{labels.title}</div>
       <Button type="button" variant="secondary" className="w-full justify-between">
         <span>{labels.all}</span>

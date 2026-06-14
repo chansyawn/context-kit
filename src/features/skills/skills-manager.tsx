@@ -213,7 +213,7 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
   };
 
   return (
-    <section className="flex min-h-[calc(100svh-5rem)] flex-col gap-3">
+    <section className="flex h-full min-h-0 flex-col gap-3">
       {error ? (
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
           <p>{error}</p>
@@ -225,7 +225,7 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
           ) : null}
         </div>
       ) : null}
-      <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[12rem_minmax(18rem,25rem)_minmax(0,1fr)]">
+      <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[12rem_minmax(18rem,25rem)_minmax(0,1fr)] lg:overflow-hidden">
         <SkillFilters count={skills.length} labels={labels.filters} />
         <SkillList
           isScanning={isScanning}

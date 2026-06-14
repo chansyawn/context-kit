@@ -80,7 +80,7 @@ export function SkillDetail({ labels, skill }: SkillDetailProps) {
       </div>
       <div className="min-h-0 flex-1 overflow-auto p-4">
         <div className="mb-2 text-xs font-medium text-muted-foreground">{labels.sourcePreview}</div>
-        <pre className="max-h-[60svh] overflow-auto rounded-lg border bg-muted/40 p-3 text-xs leading-relaxed">
+        <pre className="overflow-x-auto rounded-lg border bg-muted/40 p-3 text-xs leading-relaxed">
           <code>{skill.source || labels.unreadableSource}</code>
         </pre>
       </div>
