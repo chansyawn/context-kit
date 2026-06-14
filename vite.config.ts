@@ -29,7 +29,6 @@ export default defineConfig({
   ],
   test: {
     environment: "jsdom",
-    setupFiles: ["./src/test/setup.ts"],
   },
   fmt: {
     ignorePatterns: ["src/routeTree.gen.ts", "src/locales/**"],

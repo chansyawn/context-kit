@@ -30,7 +30,6 @@ src/
     components/         # shadcn/Base UI primitives only
     hooks/
     lib/
-  test/                 # shared test helpers
 ```
 
 - Keep app-specific copy, routing state, and feature data out of `src/ui/components`.
@@ -62,5 +61,6 @@ src/
 ### Test
 
 - Import test APIs from `vite-plus/test`, never directly from `vitest`.
-- Prefer React Testing Library for frontend behavior and DOM side effects.
-- Keep tests focused on user-observable behavior, provider state, and DOM attributes such as `lang`, `dir`, and `.dark`.
+- Prefer pure unit tests for parsing, persistence, validation, and browser-boundary logic.
+- Keep UI tests restrained. Add React Testing Library or route/component rendering tests only for high-risk user flows or regressions that cannot be covered cleanly at a lower layer.
+- When a UI test is necessary, keep it focused on one user-observable behavior and avoid broad component coverage.
