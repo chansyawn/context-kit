@@ -46,10 +46,11 @@ src/
 
 ### Theme And RTL
 
-- Appearance preferences live in `localStorage` under `tagskills.appearance.v1`.
-- Theme state is owned by `src/app/theme.tsx`; do not toggle `.dark` outside that provider.
-- Locale state is owned by `src/app/i18n.tsx`; do not write `<html lang>` outside that provider.
-- Text direction is owned by `src/app/direction.tsx`; design components with RTL behavior in mind.
+- User preferences live in `localStorage` under `tagskills.appearance`, with the schema
+  version stored in the serialized value.
+- Preference state is owned by Jotai atoms in `src/features/preferences/preferences-atoms.ts`.
+- Browser preference side effects are owned by `src/features/preferences/preferences-runtime.tsx`; do not write
+  `<html lang>`, `<html dir>`, `.dark`, or `colorScheme` elsewhere.
 - Prefer CSS logical properties and Tailwind logical utilities such as `ms`, `me`, `ps`, `pe`, `start`, and `end`.
 
 ### UI Components

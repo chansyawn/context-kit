@@ -65,27 +65,27 @@ msgid "common.tryAgain"
 msgstr "重试"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:24
+#: src/features/preferences/sidebar-settings.tsx:34
 msgid "settings.language.title"
 msgstr "语言"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:102
+#: src/features/preferences/sidebar-settings.tsx:112
 msgid "settings.theme.dark"
 msgstr "深色"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:104
+#: src/features/preferences/sidebar-settings.tsx:114
 msgid "settings.theme.light"
 msgstr "浅色"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:106
+#: src/features/preferences/sidebar-settings.tsx:116
 msgid "settings.theme.system"
 msgstr "跟随系统"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:28
+#: src/features/preferences/sidebar-settings.tsx:38
 msgid "settings.theme.title"
 msgstr "主题"
 

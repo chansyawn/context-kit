@@ -65,27 +65,27 @@ msgid "common.tryAgain"
 msgstr "Try again"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:24
+#: src/features/preferences/sidebar-settings.tsx:34
 msgid "settings.language.title"
 msgstr "Language"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:102
+#: src/features/preferences/sidebar-settings.tsx:112
 msgid "settings.theme.dark"
 msgstr "Dark"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:104
+#: src/features/preferences/sidebar-settings.tsx:114
 msgid "settings.theme.light"
 msgstr "Light"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:106
+#: src/features/preferences/sidebar-settings.tsx:116
 msgid "settings.theme.system"
 msgstr "System"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:28
+#: src/features/preferences/sidebar-settings.tsx:38
 msgid "settings.theme.title"
 msgstr "Theme"
 

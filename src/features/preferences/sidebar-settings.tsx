@@ -1,9 +1,14 @@
 "use client";
 
-import { useI18nState } from "@/app/i18n";
-import type { LocaleCode, ThemeMode } from "@/app/preferences";
-import { THEME_MODE_OPTIONS } from "@/app/preferences";
-import { useThemeState } from "@/app/theme";
+import {
+  activeLocaleAtom,
+  localeAtom,
+  localeOptionsAtom,
+  resolvedThemeAtom,
+  themeModeAtom,
+} from "@/features/preferences/preferences-atoms";
+import type { LocaleCode, ThemeMode } from "@/features/preferences/preferences";
+import { THEME_MODE_OPTIONS } from "@/features/preferences/preferences";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,12 +20,17 @@ import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/ui/components
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
+import { useAtomValue, useSetAtom } from "jotai";
 import { LanguagesIcon, MoonIcon, SunIcon } from "lucide-react";
 
 export function SidebarSettings() {
   const { i18n } = useLingui();
-  const { activeLocale, localeOptions, setLocale } = useI18nState();
-  const { resolvedTheme, setThemeMode, themeMode } = useThemeState();
+  const activeLocale = useAtomValue(activeLocaleAtom);
+  const localeOptions = useAtomValue(localeOptionsAtom);
+  const resolvedTheme = useAtomValue(resolvedThemeAtom);
+  const themeMode = useAtomValue(themeModeAtom);
+  const setLocale = useSetAtom(localeAtom);
+  const setThemeMode = useSetAtom(themeModeAtom);
   const languageLabel = i18n._({
     id: "settings.language.title",
     message: "Language",
