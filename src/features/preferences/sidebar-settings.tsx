@@ -7,43 +7,46 @@ import { useThemeState } from "@/app/theme";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/ui/components/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/ui/components/sidebar";
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
-import { Trans } from "@lingui/react/macro";
 import { LanguagesIcon, MoonIcon, SunIcon } from "lucide-react";
 
 export function SidebarSettings() {
   const { i18n } = useLingui();
   const { activeLocale, localeOptions, setLocale } = useI18nState();
   const { resolvedTheme, setThemeMode, themeMode } = useThemeState();
+  const languageLabel = i18n._({
+    id: "settings.language.title",
+    message: "Language",
+  });
+  const themeLabel = i18n._({
+    id: "settings.theme.title",
+    message: "Theme",
+  });
 
   return (
-    <SidebarMenu>
+    <SidebarMenu className="flex-row gap-1">
       <SidebarMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger render={<SidebarMenuButton />}>
+          <DropdownMenuTrigger
+            render={
+              <SidebarMenuButton
+                className="size-8! justify-center"
+                aria-label={languageLabel}
+                title={languageLabel}
+              />
+            }
+          >
             <LanguagesIcon />
-            <span>
-              <Trans id="settings.language.title">Language</Trans>
-            </span>
-            <span className="ms-auto text-xs text-muted-foreground">{activeLocale.name}</span>
+            <span className="sr-only">{languageLabel}</span>
           </DropdownMenuTrigger>
-          <DropdownMenuContent side="right" align="end" className="w-48">
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>
-                <Trans id="settings.language.title">Language</Trans>
-              </DropdownMenuLabel>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+          <DropdownMenuContent side="top" align="start" className="w-40">
             <DropdownMenuRadioGroup
               value={activeLocale.key}
               onValueChange={(value) => {
@@ -61,22 +64,19 @@ export function SidebarSettings() {
       </SidebarMenuItem>
       <SidebarMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger render={<SidebarMenuButton />}>
+          <DropdownMenuTrigger
+            render={
+              <SidebarMenuButton
+                className="size-8! justify-center"
+                aria-label={themeLabel}
+                title={themeLabel}
+              />
+            }
+          >
             {resolvedTheme === "dark" ? <MoonIcon /> : <SunIcon />}
-            <span>
-              <Trans id="settings.theme.title">Theme</Trans>
-            </span>
-            <span className="ms-auto text-xs text-muted-foreground">
-              {i18n._(themeModeLabel(themeMode))}
-            </span>
+            <span className="sr-only">{themeLabel}</span>
           </DropdownMenuTrigger>
-          <DropdownMenuContent side="right" align="end" className="w-48">
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>
-                <Trans id="settings.theme.title">Theme</Trans>
-              </DropdownMenuLabel>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+          <DropdownMenuContent side="top" align="end" className="w-40">
             <DropdownMenuRadioGroup
               value={themeMode}
               onValueChange={(value) => {

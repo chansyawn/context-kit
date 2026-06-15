@@ -59,7 +59,6 @@ export function SkillLibrarySidebarGroup() {
             {skillLibraries.map((skillLibrary) => (
               <SidebarMenuItem key={skillLibrary.id}>
                 <SidebarMenuButton
-                  size="lg"
                   tooltip={skillLibrary.name}
                   isActive={activeSkillLibraryId === skillLibrary.id}
                   render={
@@ -70,12 +69,7 @@ export function SkillLibrarySidebarGroup() {
                   }
                 >
                   <FolderIcon />
-                  <div className="grid min-w-0 flex-1 text-start leading-tight">
-                    <span className="truncate font-medium">{skillLibrary.name}</span>
-                    <span className="truncate text-xs text-sidebar-foreground/60">
-                      {skillLibrary.rootName}
-                    </span>
-                  </div>
+                  <span className="truncate font-medium">{skillLibrary.name}</span>
                 </SidebarMenuButton>
                 <DropdownMenu>
                   <DropdownMenuTrigger

@@ -65,8 +65,7 @@ msgid "common.tryAgain"
 msgstr "重试"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:36
-#: src/features/preferences/sidebar-settings.tsx:43
+#: src/features/preferences/sidebar-settings.tsx:24
 msgid "settings.language.title"
 msgstr "语言"
 
@@ -86,8 +85,7 @@ msgid "settings.theme.system"
 msgstr "跟随系统"
 
 #. js-lingui-explicit-id
-#: src/features/preferences/sidebar-settings.tsx:67
-#: src/features/preferences/sidebar-settings.tsx:76
+#: src/features/preferences/sidebar-settings.tsx:28
 msgid "settings.theme.title"
 msgstr "主题"
 
@@ -118,12 +116,12 @@ msgstr "添加技能库"
 
 #. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:112
-#: src/features/skill-libraries/skill-library-sidebar-group.tsx:102
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:96
 msgid "skillLibraries.actions.delete"
 msgstr "删除"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-sidebar-group.tsx:92
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:86
 msgid "skillLibraries.actions.rename"
 msgstr "重命名"
 
