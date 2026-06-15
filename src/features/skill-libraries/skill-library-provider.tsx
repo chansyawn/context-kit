@@ -40,6 +40,7 @@ export function SkillLibraryProvider({ children, repository }: SkillLibraryProvi
   const [error, setError] = useState<string | null>(null);
 
   const refreshSkillLibraries = useCallback(async () => {
+    setIsLoading(true);
     setError(null);
 
     try {
@@ -47,6 +48,8 @@ export function SkillLibraryProvider({ children, repository }: SkillLibraryProvi
     } catch (loadError) {
       setError(formatSkillLibraryError(loadError));
       setSkillLibraries([]);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 

@@ -2,7 +2,6 @@ import { scanSkillsRoot } from "@/features/skills/scan-skills";
 import type { LocalSkill } from "@/features/skills/skill-types";
 import { ensureReadWritePermission } from "@/features/skill-libraries/skill-library-permissions";
 import type { SkillLibraryRecord } from "@/features/skill-libraries/skill-library-types";
-import { Button } from "@/ui/components/button";
 import {
   Sheet,
   SheetContent,
@@ -11,12 +10,12 @@ import {
   SheetTitle,
 } from "@/ui/components/sheet";
 import { useLingui } from "@lingui/react";
-import { KeyRoundIcon } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { SkillDetail } from "./skill-detail";
 import { SkillFilters } from "./skill-filters";
 import { SkillList } from "./skill-list";
+import { NoSkillsState, SkillsErrorState, SkillsLoadingState } from "./skills-manager-states";
 
 type ScanStatus = "idle" | "scanning" | "permission-required";
 
@@ -34,7 +33,7 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
   const [query, setQuery] = useState("");
   const [selectedSkillId, setSelectedSkillId] = useState<string | null>(null);
   const [skills, setSkills] = useState<LocalSkill[]>([]);
-  const [status, setStatus] = useState<ScanStatus>("idle");
+  const [status, setStatus] = useState<ScanStatus>("scanning");
 
   const isScanning = status === "scanning";
   const normalizedQuery = query.trim().toLocaleLowerCase();
@@ -145,6 +144,10 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
     void scanDirectory();
   }, [scanDirectory]);
 
+  const handleClearQuery = useCallback(() => {
+    setQuery("");
+  }, []);
+
   const handleSelectSkill = useCallback(
     (skillId: string) => {
       setSelectedSkillId(skillId);
@@ -196,6 +199,14 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
         id: "skills.list.noMatches",
         message: "No skills match your search.",
       }),
+      noMatchesDescription: i18n._({
+        id: "skills.list.noMatches.description",
+        message: "Try another search or clear the current query.",
+      }),
+      clearSearch: i18n._({
+        id: "skills.actions.clearSearch",
+        message: "Clear search",
+      }),
     },
     detail: {
       title: i18n._({
@@ -205,6 +216,10 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
       empty: i18n._({
         id: "skills.detail.empty",
         message: "Select a skill to view its metadata and SKILL.md source.",
+      }),
+      emptyTitle: i18n._({
+        id: "skills.detail.emptyTitle",
+        message: "No skill selected",
       }),
       description: i18n._({
         id: "skills.detail.description",
@@ -247,24 +262,33 @@ export function SkillsManager({ skillLibrary }: SkillsManagerProps) {
     }),
   };
 
+  if (error) {
+    return (
+      <SkillsErrorState
+        error={error}
+        isPermissionRequired={status === "permission-required"}
+        retryLabel={status === "permission-required" ? labels.permission.retry : labels.list.rescan}
+        onRetry={handleRescan}
+      />
+    );
+  }
+
+  if (isScanning && skills.length === 0) {
+    return <SkillsLoadingState />;
+  }
+
+  if (skills.length === 0) {
+    return <NoSkillsState onRescan={handleRescan} />;
+  }
+
   return (
-    <section className="flex h-full min-h-0 flex-col gap-3">
-      {error ? (
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-          <p>{error}</p>
-          {status === "permission-required" ? (
-            <Button type="button" variant="outline" size="sm" onClick={handleRescan}>
-              <KeyRoundIcon data-icon="inline-start" />
-              {labels.permission.retry}
-            </Button>
-          ) : null}
-        </div>
-      ) : null}
+    <section className="flex h-full min-h-0 flex-col">
       <div className="grid min-h-0 min-w-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[12rem_minmax(18rem,25rem)_minmax(0,1fr)] lg:overflow-hidden">
         <SkillFilters count={skills.length} labels={labels.filters} />
         <SkillList
           isScanning={isScanning}
           labels={labels.list}
+          onClearQuery={handleClearQuery}
           onQueryChange={setQuery}
           onRescan={handleRescan}
           onSelectSkill={handleSelectSkill}

@@ -27,30 +27,42 @@ msgid "app.breadcrumb.section"
 msgstr "技能库"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:217
+#: src/app/app-error-boundary.tsx:31
+msgid "app.error.description"
+msgstr "应用遇到意外错误并已中断。请尝试重新加载。"
+
+#. js-lingui-explicit-id
+#: src/app/app-error-boundary.tsx:28
+msgid "app.error.title"
+msgstr "出现意外错误"
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:230
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:104
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:134
 msgid "common.cancel"
 msgstr "取消"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:52
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:58
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:38
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:48
+#: src/features/skills/skills-manager.tsx:259
 #: src/routes/-layouts/app-layout.tsx:36
 msgid "common.close"
 msgstr "关闭"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:223
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:236
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:137
 msgid "common.save"
 msgstr "保存"
 
 #. js-lingui-explicit-id
-#: src/app/i18n.test.tsx:24
-msgid "home.breadcrumb.page"
-msgstr "技能"
+#: src/app/app-error-boundary.tsx:39
+#: src/features/skill-libraries/skill-library-route-states.tsx:59
+msgid "common.tryAgain"
+msgstr "重试"
 
 #. js-lingui-explicit-id
 #: src/features/preferences/sidebar-settings.tsx:36
@@ -100,33 +112,33 @@ msgid "sidebar.toggle"
 msgstr "切换侧边栏"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:48
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:54
 msgid "skillLibraries.actions.add"
 msgstr "添加技能库"
 
 #. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:112
-#: src/features/skill-libraries/skill-library-sidebar-group.tsx:108
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:102
 msgid "skillLibraries.actions.delete"
 msgstr "删除"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-sidebar-group.tsx:98
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:92
 msgid "skillLibraries.actions.rename"
 msgstr "重命名"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:195
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:208
 msgid "skillLibraries.actions.selectDirectory"
 msgstr "选择目录"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:163
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:176
 msgid "skillLibraries.create.description"
 msgstr "为技能库命名，并选择它对应的本地 skills 根目录。"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:160
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:173
 msgid "skillLibraries.create.title"
 msgstr "添加技能库"
 
@@ -141,17 +153,17 @@ msgid "skillLibraries.delete.title"
 msgstr "删除技能库？"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-route-states.tsx:20
+#: src/features/skill-libraries/skill-library-route-states.tsx:27
 msgid "skillLibraries.empty.description"
-msgstr "从侧边栏添加技能库，以连接本地 skills 根目录。"
+msgstr "添加技能库，以连接本地 skills 根目录。"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-route-states.tsx:17
+#: src/features/skill-libraries/skill-library-route-states.tsx:24
 msgid "skillLibraries.empty.title"
 msgstr "还没有技能库"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:114
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:120
 msgid "skillLibraries.error.directoryRequired"
 msgstr "保存前请选择 skills 目录。"
 
@@ -171,15 +183,20 @@ msgid "skillLibraries.error.indexedDbUnavailable"
 msgstr "当前浏览器无法持久化技能库记录。"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:94
+#: src/features/skill-libraries/skill-library-route-states.tsx:52
+msgid "skillLibraries.error.loadTitle"
+msgstr "无法加载技能库"
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:100
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:76
 #: src/features/skill-libraries/skill-library-ui-errors.ts:11
 msgid "skillLibraries.error.nameRequired"
 msgstr "技能库名称不能为空。"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:59
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:104
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:65
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:110
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:55
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:86
 #: src/features/skill-libraries/skill-library-ui-errors.ts:16
@@ -192,28 +209,28 @@ msgid "skillLibraries.error.notFound"
 msgstr "未找到技能库。"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:185
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:198
 msgid "skillLibraries.form.directory"
 msgstr "skills 目录"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:199
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:212
 msgid "skillLibraries.form.directory.none"
 msgstr "未选择文件夹"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:171
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:184
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:123
 msgid "skillLibraries.form.name"
 msgstr "技能库名称"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:177
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:190
 msgid "skillLibraries.form.name.placeholder"
 msgstr "我的 skills"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-route-states.tsx:39
+#: src/features/skill-libraries/skill-library-route-states.tsx:71
 msgid "skillLibraries.loading"
 msgstr "正在加载技能库..."
 
@@ -233,119 +250,150 @@ msgid "skillLibraries.rename.title"
 msgstr "重命名技能库"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-sidebar-group.tsx:62
-msgid "skillLibraries.sidebar.empty"
-msgstr "没有技能库"
-
-#. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-sidebar-group.tsx:48
 msgid "skillLibraries.sidebar.title"
 msgstr "技能库"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:208
+#: src/features/skills/skills-manager.tsx:206
+msgid "skills.actions.clearSearch"
+msgstr "清除搜索"
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:254
 msgid "skills.actions.requestPermission"
 msgstr "请求文件夹访问权限"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:152
+#: src/features/skills/skills-manager-states.tsx:50
+#: src/features/skills/skills-manager.tsx:186
 msgid "skills.actions.rescan"
 msgstr "重新扫描"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:178
+#: src/features/skills/skills-manager.tsx:224
 msgid "skills.detail.description"
 msgstr "描述"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:194
+#: src/features/skills/skills-manager.tsx:240
 msgid "skills.detail.diagnostics"
 msgstr "诊断"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:174
+#: src/features/skills/skills-manager.tsx:216
 msgid "skills.detail.empty"
 msgstr "选择一个 skill 查看元数据和 SKILL.md 原文。"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:198
+#: src/features/skills/skills-manager.tsx:220
+msgid "skills.detail.emptyTitle"
+msgstr "未选择 skill"
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:244
 msgid "skills.detail.noDescription"
 msgstr "暂无描述。"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:182
+#: src/features/skills/skills-manager.tsx:228
 msgid "skills.detail.path"
 msgstr "本地路径"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:186
+#: src/features/skills/skills-manager.tsx:232
 msgid "skills.detail.sourcePreview"
 msgstr "SKILL.md 预览"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:170
+#: src/features/skills/skills-manager.tsx:212
 msgid "skills.detail.title"
 msgstr "Skill 详情"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:202
+#: src/features/skills/skills-manager.tsx:248
 msgid "skills.detail.unreadableSource"
 msgstr "无法读取 SKILL.md。"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:72
-#: src/features/skills/skills-manager.tsx:98
+#: src/features/skills/skills-manager-states.tsx:42
+msgid "skills.empty.description"
+msgstr "此技能库中没有可读取的 SKILL.md 文件。"
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager-states.tsx:39
+msgid "skills.empty.title"
+msgstr "未找到 skills"
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:90
+#: src/features/skills/skills-manager.tsx:116
 msgid "skills.error.permissionRequired"
 msgstr "已保存的文件夹权限不再可用。请通过浏览器提示重新请求访问权限，或删除并重新创建此技能库。"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:108
+#: src/features/skills/skills-manager.tsx:126
 msgid "skills.error.scan"
 msgstr "无法扫描所选目录。"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:207
+#: src/features/skills/skills-manager-states.tsx:79
+msgid "skills.error.title"
+msgstr "无法加载 skills"
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:220
 #: src/features/skill-libraries/skill-library-ui-errors.ts:31
 msgid "skills.error.unsupported"
 msgstr "当前浏览器不支持选择本地目录。"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:134
+#: src/features/skills/skills-manager.tsx:168
 msgid "skills.filters.all"
 msgstr "全部"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:130
+#: src/features/skills/skills-manager.tsx:164
 msgid "skills.filters.title"
 msgstr "筛选"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:156
 #: src/features/skills/skills-manager.tsx:190
+#: src/features/skills/skills-manager.tsx:236
 msgid "skills.invalidMetadata"
 msgstr "元数据无效"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:160
+#: src/features/skills/skills-manager.tsx:194
 msgid "skills.list.empty"
 msgstr "该目录中未找到 skills。"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:164
+#: src/features/skills/skills-manager.tsx:198
 msgid "skills.list.noMatches"
 msgstr "没有匹配搜索的 skills。"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:144
+#: src/features/skills/skills-manager.tsx:202
+msgid "skills.list.noMatches.description"
+msgstr "请尝试其他关键词或清除当前搜索。"
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:178
 msgid "skills.list.rootDirectory"
 msgstr "根目录"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:140
+#: src/features/skills/skills-manager.tsx:174
 msgid "skills.list.title"
 msgstr "Skills"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:148
+#: src/features/skills/skills-manager-states.tsx:19
+msgid "skills.loading"
+msgstr "正在扫描 skills..."
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:182
 msgid "skills.search.placeholder"
 msgstr "搜索 skills"

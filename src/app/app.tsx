@@ -1,3 +1,4 @@
+import { AppErrorBoundary } from "@/app/app-error-boundary";
 import { DirectionStateProvider } from "@/app/direction";
 import { I18nStateProvider } from "@/app/i18n";
 import { ThemeStateProvider } from "@/app/theme";
@@ -19,11 +20,13 @@ export function App() {
     <ThemeStateProvider>
       <I18nStateProvider>
         <DirectionStateProvider>
-          <TooltipProvider>
-            <SkillLibraryProvider>
-              <RouterProvider router={router} />
-            </SkillLibraryProvider>
-          </TooltipProvider>
+          <AppErrorBoundary>
+            <TooltipProvider>
+              <SkillLibraryProvider>
+                <RouterProvider router={router} />
+              </SkillLibraryProvider>
+            </TooltipProvider>
+          </AppErrorBoundary>
         </DirectionStateProvider>
       </I18nStateProvider>
     </ThemeStateProvider>

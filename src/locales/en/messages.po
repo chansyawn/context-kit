@@ -27,30 +27,42 @@ msgid "app.breadcrumb.section"
 msgstr "Skill Libraries"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:217
+#: src/app/app-error-boundary.tsx:31
+msgid "app.error.description"
+msgstr "An unexpected error interrupted the application. Try loading it again."
+
+#. js-lingui-explicit-id
+#: src/app/app-error-boundary.tsx:28
+msgid "app.error.title"
+msgstr "Something went wrong"
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:230
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:104
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:134
 msgid "common.cancel"
 msgstr "Cancel"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:52
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:58
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:38
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:48
+#: src/features/skills/skills-manager.tsx:259
 #: src/routes/-layouts/app-layout.tsx:36
 msgid "common.close"
 msgstr "Close"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:223
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:236
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:137
 msgid "common.save"
 msgstr "Save"
 
 #. js-lingui-explicit-id
-#: src/app/i18n.test.tsx:24
-msgid "home.breadcrumb.page"
-msgstr "Skills"
+#: src/app/app-error-boundary.tsx:39
+#: src/features/skill-libraries/skill-library-route-states.tsx:59
+msgid "common.tryAgain"
+msgstr "Try again"
 
 #. js-lingui-explicit-id
 #: src/features/preferences/sidebar-settings.tsx:36
@@ -100,33 +112,33 @@ msgid "sidebar.toggle"
 msgstr "Toggle Sidebar"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:48
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:54
 msgid "skillLibraries.actions.add"
 msgstr "Add skill library"
 
 #. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:112
-#: src/features/skill-libraries/skill-library-sidebar-group.tsx:108
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:102
 msgid "skillLibraries.actions.delete"
 msgstr "Delete"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-sidebar-group.tsx:98
+#: src/features/skill-libraries/skill-library-sidebar-group.tsx:92
 msgid "skillLibraries.actions.rename"
 msgstr "Rename"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:195
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:208
 msgid "skillLibraries.actions.selectDirectory"
 msgstr "Select directory"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:163
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:176
 msgid "skillLibraries.create.description"
 msgstr "Name the skill library and select its local skills root directory."
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:160
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:173
 msgid "skillLibraries.create.title"
 msgstr "Add skill library"
 
@@ -141,17 +153,17 @@ msgid "skillLibraries.delete.title"
 msgstr "Delete skill library?"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-route-states.tsx:20
+#: src/features/skill-libraries/skill-library-route-states.tsx:27
 msgid "skillLibraries.empty.description"
-msgstr "Add a skill library from the sidebar to connect a local skills root."
+msgstr "Add a skill library to connect a local skills root."
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-route-states.tsx:17
+#: src/features/skill-libraries/skill-library-route-states.tsx:24
 msgid "skillLibraries.empty.title"
 msgstr "No skill libraries yet"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:114
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:120
 msgid "skillLibraries.error.directoryRequired"
 msgstr "Select a skills directory before saving."
 
@@ -171,15 +183,20 @@ msgid "skillLibraries.error.indexedDbUnavailable"
 msgstr "This browser cannot persist skill library records."
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:94
+#: src/features/skill-libraries/skill-library-route-states.tsx:52
+msgid "skillLibraries.error.loadTitle"
+msgstr "Unable to load skill libraries"
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:100
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:76
 #: src/features/skill-libraries/skill-library-ui-errors.ts:11
 msgid "skillLibraries.error.nameRequired"
 msgstr "Skill library name is required."
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:59
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:104
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:65
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:110
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:55
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:86
 #: src/features/skill-libraries/skill-library-ui-errors.ts:16
@@ -192,28 +209,28 @@ msgid "skillLibraries.error.notFound"
 msgstr "Skill library was not found."
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:185
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:198
 msgid "skillLibraries.form.directory"
 msgstr "Skills directory"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:199
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:212
 msgid "skillLibraries.form.directory.none"
 msgstr "No folder selected"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:171
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:184
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:123
 msgid "skillLibraries.form.name"
 msgstr "Skill library name"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:177
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:190
 msgid "skillLibraries.form.name.placeholder"
 msgstr "My skills"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-route-states.tsx:39
+#: src/features/skill-libraries/skill-library-route-states.tsx:71
 msgid "skillLibraries.loading"
 msgstr "Loading skill libraries..."
 
@@ -233,119 +250,150 @@ msgid "skillLibraries.rename.title"
 msgstr "Rename skill library"
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-sidebar-group.tsx:62
-msgid "skillLibraries.sidebar.empty"
-msgstr "No skill libraries"
-
-#. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-sidebar-group.tsx:48
 msgid "skillLibraries.sidebar.title"
 msgstr "Skill Libraries"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:208
+#: src/features/skills/skills-manager.tsx:206
+msgid "skills.actions.clearSearch"
+msgstr "Clear search"
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:254
 msgid "skills.actions.requestPermission"
 msgstr "Request folder access"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:152
+#: src/features/skills/skills-manager-states.tsx:50
+#: src/features/skills/skills-manager.tsx:186
 msgid "skills.actions.rescan"
 msgstr "Rescan"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:178
+#: src/features/skills/skills-manager.tsx:224
 msgid "skills.detail.description"
 msgstr "Description"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:194
+#: src/features/skills/skills-manager.tsx:240
 msgid "skills.detail.diagnostics"
 msgstr "Diagnostics"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:174
+#: src/features/skills/skills-manager.tsx:216
 msgid "skills.detail.empty"
 msgstr "Select a skill to view its metadata and SKILL.md source."
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:198
+#: src/features/skills/skills-manager.tsx:220
+msgid "skills.detail.emptyTitle"
+msgstr "No skill selected"
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:244
 msgid "skills.detail.noDescription"
 msgstr "No description available."
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:182
+#: src/features/skills/skills-manager.tsx:228
 msgid "skills.detail.path"
 msgstr "Local path"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:186
+#: src/features/skills/skills-manager.tsx:232
 msgid "skills.detail.sourcePreview"
 msgstr "SKILL.md preview"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:170
+#: src/features/skills/skills-manager.tsx:212
 msgid "skills.detail.title"
 msgstr "Skill detail"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:202
+#: src/features/skills/skills-manager.tsx:248
 msgid "skills.detail.unreadableSource"
 msgstr "SKILL.md could not be read."
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:72
-#: src/features/skills/skills-manager.tsx:98
+#: src/features/skills/skills-manager-states.tsx:42
+msgid "skills.empty.description"
+msgstr "This skill library does not contain any readable SKILL.md files."
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager-states.tsx:39
+msgid "skills.empty.title"
+msgstr "No skills found"
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:90
+#: src/features/skills/skills-manager.tsx:116
 msgid "skills.error.permissionRequired"
 msgstr "The saved folder permission is no longer available. Request access again from the browser prompt, or delete and recreate this skill library."
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:108
+#: src/features/skills/skills-manager.tsx:126
 msgid "skills.error.scan"
 msgstr "Unable to scan the selected directory."
 
 #. js-lingui-explicit-id
-#: src/features/skill-libraries/skill-library-create-dialog.tsx:207
+#: src/features/skills/skills-manager-states.tsx:79
+msgid "skills.error.title"
+msgstr "Unable to load skills"
+
+#. js-lingui-explicit-id
+#: src/features/skill-libraries/skill-library-create-dialog.tsx:220
 #: src/features/skill-libraries/skill-library-ui-errors.ts:31
 msgid "skills.error.unsupported"
 msgstr "This browser does not support selecting local directories."
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:134
+#: src/features/skills/skills-manager.tsx:168
 msgid "skills.filters.all"
 msgstr "All"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:130
+#: src/features/skills/skills-manager.tsx:164
 msgid "skills.filters.title"
 msgstr "Filters"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:156
 #: src/features/skills/skills-manager.tsx:190
+#: src/features/skills/skills-manager.tsx:236
 msgid "skills.invalidMetadata"
 msgstr "Invalid metadata"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:160
+#: src/features/skills/skills-manager.tsx:194
 msgid "skills.list.empty"
 msgstr "No skills were found in this directory."
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:164
+#: src/features/skills/skills-manager.tsx:198
 msgid "skills.list.noMatches"
 msgstr "No skills match your search."
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:144
+#: src/features/skills/skills-manager.tsx:202
+msgid "skills.list.noMatches.description"
+msgstr "Try another search or clear the current query."
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:178
 msgid "skills.list.rootDirectory"
 msgstr "Root"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:140
+#: src/features/skills/skills-manager.tsx:174
 msgid "skills.list.title"
 msgstr "Skills"
 
 #. js-lingui-explicit-id
-#: src/features/skills/skills-manager.tsx:148
+#: src/features/skills/skills-manager-states.tsx:19
+msgid "skills.loading"
+msgstr "Scanning skills..."
+
+#. js-lingui-explicit-id
+#: src/features/skills/skills-manager.tsx:182
 msgid "skills.search.placeholder"
 msgstr "Search skills"

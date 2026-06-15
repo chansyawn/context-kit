@@ -1,5 +1,6 @@
 import {
   NoSkillLibrariesState,
+  SkillLibraryErrorState,
   SkillLibraryLoadingState,
 } from "@/features/skill-libraries/skill-library-route-states";
 import { useSkillLibraries } from "@/features/skill-libraries/skill-library-provider";
@@ -10,11 +11,15 @@ export const Route = createFileRoute("/skill-libraries/")({
 });
 
 function SkillLibrariesIndexPage() {
-  const { error, isLoading, skillLibraries } = useSkillLibraries();
+  const { error, isLoading, refreshSkillLibraries, skillLibraries } = useSkillLibraries();
   const firstSkillLibrary = skillLibraries[0] ?? null;
 
   if (isLoading) {
     return <SkillLibraryLoadingState />;
+  }
+
+  if (error) {
+    return <SkillLibraryErrorState error={error} onRetry={() => void refreshSkillLibraries()} />;
   }
 
   if (firstSkillLibrary) {
@@ -27,5 +32,5 @@ function SkillLibrariesIndexPage() {
     );
   }
 
-  return <NoSkillLibrariesState error={error} />;
+  return <NoSkillLibrariesState />;
 }

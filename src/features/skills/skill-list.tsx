@@ -1,8 +1,16 @@
 import type { LocalSkill } from "@/features/skills/skill-types";
 import { Button } from "@/ui/components/button";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/ui/components/empty";
 import { Input } from "@/ui/components/input";
 import { cn } from "@/ui/lib/utils";
-import { AlertTriangleIcon, RefreshCwIcon, SearchIcon } from "lucide-react";
+import { AlertTriangleIcon, RefreshCwIcon, SearchIcon, SearchXIcon } from "lucide-react";
 
 type SkillListProps = {
   isScanning: boolean;
@@ -19,7 +27,10 @@ type SkillListProps = {
     invalidMetadata: string;
     empty: string;
     noMatches: string;
+    noMatchesDescription: string;
+    clearSearch: string;
   };
+  onClearQuery: () => void;
   onQueryChange: (query: string) => void;
   onRescan: () => void;
   onSelectSkill: (skillId: string) => void;
@@ -28,6 +39,7 @@ type SkillListProps = {
 export function SkillList({
   isScanning,
   labels,
+  onClearQuery,
   onQueryChange,
   onRescan,
   onSelectSkill,
@@ -37,8 +49,6 @@ export function SkillList({
   skills,
   totalCount,
 }: SkillListProps) {
-  const emptyMessage = totalCount === 0 ? labels.empty : labels.noMatches;
-
   return (
     <section className="flex min-h-0 flex-col rounded-lg border bg-card">
       <div className="space-y-3 border-b p-3">
@@ -75,9 +85,24 @@ export function SkillList({
         </label>
       </div>
       {skills.length === 0 ? (
-        <div className="grid min-h-48 flex-1 place-items-center p-6 text-center text-sm text-muted-foreground">
-          {emptyMessage}
-        </div>
+        <Empty className="min-h-48 rounded-none border-0">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <SearchXIcon />
+            </EmptyMedia>
+            <EmptyTitle>{totalCount === 0 ? labels.empty : labels.noMatches}</EmptyTitle>
+            {totalCount > 0 ? (
+              <EmptyDescription>{labels.noMatchesDescription}</EmptyDescription>
+            ) : null}
+          </EmptyHeader>
+          {totalCount > 0 ? (
+            <EmptyContent>
+              <Button type="button" variant="outline" size="sm" onClick={onClearQuery}>
+                {labels.clearSearch}
+              </Button>
+            </EmptyContent>
+          ) : null}
+        </Empty>
       ) : (
         <div className="min-h-0 flex-1 overflow-auto p-2">
           <div className="space-y-1">

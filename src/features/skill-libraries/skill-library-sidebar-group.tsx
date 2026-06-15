@@ -31,7 +31,7 @@ import type { SkillLibraryRecord } from "./skill-library-types";
 
 export function SkillLibrarySidebarGroup() {
   const { i18n } = useLingui();
-  const { error, isLoading, skillLibraries } = useSkillLibraries();
+  const { isLoading, skillLibraries } = useSkillLibraries();
   const location = useLocation();
   const [skillLibraryToRename, setSkillLibraryToRename] = useState<SkillLibraryRecord | null>(null);
   const [skillLibraryToDelete, setSkillLibraryToDelete] = useState<SkillLibraryRecord | null>(null);
@@ -49,18 +49,12 @@ export function SkillLibrarySidebarGroup() {
         </SidebarGroupLabel>
         <SkillLibraryCreateDialog />
         <SidebarGroupContent>
-          {error ? <p className="px-2 py-1.5 text-xs text-destructive">{error}</p> : null}
           <SidebarMenu>
             {isLoading ? (
               <>
                 <SidebarMenuSkeleton showIcon />
                 <SidebarMenuSkeleton showIcon />
               </>
-            ) : null}
-            {!isLoading && skillLibraries.length === 0 ? (
-              <li className="px-2 py-1.5 text-xs text-sidebar-foreground/60">
-                <Trans id="skillLibraries.sidebar.empty">No skill libraries</Trans>
-              </li>
             ) : null}
             {skillLibraries.map((skillLibrary) => (
               <SidebarMenuItem key={skillLibrary.id}>

@@ -26,7 +26,13 @@ import { useMemo, useState, type FormEvent } from "react";
 import { useSkillLibraries } from "./skill-library-provider";
 import { formatSkillLibraryUiError } from "./skill-library-ui-errors";
 
-export function SkillLibraryCreateDialog() {
+type SkillLibraryCreateDialogProps = {
+  triggerVariant?: "sidebar" | "empty-state";
+};
+
+export function SkillLibraryCreateDialog({
+  triggerVariant = "sidebar",
+}: SkillLibraryCreateDialogProps) {
   const { i18n } = useLingui();
   const navigate = useNavigate();
   const { createSkillLibrary, skillLibraries } = useSkillLibraries();
@@ -149,10 +155,17 @@ export function SkillLibraryCreateDialog() {
         }
       }}
     >
-      <DialogTrigger render={<SidebarGroupAction aria-label={addLabel} title={addLabel} />}>
-        <PlusIcon />
-        <span className="sr-only">{addLabel}</span>
-      </DialogTrigger>
+      {triggerVariant === "sidebar" ? (
+        <DialogTrigger render={<SidebarGroupAction aria-label={addLabel} title={addLabel} />}>
+          <PlusIcon />
+          <span className="sr-only">{addLabel}</span>
+        </DialogTrigger>
+      ) : (
+        <DialogTrigger render={<Button type="button" size="lg" />}>
+          <FolderPlusIcon data-icon="inline-start" />
+          {addLabel}
+        </DialogTrigger>
+      )}
       <DialogContent closeLabel={closeLabel}>
         <form className="grid gap-4" onSubmit={handleSubmit}>
           <DialogHeader>

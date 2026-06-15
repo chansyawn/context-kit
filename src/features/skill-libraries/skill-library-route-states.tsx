@@ -1,39 +1,71 @@
+import { Button } from "@/ui/components/button";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/ui/components/empty";
 import { Skeleton } from "@/ui/components/skeleton";
 import { Trans } from "@lingui/react/macro";
-import { FolderPlusIcon } from "lucide-react";
+import { AlertTriangleIcon, FolderPlusIcon, RefreshCwIcon } from "lucide-react";
 
-type NoSkillLibrariesStateProps = {
-  error?: string | null;
+import { SkillLibraryCreateDialog } from "./skill-library-create-dialog";
+
+export function NoSkillLibrariesState() {
+  return (
+    <Empty className="min-h-0 border bg-card">
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <FolderPlusIcon />
+        </EmptyMedia>
+        <EmptyTitle>
+          <Trans id="skillLibraries.empty.title">No skill libraries yet</Trans>
+        </EmptyTitle>
+        <EmptyDescription>
+          <Trans id="skillLibraries.empty.description">
+            Add a skill library to connect a local skills root.
+          </Trans>
+        </EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <SkillLibraryCreateDialog triggerVariant="empty-state" />
+      </EmptyContent>
+    </Empty>
+  );
+}
+
+type SkillLibraryErrorStateProps = {
+  error: string;
+  onRetry: () => void;
 };
 
-export function NoSkillLibrariesState({ error }: NoSkillLibrariesStateProps) {
+export function SkillLibraryErrorState({ error, onRetry }: SkillLibraryErrorStateProps) {
   return (
-    <section className="grid min-h-[calc(100svh-5rem)] place-items-center">
-      <div className="max-w-md text-center">
-        <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-lg border bg-muted text-muted-foreground">
-          <FolderPlusIcon className="size-6" />
-        </div>
-        <h1 className="text-xl font-semibold tracking-normal">
-          <Trans id="skillLibraries.empty.title">No skill libraries yet</Trans>
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          <Trans id="skillLibraries.empty.description">
-            Add a skill library from the sidebar to connect a local skills root.
-          </Trans>
-        </p>
-        {error ? (
-          <p className="mt-4 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-            {error}
-          </p>
-        ) : null}
-      </div>
-    </section>
+    <Empty role="alert" className="min-h-0 border bg-card">
+      <EmptyHeader>
+        <EmptyMedia variant="icon" className="bg-destructive/10 text-destructive">
+          <AlertTriangleIcon />
+        </EmptyMedia>
+        <EmptyTitle>
+          <Trans id="skillLibraries.error.loadTitle">Unable to load skill libraries</Trans>
+        </EmptyTitle>
+        <EmptyDescription>{error}</EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <Button type="button" onClick={onRetry}>
+          <RefreshCwIcon data-icon="inline-start" />
+          <Trans id="common.tryAgain">Try again</Trans>
+        </Button>
+      </EmptyContent>
+    </Empty>
   );
 }
 
 export function SkillLibraryLoadingState() {
   return (
-    <section className="grid min-h-[calc(100svh-5rem)] place-items-center">
+    <section className="grid min-h-0 flex-1 place-items-center">
       <div className="w-full max-w-md space-y-3 text-center">
         <p className="text-sm text-muted-foreground">
           <Trans id="skillLibraries.loading">Loading skill libraries...</Trans>

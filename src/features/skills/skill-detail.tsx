@@ -1,4 +1,11 @@
 import type { LocalSkill } from "@/features/skills/skill-types";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/ui/components/empty";
 import { cn } from "@/ui/lib/utils";
 import { AlertTriangleIcon, FileTextIcon } from "lucide-react";
 
@@ -9,6 +16,7 @@ type SkillDetailProps = {
   labels: {
     title: string;
     empty: string;
+    emptyTitle: string;
     description: string;
     path: string;
     sourcePreview: string;
@@ -22,15 +30,21 @@ type SkillDetailProps = {
 export function SkillDetail({ className, labels, skill, variant = "panel" }: SkillDetailProps) {
   if (!skill) {
     return (
-      <section
+      <Empty
         className={cn(
-          "grid min-h-64 min-w-0 max-w-full place-items-center p-6 text-center text-sm text-muted-foreground",
+          "min-h-64 min-w-0 max-w-full",
           variant === "panel" ? "rounded-lg border bg-card" : null,
           className,
         )}
       >
-        {labels.empty}
-      </section>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <FileTextIcon />
+          </EmptyMedia>
+          <EmptyTitle>{labels.emptyTitle}</EmptyTitle>
+          <EmptyDescription>{labels.empty}</EmptyDescription>
+        </EmptyHeader>
+      </Empty>
     );
   }
 
