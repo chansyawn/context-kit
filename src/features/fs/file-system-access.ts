@@ -20,7 +20,7 @@ declare global {
 }
 
 export function isFileSystemAccessSupported(): boolean {
-  return typeof window.showDirectoryPicker === "function";
+  return typeof window !== "undefined" && typeof window.showDirectoryPicker === "function";
 }
 
 export function isDirectoryPickerAbort(error: unknown): boolean {

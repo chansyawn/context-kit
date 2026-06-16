@@ -1,7 +1,7 @@
 import { lingui } from "@lingui/vite-plugin";
 import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
-import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite-plus";
@@ -16,9 +16,10 @@ export default defineConfig({
     },
   },
   plugins: [
-    tanstackRouter({
-      target: "react",
-      autoCodeSplitting: true,
+    tanstackStart({
+      spa: {
+        enabled: true,
+      },
     }),
     babel({
       plugins: ["@lingui/babel-plugin-lingui-macro"],

@@ -3,7 +3,7 @@ import {
   textDirectionAtom,
   type PreferencesRuntime,
 } from "@/features/preferences/preferences-atoms";
-import type { LocaleCode } from "@/features/preferences/preferences";
+import { DEFAULT_LOCALE, type LocaleCode } from "@/features/preferences/preferences";
 import { preferencesStore, type PreferencesStore } from "@/features/preferences/preferences-store";
 import { messages as enMessages } from "@/locales/en/messages.po";
 import { messages as pseudoMessages } from "@/locales/pseudo/messages.po";
@@ -23,6 +23,7 @@ const catalogs: Record<LocaleCode, Messages> = {
 for (const [locale, messages] of Object.entries(catalogs)) {
   i18n.load(locale, messages);
 }
+i18n.activate(DEFAULT_LOCALE);
 
 function applyPreferencesRuntime(runtime: PreferencesRuntime) {
   i18n.activate(runtime.locale);

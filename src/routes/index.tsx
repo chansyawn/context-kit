@@ -1,9 +1,10 @@
-import { createFileRoute, Navigate } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
-  component: IndexPage,
+  beforeLoad: () => {
+    throw redirect({
+      to: "/skill-libraries",
+      replace: true,
+    });
+  },
 });
-
-function IndexPage() {
-  return <Navigate to="/skill-libraries" replace />;
-}
