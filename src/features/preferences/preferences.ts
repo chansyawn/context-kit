@@ -1,4 +1,4 @@
-export const PREFERENCES_STORAGE_KEY = "tagskills.appearance";
+export const PREFERENCES_STORAGE_KEY = "context-kit.appearance";
 
 export const LOCALE_CODES = ["en", "zh-Hans", "pseudo"] as const;
 export const THEME_MODE_OPTIONS = ["system", "light", "dark"] as const;

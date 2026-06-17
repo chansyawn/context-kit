@@ -46,7 +46,7 @@ src/
 
 ### Theme And RTL
 
-- User preferences live in `localStorage` under `tagskills.appearance`, with the schema
+- User preferences live in `localStorage` under `context-kit.appearance`, with the schema
   version stored in the serialized value.
 - Preference state is owned by Jotai atoms in `src/features/preferences/preferences-atoms.ts`.
 - Browser preference side effects are owned by `src/features/preferences/preferences-runtime.tsx`; do not write

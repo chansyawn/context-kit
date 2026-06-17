@@ -5,7 +5,7 @@ import type {
   SkillLibraryValidationResult,
 } from "./skill-library-types";
 
-const DATABASE_NAME = "tagskills.skill-libraries.v1";
+const DATABASE_NAME = "context-kit.skill-libraries.v1";
 const DATABASE_VERSION = 1;
 const SKILL_LIBRARY_STORE_NAME = "skillLibraries";
 

@@ -114,7 +114,7 @@ export function SkillLibraryRenameDialog({
             </DialogTitle>
             <DialogDescription>
               <Trans id="skillLibraries.rename.description">
-                This changes only the skill library name in tagskills.
+                This changes only the skill library name in ContextKit.
               </Trans>
             </DialogDescription>
           </DialogHeader>

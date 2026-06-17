@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: tagskills\n"
+"Project-Id-Version: ContextKit\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -143,7 +143,7 @@ msgstr "添加技能库"
 #. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:90
 msgid "skillLibraries.delete.description"
-msgstr "这只会从 tagskills 移除技能库记录，不会删除本地文件。"
+msgstr "这只会从 ContextKit 移除技能库记录，不会删除本地文件。"
 
 #. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:87
@@ -240,7 +240,7 @@ msgstr "技能库操作"
 #. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:116
 msgid "skillLibraries.rename.description"
-msgstr "这只会修改 tagskills 中的技能库名称。"
+msgstr "这只会修改 ContextKit 中的技能库名称。"
 
 #. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:113

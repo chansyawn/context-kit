@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-tagskills needs to remember user-added skills directories across reloads. A skill library stores app metadata and points to one local skills root directory. Browsers do not expose stable absolute local paths to web apps, and `FileSystemDirectoryHandle` values cannot be stored in `localStorage`.
+ContextKit needs to remember user-added skills directories across reloads. A skill library stores app metadata and points to one local skills root directory. Browsers do not expose stable absolute local paths to web apps, and `FileSystemDirectoryHandle` values cannot be stored in `localStorage`.
 
 ## Decision
 

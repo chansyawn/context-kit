@@ -88,7 +88,7 @@ export function SkillLibraryDeleteDialog({
           </AlertDialogTitle>
           <AlertDialogDescription>
             <Trans id="skillLibraries.delete.description">
-              This removes the skill library record from tagskills. Local files are not deleted.
+              This removes the skill library record from ContextKit. Local files are not deleted.
             </Trans>
           </AlertDialogDescription>
         </AlertDialogHeader>
