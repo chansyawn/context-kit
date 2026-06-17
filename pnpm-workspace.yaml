@@ -1,6 +1,8 @@
 allowBuilds:
   esbuild: true
   msw: false
+  sharp: true
+  workerd: true
 catalog:
   vite: npm:@voidzero-dev/vite-plus-core@latest
   vitest: npm:@voidzero-dev/vite-plus-test@latest

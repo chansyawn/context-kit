@@ -7,9 +7,15 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+.env*
+.dev.vars*
+!.env.example
+!.dev.vars.example
+
 node_modules
 dist
 dist-ssr
+.wrangler
 *.local
 
 # Editor directories and files

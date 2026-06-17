@@ -1,10 +1,13 @@
 import { lingui } from "@lingui/vite-plugin";
+import { cloudflare } from "@cloudflare/vite-plugin";
 import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite-plus";
+
+const isTest = process.env.VITEST === "true" || process.env.NODE_ENV === "test";
 
 export default defineConfig({
   staged: {
@@ -16,6 +19,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    ...(isTest ? [] : [cloudflare({ viteEnvironment: { name: "ssr" } })]),
     tanstackStart({
       spa: {
         enabled: true,
