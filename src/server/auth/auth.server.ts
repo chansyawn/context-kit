@@ -1,5 +1,5 @@
-import { db } from "@/server/db/client";
-import { authSchema } from "@/server/db/schema";
+import { db } from "@/db/client";
+import { authSchema } from "@/db/schema";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { env } from "cloudflare:workers";

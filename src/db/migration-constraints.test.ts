@@ -3,10 +3,10 @@ import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, beforeEach, describe, expect, it } from "vite-plus/test";
 
-const migration = readFileSync(resolve("drizzle/0000_goofy_steel_serpent.sql"), "utf8").replaceAll(
-  "--> statement-breakpoint",
-  "",
-);
+const migration = readFileSync(
+  resolve("src/db/drizzle/0000_goofy_steel_serpent.sql"),
+  "utf8",
+).replaceAll("--> statement-breakpoint", "");
 
 let database: DatabaseSync;
 

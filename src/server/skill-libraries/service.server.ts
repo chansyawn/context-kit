@@ -4,8 +4,8 @@ import {
 } from "@/domain/skill-libraries/error-codes";
 import type { SkillLibrary } from "@/domain/skill-libraries/types";
 import { requireSession } from "@/server/auth/session.server";
-import { db } from "@/server/db/client";
-import { skillLibraries } from "@/server/db/schema";
+import { db } from "@/db/client";
+import { skillLibraries } from "@/db/schema";
 import { createUserOctokit } from "@/server/github/client.server";
 import { formatGithubError } from "@/server/github/github-error";
 import { getRepositoryContext, resolveTreeSha } from "@/server/github/repositories.server";
