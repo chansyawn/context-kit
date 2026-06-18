@@ -1,4 +1,4 @@
-import type { LocalSkill } from "@/features/skills/skill-types";
+import type { SkillPreview } from "@/domain/skill-libraries/types";
 import {
   Empty,
   EmptyDescription,
@@ -10,7 +10,7 @@ import { cn } from "@/ui/lib/utils";
 import { AlertTriangleIcon, FileTextIcon } from "lucide-react";
 
 type SkillDetailProps = {
-  skill: LocalSkill | null;
+  skill: SkillPreview | null;
   className?: string;
   variant?: "panel" | "drawer";
   labels: {

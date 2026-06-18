@@ -1,4 +1,4 @@
-import type { LocalSkill } from "@/features/skills/skill-types";
+import type { SkillPreview } from "@/domain/skill-libraries/types";
 import { Button } from "@/ui/components/button";
 import {
   Empty,
@@ -17,7 +17,7 @@ type SkillListProps = {
   query: string;
   rootName: string;
   selectedSkillId: string | null;
-  skills: LocalSkill[];
+  skills: SkillPreview[];
   totalCount: number;
   labels: {
     title: string;

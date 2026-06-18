@@ -1,7 +1,7 @@
 "use client";
 
 import { SidebarSettings } from "@/features/preferences/sidebar-settings";
-import { SkillLibrarySidebarGroup } from "@/features/skill-libraries/skill-library-sidebar-group";
+import { SkillLibrarySidebarGroup } from "@/routes/-features/skill-libraries/skill-library-sidebar-group";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/ui/components/sidebar";
 
 import { ProductSidebarHeader } from "./product-sidebar-header";

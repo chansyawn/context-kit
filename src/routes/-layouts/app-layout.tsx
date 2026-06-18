@@ -6,7 +6,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/ui/components/breadcrumb";
-import { useSkillLibraries } from "@/features/skill-libraries/skill-library-provider";
+import { useSkillLibraries } from "@/routes/-features/skill-libraries/use-skill-libraries";
 import { Separator } from "@/ui/components/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/ui/components/sidebar";
 import { useLingui } from "@lingui/react";

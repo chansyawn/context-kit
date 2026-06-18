@@ -1,10 +1,10 @@
-import { SkillsManager } from "@/features/skills/skills-manager";
+import { GithubSkillsPreview } from "@/routes/-features/skill-libraries/github-skills-preview";
 import {
   NoSkillLibrariesState,
   SkillLibraryErrorState,
   SkillLibraryLoadingState,
-} from "@/features/skill-libraries/skill-library-route-states";
-import { useSkillLibraries } from "@/features/skill-libraries/skill-library-provider";
+} from "@/routes/-features/skill-libraries/skill-library-route-states";
+import { useSkillLibraries } from "@/routes/-features/skill-libraries/use-skill-libraries";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/skill-libraries/$skillLibraryId")({
@@ -40,5 +40,5 @@ function SkillLibraryPage() {
     return <NoSkillLibrariesState />;
   }
 
-  return <SkillsManager key={skillLibrary.id} skillLibrary={skillLibrary} />;
+  return <GithubSkillsPreview key={skillLibrary.id} skillLibrary={skillLibrary} />;
 }

@@ -1,7 +1,6 @@
 import { AppErrorBoundary } from "@/app/app-error-boundary";
 import { PreferencesProvider } from "@/features/preferences/preferences-runtime";
 import { preferencesStore } from "@/features/preferences/preferences-store";
-import { SkillLibraryProvider } from "@/features/skill-libraries/skill-library-provider";
 import { TooltipProvider } from "@/ui/components/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as JotaiProvider } from "jotai";
@@ -29,9 +28,7 @@ export function AppProviders({ children }: AppProvidersProps) {
       <JotaiProvider store={preferencesStore}>
         <PreferencesProvider>
           <AppErrorBoundary>
-            <TooltipProvider>
-              <SkillLibraryProvider>{children}</SkillLibraryProvider>
-            </TooltipProvider>
+            <TooltipProvider>{children}</TooltipProvider>
           </AppErrorBoundary>
         </PreferencesProvider>
       </JotaiProvider>

@@ -14,6 +14,12 @@ export const listInstallations = createServerFn({ method: "GET" }).handler(async
   return service.listInstallations();
 });
 
+export const getGithubAppConfig = createServerFn({ method: "GET" }).handler(async () => {
+  const service = await import("@/server/github/app-config.server");
+
+  return service.getGithubAppConfig();
+});
+
 export const listRepositories = createServerFn({ method: "GET" })
   .validator(parseRepositoryPageInput)
   .handler(async ({ data }) => {

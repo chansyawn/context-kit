@@ -2,8 +2,8 @@ import {
   NoSkillLibrariesState,
   SkillLibraryErrorState,
   SkillLibraryLoadingState,
-} from "@/features/skill-libraries/skill-library-route-states";
-import { useSkillLibraries } from "@/features/skill-libraries/skill-library-provider";
+} from "@/routes/-features/skill-libraries/skill-library-route-states";
+import { useSkillLibraries } from "@/routes/-features/skill-libraries/use-skill-libraries";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/skill-libraries/")({
