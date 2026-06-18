@@ -1,7 +1,6 @@
 import { AppProviders } from "@/app/app-providers";
 import "@/global.css";
-import { AppLayout } from "@/routes/-layouts/app-layout";
-import { ClientOnly, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { ClientOnly, createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 export const Route = createRootRoute({
@@ -21,7 +20,7 @@ function RootComponent() {
     <RootDocument>
       <ClientOnly fallback={<div className="min-h-svh bg-background" />}>
         <AppProviders>
-          <AppLayout />
+          <Outlet />
         </AppProviders>
       </ClientOnly>
     </RootDocument>

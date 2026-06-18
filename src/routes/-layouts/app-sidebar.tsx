@@ -5,6 +5,7 @@ import { SkillLibrarySidebarGroup } from "@/features/skill-libraries/skill-libra
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/ui/components/sidebar";
 
 import { ProductSidebarHeader } from "./product-sidebar-header";
+import { AccountSidebarFooter } from "./account-sidebar-footer";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -17,6 +18,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         <SidebarSettings />
+        <AccountSidebarFooter />
       </SidebarFooter>
     </Sidebar>
   );

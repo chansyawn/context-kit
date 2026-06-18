@@ -1,13 +1,14 @@
 import { getSession } from "@/server/auth/session";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/github/setup")({
   beforeLoad: async () => {
     const session = await getSession();
 
-    throw redirect({
-      to: session ? "/skill-libraries" : "/login",
-      replace: true,
-    });
+    if (!session) {
+      throw redirect({ to: "/login" });
+    }
+
+    throw redirect({ to: "/skill-libraries" });
   },
 });

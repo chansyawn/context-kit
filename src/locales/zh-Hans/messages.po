@@ -37,6 +37,26 @@ msgid "app.error.title"
 msgstr "出现意外错误"
 
 #. js-lingui-explicit-id
+#: src/routes/login.tsx:48
+msgid "auth.login.description"
+msgstr "登录以访问你的 Skill Library。"
+
+#. js-lingui-explicit-id
+#: src/routes/login.tsx:56
+msgid "auth.login.github"
+msgstr "使用 GitHub 继续"
+
+#. js-lingui-explicit-id
+#: src/routes/login.tsx:54
+msgid "auth.login.pending"
+msgstr "正在连接..."
+
+#. js-lingui-explicit-id
+#: src/routes/-layouts/account-sidebar-footer.tsx:21
+msgid "auth.logout"
+msgstr "退出登录"
+
+#. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-create-dialog.tsx:230
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:104
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:134

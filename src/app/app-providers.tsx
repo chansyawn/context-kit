@@ -3,23 +3,38 @@ import { PreferencesProvider } from "@/features/preferences/preferences-runtime"
 import { preferencesStore } from "@/features/preferences/preferences-store";
 import { SkillLibraryProvider } from "@/features/skill-libraries/skill-library-provider";
 import { TooltipProvider } from "@/ui/components/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as JotaiProvider } from "jotai";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 
 type AppProvidersProps = {
   children: ReactNode;
 };
 
 export function AppProviders({ children }: AppProvidersProps) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: 1,
+            staleTime: 60_000,
+          },
+        },
+      }),
+  );
+
   return (
-    <JotaiProvider store={preferencesStore}>
-      <PreferencesProvider>
-        <AppErrorBoundary>
-          <TooltipProvider>
-            <SkillLibraryProvider>{children}</SkillLibraryProvider>
-          </TooltipProvider>
-        </AppErrorBoundary>
-      </PreferencesProvider>
-    </JotaiProvider>
+    <QueryClientProvider client={queryClient}>
+      <JotaiProvider store={preferencesStore}>
+        <PreferencesProvider>
+          <AppErrorBoundary>
+            <TooltipProvider>
+              <SkillLibraryProvider>{children}</SkillLibraryProvider>
+            </TooltipProvider>
+          </AppErrorBoundary>
+        </PreferencesProvider>
+      </JotaiProvider>
+    </QueryClientProvider>
   );
 }

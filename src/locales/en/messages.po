@@ -37,6 +37,26 @@ msgid "app.error.title"
 msgstr "Something went wrong"
 
 #. js-lingui-explicit-id
+#: src/routes/login.tsx:48
+msgid "auth.login.description"
+msgstr "Sign in to access your skill libraries."
+
+#. js-lingui-explicit-id
+#: src/routes/login.tsx:56
+msgid "auth.login.github"
+msgstr "Continue with GitHub"
+
+#. js-lingui-explicit-id
+#: src/routes/login.tsx:54
+msgid "auth.login.pending"
+msgstr "Connecting..."
+
+#. js-lingui-explicit-id
+#: src/routes/-layouts/account-sidebar-footer.tsx:21
+msgid "auth.logout"
+msgstr "Sign out"
+
+#. js-lingui-explicit-id
 #: src/features/skill-libraries/skill-library-create-dialog.tsx:230
 #: src/features/skill-libraries/skill-library-delete-dialog.tsx:104
 #: src/features/skill-libraries/skill-library-rename-dialog.tsx:134
