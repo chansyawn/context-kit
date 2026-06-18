@@ -59,6 +59,7 @@ export function SkillLibraryDeleteDialog({
             ? {
                 to: "/skill-libraries/$skillLibraryId",
                 params: { skillLibraryId: nextSkillLibrary.id },
+                search: { page: 1, query: "" },
                 replace: true,
               }
             : { to: "/skill-libraries", replace: true },

@@ -1,4 +1,4 @@
-import { GithubSkillsPreview } from "@/routes/-features/skill-libraries/github-skills-preview";
+import { GithubSkillsManager } from "@/routes/-features/skill-libraries/github-skills-manager";
 import {
   NoSkillLibrariesState,
   SkillLibraryErrorState,
@@ -6,17 +6,42 @@ import {
 } from "@/routes/-features/skill-libraries/skill-library-route-states";
 import { useSkillLibraries } from "@/routes/-features/skill-libraries/use-skill-libraries";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
+import { useCallback } from "react";
 
 export const Route = createFileRoute("/skill-libraries/$skillLibraryId")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    page:
+      typeof search.page === "number" && Number.isSafeInteger(search.page) && search.page > 0
+        ? search.page
+        : 1,
+    query: typeof search.query === "string" ? search.query.slice(0, 100) : "",
+  }),
   component: SkillLibraryPage,
 });
 
 function SkillLibraryPage() {
   const { skillLibraryId } = Route.useParams();
+  const { page, query } = Route.useSearch();
+  const navigate = Route.useNavigate();
   const { error, getSkillLibrary, isLoading, refreshSkillLibraries, skillLibraries } =
     useSkillLibraries();
   const skillLibrary = getSkillLibrary(skillLibraryId);
   const firstSkillLibrary = skillLibraries[0] ?? null;
+  const handlePageChange = useCallback(
+    (nextPage: number) => {
+      void navigate({ search: (current) => ({ ...current, page: nextPage }), replace: true });
+    },
+    [navigate],
+  );
+  const handleSearchChange = useCallback(
+    (nextQuery: string) => {
+      void navigate({
+        search: (current) => ({ ...current, page: 1, query: nextQuery }),
+        replace: true,
+      });
+    },
+    [navigate],
+  );
 
   if (isLoading) {
     return <SkillLibraryLoadingState />;
@@ -31,6 +56,7 @@ function SkillLibraryPage() {
       <Navigate
         to="/skill-libraries/$skillLibraryId"
         params={{ skillLibraryId: firstSkillLibrary.id }}
+        search={{ page: 1, query: "" }}
         replace
       />
     );
@@ -40,5 +66,14 @@ function SkillLibraryPage() {
     return <NoSkillLibrariesState />;
   }
 
-  return <GithubSkillsPreview key={skillLibrary.id} skillLibrary={skillLibrary} />;
+  return (
+    <GithubSkillsManager
+      key={skillLibrary.id}
+      skillLibrary={skillLibrary}
+      page={page}
+      query={query}
+      onPageChange={handlePageChange}
+      onSearchChange={handleSearchChange}
+    />
+  );
 }

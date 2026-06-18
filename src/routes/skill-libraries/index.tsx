@@ -27,6 +27,7 @@ function SkillLibrariesIndexPage() {
       <Navigate
         to="/skill-libraries/$skillLibraryId"
         params={{ skillLibraryId: firstSkillLibrary.id }}
+        search={{ page: 1, query: "" }}
         replace
       />
     );

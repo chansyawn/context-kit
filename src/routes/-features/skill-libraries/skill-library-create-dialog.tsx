@@ -163,6 +163,7 @@ export function SkillLibraryCreateDialog({
       await navigate({
         to: "/skill-libraries/$skillLibraryId",
         params: { skillLibraryId: skillLibrary.id },
+        search: { page: 1, query: "" },
         replace: true,
       });
     } catch (createError) {

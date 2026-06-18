@@ -1,5 +1,5 @@
 import type { SkillLibrary, SkillPage, SkillPreview } from "@/domain/skill-libraries/types";
-import { parseSkillMarkdown } from "@/features/skills/parse-skill";
+import { parseSkillMarkdown } from "@/domain/skills/parse-skill";
 import type { Octokit } from "octokit";
 
 import { createUserOctokit } from "./client.server";

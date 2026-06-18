@@ -10,7 +10,14 @@ import {
 } from "@/ui/components/empty";
 import { Input } from "@/ui/components/input";
 import { cn } from "@/ui/lib/utils";
-import { AlertTriangleIcon, RefreshCwIcon, SearchIcon, SearchXIcon } from "lucide-react";
+import {
+  AlertTriangleIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  RefreshCwIcon,
+  SearchIcon,
+  SearchXIcon,
+} from "lucide-react";
 
 type SkillListProps = {
   isScanning: boolean;
@@ -18,7 +25,10 @@ type SkillListProps = {
   rootName: string;
   selectedSkillId: string | null;
   skills: SkillPreview[];
-  totalCount: number;
+  hasQuery: boolean;
+  incompleteResults: boolean;
+  page: number;
+  pageCount: number;
   labels: {
     title: string;
     rootDirectory: string;
@@ -29,25 +39,35 @@ type SkillListProps = {
     noMatches: string;
     noMatchesDescription: string;
     clearSearch: string;
+    previous: string;
+    next: string;
+    incomplete: string;
   };
   onClearQuery: () => void;
   onQueryChange: (query: string) => void;
   onRescan: () => void;
   onSelectSkill: (skillId: string) => void;
+  onPreviousPage: () => void;
+  onNextPage: () => void;
 };
 
 export function SkillList({
+  hasQuery,
+  incompleteResults,
   isScanning,
   labels,
   onClearQuery,
   onQueryChange,
   onRescan,
   onSelectSkill,
+  onNextPage,
+  onPreviousPage,
+  page,
+  pageCount,
   query,
   rootName,
   selectedSkillId,
   skills,
-  totalCount,
 }: SkillListProps) {
   return (
     <section className="flex min-h-0 flex-col rounded-lg border bg-card">
@@ -84,18 +104,22 @@ export function SkillList({
           />
         </label>
       </div>
+      {incompleteResults ? (
+        <p className="flex items-center gap-2 border-b px-3 py-2 text-xs text-muted-foreground">
+          <AlertTriangleIcon className="size-3.5" />
+          {labels.incomplete}
+        </p>
+      ) : null}
       {skills.length === 0 ? (
         <Empty className="min-h-48 rounded-none border-0">
           <EmptyHeader>
             <EmptyMedia variant="icon">
               <SearchXIcon />
             </EmptyMedia>
-            <EmptyTitle>{totalCount === 0 ? labels.empty : labels.noMatches}</EmptyTitle>
-            {totalCount > 0 ? (
-              <EmptyDescription>{labels.noMatchesDescription}</EmptyDescription>
-            ) : null}
+            <EmptyTitle>{hasQuery ? labels.noMatches : labels.empty}</EmptyTitle>
+            {hasQuery ? <EmptyDescription>{labels.noMatchesDescription}</EmptyDescription> : null}
           </EmptyHeader>
-          {totalCount > 0 ? (
+          {hasQuery ? (
             <EmptyContent>
               <Button type="button" variant="outline" size="sm" onClick={onClearQuery}>
                 {labels.clearSearch}
@@ -133,6 +157,31 @@ export function SkillList({
           </div>
         </div>
       )}
+      <div className="flex h-10 shrink-0 items-center justify-between border-t px-2">
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-sm"
+          aria-label={labels.previous}
+          disabled={page <= 1}
+          onClick={onPreviousPage}
+        >
+          <ChevronLeftIcon />
+        </Button>
+        <span className="text-xs tabular-nums text-muted-foreground">
+          {page} / {pageCount}
+        </span>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-sm"
+          aria-label={labels.next}
+          disabled={page >= pageCount}
+          onClick={onNextPage}
+        >
+          <ChevronRightIcon />
+        </Button>
+      </div>
     </section>
   );
 }

@@ -1,4 +1,4 @@
-import type { SkillDiagnostic } from "@/features/skills/skill-types";
+import type { SkillDiagnostic } from "@/domain/skills/skill-types";
 
 export type InstallationSummary = {
   id: string;

@@ -65,6 +65,7 @@ export function SkillLibrarySidebarGroup() {
                     <Link
                       to="/skill-libraries/$skillLibraryId"
                       params={{ skillLibraryId: skillLibrary.id }}
+                      search={{ page: 1, query: "" }}
                     />
                   }
                 >
