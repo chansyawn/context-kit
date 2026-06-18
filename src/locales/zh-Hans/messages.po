@@ -37,6 +37,11 @@ msgid "app.error.title"
 msgstr "出现意外错误"
 
 #. js-lingui-explicit-id
+#: src/routes/-features/skills/skill-labels.ts:7
+msgid "auth.login.again"
+msgstr "重新登录"
+
+#. js-lingui-explicit-id
 #: src/routes/login.tsx:48
 msgid "auth.login.description"
 msgstr "登录以访问你的 Skill Library。"
@@ -57,42 +62,43 @@ msgid "auth.logout"
 msgstr "退出登录"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:356
-#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:97
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:86
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:357
+#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:98
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:87
 msgid "common.cancel"
 msgstr "取消"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:89
-#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:77
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:65
-#: src/routes/-features/skills/skill-labels.ts:56
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:90
+#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:78
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:66
+#: src/routes/-features/skills/skill-labels.ts:64
 #: src/routes/-layouts/app-layout.tsx:36
 msgid "common.close"
 msgstr "关闭"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:282
-#: src/routes/-features/skills/skill-labels.ts:29
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:283
+#: src/routes/-features/skills/skill-labels.ts:37
 msgid "common.next"
 msgstr "下一页"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:271
-#: src/routes/-features/skills/skill-labels.ts:28
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:272
+#: src/routes/-features/skills/skill-labels.ts:36
 msgid "common.previous"
 msgstr "上一页"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:368
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:89
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:369
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:90
 msgid "common.save"
 msgstr "保存"
 
 #. js-lingui-explicit-id
 #: src/app/app-error-boundary.tsx:39
 #: src/routes/-features/skill-libraries/skill-library-route-states.tsx:54
+#: src/routes/-features/skills/skill-labels.ts:6
 msgid "common.tryAgain"
 msgstr "重试"
 
@@ -142,28 +148,33 @@ msgid "sidebar.toggle"
 msgstr "切换侧边栏"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:85
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:86
 msgid "skillLibraries.actions.add"
 msgstr "添加技能库"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:105
+#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:106
 #: src/routes/-features/skill-libraries/skill-library-sidebar-group.tsx:94
 msgid "skillLibraries.actions.delete"
 msgstr "删除"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:242
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:243
 msgid "skillLibraries.actions.installApp"
 msgstr "安装 GitHub App"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:314
+#: src/routes/-features/skills/skill-labels.ts:8
+msgid "skillLibraries.actions.manageGithubAccess"
+msgstr "管理 GitHub 访问权限"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:315
 msgid "skillLibraries.actions.openPath"
 msgstr "打开"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:302
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:303
 msgid "skillLibraries.actions.parent"
 msgstr "上级目录"
 
@@ -173,22 +184,22 @@ msgid "skillLibraries.actions.rename"
 msgstr "重命名"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:211
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:212
 msgid "skillLibraries.create.githubDescription"
 msgstr "从你的 GitHub App 安装中连接仓库目录。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:208
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:209
 msgid "skillLibraries.create.title"
 msgstr "添加技能库"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:83
+#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:84
 msgid "skillLibraries.delete.githubDescription"
 msgstr "这会从 ContextKit 移除 Library，但不会更改 GitHub 文件。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:80
+#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:81
 msgid "skillLibraries.delete.title"
 msgstr "删除技能库？"
 
@@ -203,9 +214,49 @@ msgid "skillLibraries.empty.title"
 msgstr "还没有技能库"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:143
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:59
+msgid "skillLibraries.error.alreadyExists"
+msgstr "此仓库目录已添加。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:29
+msgid "skillLibraries.error.authenticationRequired"
+msgstr "你的会话或 GitHub 授权已过期，请重新登录。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:64
+msgid "skillLibraries.error.createFailed"
+msgstr "无法创建技能库。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:34
+msgid "skillLibraries.error.githubAuthorizationRequired"
+msgstr "GitHub 拒绝了访问请求，请检查此应用的仓库权限。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:39
+msgid "skillLibraries.error.githubRateLimited"
+msgstr "已达到 GitHub API 速率限制，请稍后重试。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:49
+msgid "skillLibraries.error.githubRequestInvalid"
+msgstr "GitHub 拒绝了此仓库请求。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:44
+msgid "skillLibraries.error.githubResourceUnavailable"
+msgstr "仓库或目录已移动、删除或不再授权。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:144
 msgid "skillLibraries.error.githubSelectionRequired"
 msgstr "保存前请选择可访问的仓库目录。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:54
+msgid "skillLibraries.error.githubUnavailable"
+msgstr "GitHub 数据暂时不可用。"
 
 #. js-lingui-explicit-id
 #: src/routes/-features/skill-libraries/skill-library-route-states.tsx:47
@@ -213,23 +264,33 @@ msgid "skillLibraries.error.loadTitle"
 msgstr "无法加载技能库"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:295
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:69
+msgid "skillLibraries.error.notFound"
+msgstr "未找到技能库。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:74
+msgid "skillLibraries.error.unknown"
+msgstr "无法加载技能库数据。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:296
 msgid "skillLibraries.form.directory"
 msgstr "skills 目录"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:219
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:220
 msgid "skillLibraries.form.installation"
 msgstr "GitHub 账号"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:337
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:79
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:338
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:80
 msgid "skillLibraries.form.name"
 msgstr "技能库名称"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:250
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:251
 msgid "skillLibraries.form.repository"
 msgstr "仓库"
 
@@ -244,12 +305,12 @@ msgid "skillLibraries.menu.label"
 msgstr "技能库操作"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:72
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:73
 msgid "skillLibraries.rename.description"
 msgstr "这只会修改 ContextKit 中的技能库名称。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:69
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:70
 msgid "skillLibraries.rename.title"
 msgstr "重命名技能库"
 
@@ -259,58 +320,58 @@ msgid "skillLibraries.sidebar.title"
 msgstr "技能库"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:27
+#: src/routes/-features/skills/skill-labels.ts:35
 msgid "skills.actions.clearSearch"
 msgstr "清除搜索"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:16
+#: src/routes/-features/skills/skill-labels.ts:24
 #: src/routes/-features/skills/skills-manager-states.tsx:50
 msgid "skills.actions.rescan"
 msgstr "重新扫描"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:42
+#: src/routes/-features/skills/skill-labels.ts:50
 msgid "skills.detail.description"
 msgstr "描述"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:46
+#: src/routes/-features/skills/skill-labels.ts:54
 msgid "skills.detail.diagnostics"
 msgstr "诊断"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:37
+#: src/routes/-features/skills/skill-labels.ts:45
 msgid "skills.detail.empty"
 msgstr "选择一个 skill 查看元数据和 SKILL.md 原文。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:41
+#: src/routes/-features/skills/skill-labels.ts:49
 msgid "skills.detail.emptyTitle"
 msgstr "未选择 skill"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:43
+#: src/routes/-features/skills/skill-labels.ts:51
 msgid "skills.detail.githubPath"
 msgstr "GitHub 路径"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:47
+#: src/routes/-features/skills/skill-labels.ts:55
 msgid "skills.detail.noDescription"
 msgstr "暂无描述。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:44
+#: src/routes/-features/skills/skill-labels.ts:52
 msgid "skills.detail.sourcePreview"
 msgstr "SKILL.md 预览"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:36
+#: src/routes/-features/skills/skill-labels.ts:44
 msgid "skills.detail.title"
 msgstr "Skill 详情"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:51
+#: src/routes/-features/skills/skill-labels.ts:59
 msgid "skills.detail.unreadableSource"
 msgstr "无法读取 SKILL.md。"
 
@@ -330,43 +391,43 @@ msgid "skills.error.title"
 msgstr "无法加载 skills"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:7
+#: src/routes/-features/skills/skill-labels.ts:15
 msgid "skills.filters.all"
 msgstr "全部"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:6
+#: src/routes/-features/skills/skill-labels.ts:14
 msgid "skills.filters.title"
 msgstr "筛选"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:17
-#: src/routes/-features/skills/skill-labels.ts:45
+#: src/routes/-features/skills/skill-labels.ts:25
+#: src/routes/-features/skills/skill-labels.ts:53
 msgid "skills.invalidMetadata"
 msgstr "元数据无效"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:18
+#: src/routes/-features/skills/skill-labels.ts:26
 msgid "skills.list.empty"
 msgstr "该目录中未找到 skills。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:22
+#: src/routes/-features/skills/skill-labels.ts:30
 msgid "skills.list.noMatches"
 msgstr "没有匹配搜索的 skills。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:23
+#: src/routes/-features/skills/skill-labels.ts:31
 msgid "skills.list.noMatches.githubDescription"
 msgstr "GitHub 搜索可能需要一些时间来索引最近的更改。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:11
+#: src/routes/-features/skills/skill-labels.ts:19
 msgid "skills.list.rootDirectory"
 msgstr "根目录"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:10
+#: src/routes/-features/skills/skill-labels.ts:18
 msgid "skills.list.title"
 msgstr "Skills"
 
@@ -376,11 +437,11 @@ msgid "skills.loading"
 msgstr "正在扫描 skills..."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:12
+#: src/routes/-features/skills/skill-labels.ts:20
 msgid "skills.search.githubPlaceholder"
 msgstr "搜索 SKILL.md 内容"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:30
+#: src/routes/-features/skills/skill-labels.ts:38
 msgid "skills.search.incomplete"
 msgstr "GitHub 返回的搜索结果不完整。"

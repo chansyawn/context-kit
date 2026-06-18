@@ -36,7 +36,8 @@ import {
 } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 
-import { formatError, useSkillLibraries } from "./use-skill-libraries";
+import { formatSkillLibraryError } from "./skill-library-errors";
+import { useSkillLibraries } from "./use-skill-libraries";
 
 type SkillLibraryCreateDialogProps = {
   triggerVariant?: "sidebar" | "empty-state";
@@ -167,7 +168,7 @@ export function SkillLibraryCreateDialog({
         replace: true,
       });
     } catch (createError) {
-      setError(formatError(createError));
+      setError(formatSkillLibraryError(createError, i18n));
     } finally {
       setIsSaving(false);
     }
@@ -175,9 +176,9 @@ export function SkillLibraryCreateDialog({
 
   const displayedError =
     error ??
-    (installationsQuery.error ? formatError(installationsQuery.error) : null) ??
-    (repositoriesQuery.error ? formatError(repositoriesQuery.error) : null) ??
-    (directoriesQuery.error ? formatError(directoriesQuery.error) : null);
+    (installationsQuery.error ? formatSkillLibraryError(installationsQuery.error, i18n) : null) ??
+    (repositoriesQuery.error ? formatSkillLibraryError(repositoriesQuery.error, i18n) : null) ??
+    (directoriesQuery.error ? formatSkillLibraryError(directoriesQuery.error, i18n) : null);
 
   return (
     <Dialog

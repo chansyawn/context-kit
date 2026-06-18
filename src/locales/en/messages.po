@@ -37,6 +37,11 @@ msgid "app.error.title"
 msgstr "Something went wrong"
 
 #. js-lingui-explicit-id
+#: src/routes/-features/skills/skill-labels.ts:7
+msgid "auth.login.again"
+msgstr "Sign in again"
+
+#. js-lingui-explicit-id
 #: src/routes/login.tsx:48
 msgid "auth.login.description"
 msgstr "Sign in to access your skill libraries."
@@ -57,42 +62,43 @@ msgid "auth.logout"
 msgstr "Sign out"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:356
-#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:97
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:86
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:357
+#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:98
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:87
 msgid "common.cancel"
 msgstr "Cancel"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:89
-#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:77
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:65
-#: src/routes/-features/skills/skill-labels.ts:56
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:90
+#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:78
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:66
+#: src/routes/-features/skills/skill-labels.ts:64
 #: src/routes/-layouts/app-layout.tsx:36
 msgid "common.close"
 msgstr "Close"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:282
-#: src/routes/-features/skills/skill-labels.ts:29
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:283
+#: src/routes/-features/skills/skill-labels.ts:37
 msgid "common.next"
 msgstr "Next"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:271
-#: src/routes/-features/skills/skill-labels.ts:28
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:272
+#: src/routes/-features/skills/skill-labels.ts:36
 msgid "common.previous"
 msgstr "Previous"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:368
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:89
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:369
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:90
 msgid "common.save"
 msgstr "Save"
 
 #. js-lingui-explicit-id
 #: src/app/app-error-boundary.tsx:39
 #: src/routes/-features/skill-libraries/skill-library-route-states.tsx:54
+#: src/routes/-features/skills/skill-labels.ts:6
 msgid "common.tryAgain"
 msgstr "Try again"
 
@@ -142,28 +148,33 @@ msgid "sidebar.toggle"
 msgstr "Toggle Sidebar"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:85
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:86
 msgid "skillLibraries.actions.add"
 msgstr "Add skill library"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:105
+#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:106
 #: src/routes/-features/skill-libraries/skill-library-sidebar-group.tsx:94
 msgid "skillLibraries.actions.delete"
 msgstr "Delete"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:242
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:243
 msgid "skillLibraries.actions.installApp"
 msgstr "Install GitHub App"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:314
+#: src/routes/-features/skills/skill-labels.ts:8
+msgid "skillLibraries.actions.manageGithubAccess"
+msgstr "Manage GitHub access"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:315
 msgid "skillLibraries.actions.openPath"
 msgstr "Open"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:302
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:303
 msgid "skillLibraries.actions.parent"
 msgstr "Parent"
 
@@ -173,22 +184,22 @@ msgid "skillLibraries.actions.rename"
 msgstr "Rename"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:211
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:212
 msgid "skillLibraries.create.githubDescription"
 msgstr "Connect a repository directory from your GitHub App installations."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:208
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:209
 msgid "skillLibraries.create.title"
 msgstr "Add skill library"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:83
+#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:84
 msgid "skillLibraries.delete.githubDescription"
 msgstr "This removes the library from ContextKit. GitHub files are not changed."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:80
+#: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:81
 msgid "skillLibraries.delete.title"
 msgstr "Delete skill library?"
 
@@ -203,9 +214,49 @@ msgid "skillLibraries.empty.title"
 msgstr "No skill libraries yet"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:143
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:59
+msgid "skillLibraries.error.alreadyExists"
+msgstr "This repository directory has already been added."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:29
+msgid "skillLibraries.error.authenticationRequired"
+msgstr "Your session or GitHub authorization has expired. Sign in again."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:64
+msgid "skillLibraries.error.createFailed"
+msgstr "Unable to create the skill library."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:34
+msgid "skillLibraries.error.githubAuthorizationRequired"
+msgstr "GitHub denied access. Review this app's repository permissions."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:39
+msgid "skillLibraries.error.githubRateLimited"
+msgstr "GitHub's API rate limit was reached. Try again later."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:49
+msgid "skillLibraries.error.githubRequestInvalid"
+msgstr "GitHub rejected this repository request."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:44
+msgid "skillLibraries.error.githubResourceUnavailable"
+msgstr "The repository or directory moved, was removed, or is no longer authorized."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:144
 msgid "skillLibraries.error.githubSelectionRequired"
 msgstr "Select an accessible repository directory before saving."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:54
+msgid "skillLibraries.error.githubUnavailable"
+msgstr "GitHub data is temporarily unavailable."
 
 #. js-lingui-explicit-id
 #: src/routes/-features/skill-libraries/skill-library-route-states.tsx:47
@@ -213,23 +264,33 @@ msgid "skillLibraries.error.loadTitle"
 msgstr "Unable to load skill libraries"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:295
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:69
+msgid "skillLibraries.error.notFound"
+msgstr "The skill library was not found."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:74
+msgid "skillLibraries.error.unknown"
+msgstr "Unable to load skill library data."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:296
 msgid "skillLibraries.form.directory"
 msgstr "Skills directory"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:219
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:220
 msgid "skillLibraries.form.installation"
 msgstr "GitHub account"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:337
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:79
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:338
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:80
 msgid "skillLibraries.form.name"
 msgstr "Skill library name"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:250
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:251
 msgid "skillLibraries.form.repository"
 msgstr "Repository"
 
@@ -244,12 +305,12 @@ msgid "skillLibraries.menu.label"
 msgstr "Skill library actions"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:72
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:73
 msgid "skillLibraries.rename.description"
 msgstr "This changes only the skill library name in ContextKit."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:69
+#: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:70
 msgid "skillLibraries.rename.title"
 msgstr "Rename skill library"
 
@@ -259,58 +320,58 @@ msgid "skillLibraries.sidebar.title"
 msgstr "Skill Libraries"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:27
+#: src/routes/-features/skills/skill-labels.ts:35
 msgid "skills.actions.clearSearch"
 msgstr "Clear search"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:16
+#: src/routes/-features/skills/skill-labels.ts:24
 #: src/routes/-features/skills/skills-manager-states.tsx:50
 msgid "skills.actions.rescan"
 msgstr "Rescan"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:42
+#: src/routes/-features/skills/skill-labels.ts:50
 msgid "skills.detail.description"
 msgstr "Description"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:46
+#: src/routes/-features/skills/skill-labels.ts:54
 msgid "skills.detail.diagnostics"
 msgstr "Diagnostics"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:37
+#: src/routes/-features/skills/skill-labels.ts:45
 msgid "skills.detail.empty"
 msgstr "Select a skill to view its metadata and SKILL.md source."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:41
+#: src/routes/-features/skills/skill-labels.ts:49
 msgid "skills.detail.emptyTitle"
 msgstr "No skill selected"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:43
+#: src/routes/-features/skills/skill-labels.ts:51
 msgid "skills.detail.githubPath"
 msgstr "GitHub path"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:47
+#: src/routes/-features/skills/skill-labels.ts:55
 msgid "skills.detail.noDescription"
 msgstr "No description available."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:44
+#: src/routes/-features/skills/skill-labels.ts:52
 msgid "skills.detail.sourcePreview"
 msgstr "SKILL.md preview"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:36
+#: src/routes/-features/skills/skill-labels.ts:44
 msgid "skills.detail.title"
 msgstr "Skill detail"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:51
+#: src/routes/-features/skills/skill-labels.ts:59
 msgid "skills.detail.unreadableSource"
 msgstr "SKILL.md could not be read."
 
@@ -330,43 +391,43 @@ msgid "skills.error.title"
 msgstr "Unable to load skills"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:7
+#: src/routes/-features/skills/skill-labels.ts:15
 msgid "skills.filters.all"
 msgstr "All"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:6
+#: src/routes/-features/skills/skill-labels.ts:14
 msgid "skills.filters.title"
 msgstr "Filters"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:17
-#: src/routes/-features/skills/skill-labels.ts:45
+#: src/routes/-features/skills/skill-labels.ts:25
+#: src/routes/-features/skills/skill-labels.ts:53
 msgid "skills.invalidMetadata"
 msgstr "Invalid metadata"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:18
+#: src/routes/-features/skills/skill-labels.ts:26
 msgid "skills.list.empty"
 msgstr "No skills were found in this directory."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:22
+#: src/routes/-features/skills/skill-labels.ts:30
 msgid "skills.list.noMatches"
 msgstr "No skills match your search."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:23
+#: src/routes/-features/skills/skill-labels.ts:31
 msgid "skills.list.noMatches.githubDescription"
 msgstr "GitHub search may take time to index recent changes."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:11
+#: src/routes/-features/skills/skill-labels.ts:19
 msgid "skills.list.rootDirectory"
 msgstr "Root"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:10
+#: src/routes/-features/skills/skill-labels.ts:18
 msgid "skills.list.title"
 msgstr "Skills"
 
@@ -376,11 +437,11 @@ msgid "skills.loading"
 msgstr "Scanning skills..."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:12
+#: src/routes/-features/skills/skill-labels.ts:20
 msgid "skills.search.githubPlaceholder"
 msgstr "Search SKILL.md content"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skills/skill-labels.ts:30
+#: src/routes/-features/skills/skill-labels.ts:38
 msgid "skills.search.incomplete"
 msgstr "GitHub returned incomplete search results."

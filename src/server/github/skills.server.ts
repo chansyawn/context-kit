@@ -5,6 +5,14 @@ import type { Octokit } from "octokit";
 import { createUserOctokit } from "./client.server";
 import { formatGithubError } from "./github-error";
 import {
+  createCodeSearchQuery,
+  createSkillPathPattern,
+  isReadableSkillBlob,
+  paginateSkillReferences,
+  readDirectSkillReferences,
+  type SkillReference,
+} from "./skill-index";
+import {
   getRepositoryContext,
   resolveTreeSha,
   type RepositoryContext,
@@ -13,16 +21,18 @@ import {
 const SKILLS_PAGE_SIZE = 20;
 const MAX_SKILL_FILE_SIZE = 1024 * 1024;
 
-type SkillReference = {
-  directoryName: string;
-  path: string;
-  sha: string;
-};
-
-type BlobData = {
+type BlobMetadataData = {
   oid: string;
   byteSize: number;
   isBinary: boolean;
+};
+
+type BlobData = BlobMetadataData & {
+  text: string | null;
+};
+
+type BlobTextData = {
+  oid: string;
   text: string | null;
 };
 
@@ -74,14 +84,11 @@ async function getBrowseReferences(
   const references = data.truncated
     ? await scanDirectChildTrees(octokit, repository, treeSha)
     : readDirectSkillReferences(data.tree);
-  const sortedReferences = references.sort((left, right) =>
-    left.directoryName.localeCompare(right.directoryName),
-  );
-  const offset = (page - 1) * SKILLS_PAGE_SIZE;
+  const paginated = paginateSkillReferences(references, page, SKILLS_PAGE_SIZE);
 
   return {
-    references: sortedReferences.slice(offset, offset + SKILLS_PAGE_SIZE),
-    total: sortedReferences.length,
+    references: paginated.references,
+    total: paginated.total,
     incompleteResults: false,
   };
 }
@@ -94,9 +101,8 @@ async function getSearchReferences(
   page: number,
 ): Promise<{ references: SkillReference[]; total: number; incompleteResults: boolean }> {
   const pathPattern = createSkillPathPattern(libraryPath);
-  const searchTerm = `"${query.replaceAll("\\", "\\\\").replaceAll('"', '\\"')}"`;
   const { data } = await octokit.rest.search.code({
-    q: `${searchTerm} repo:${repository.fullName} path:/${pathPattern}/`,
+    q: createCodeSearchQuery(repository.fullName, libraryPath, query),
     page,
     per_page: SKILLS_PAGE_SIZE,
   });
@@ -113,20 +119,6 @@ async function getSearchReferences(
     total: Math.min(data.total_count, 1_000),
     incompleteResults: data.incomplete_results,
   };
-}
-
-function readDirectSkillReferences(
-  tree: Array<{ path?: string; sha?: string | null; type?: string }>,
-): SkillReference[] {
-  return tree.flatMap((entry) => {
-    if (entry.type !== "blob" || !entry.path || !entry.sha) {
-      return [];
-    }
-
-    const match = /^([^/]+)\/SKILL\.md$/.exec(entry.path);
-
-    return match ? [{ directoryName: match[1] ?? "", path: entry.path, sha: entry.sha }] : [];
-  });
 }
 
 async function scanDirectChildTrees(
@@ -187,34 +179,85 @@ async function readBlobSources(
     return new Map();
   }
 
-  const fields = references
+  const metadataFields = references
     .map(
       (reference, index) => `
         skill${index}: object(oid: "${reference.sha}") {
-          ... on Blob { oid byteSize isBinary text }
+          ... on Blob { oid byteSize isBinary }
+        }
+      `,
+    )
+    .join("\n");
+  const metadataResponse = await octokit.graphql<{
+    repository: Record<string, BlobMetadataData | null> | null;
+  }>(
+    `query SkillSourceMetadata($owner: String!, $repo: String!) {
+      repository(owner: $owner, name: $repo) {
+        ${metadataFields}
+      }
+    }`,
+    { owner: repository.owner, repo: repository.name },
+  );
+  const metadataByOid = new Map<string, BlobMetadataData>();
+
+  for (const blob of Object.values(metadataResponse.repository ?? {})) {
+    if (blob) {
+      metadataByOid.set(blob.oid, blob);
+    }
+  }
+
+  const readableReferences = references.filter((reference) => {
+    const metadata = metadataByOid.get(reference.sha);
+
+    return metadata ? isReadableSkillBlob(metadata, MAX_SKILL_FILE_SIZE) : false;
+  });
+  const textByOid = await readBlobTexts(octokit, repository, readableReferences);
+  const sources = new Map<string, BlobData>();
+
+  for (const [oid, metadata] of metadataByOid) {
+    sources.set(oid, { ...metadata, text: textByOid.get(oid) ?? null });
+  }
+
+  return sources;
+}
+
+async function readBlobTexts(
+  octokit: Octokit,
+  repository: RepositoryContext,
+  references: SkillReference[],
+): Promise<Map<string, string | null>> {
+  if (references.length === 0) {
+    return new Map();
+  }
+
+  const textFields = references
+    .map(
+      (reference, index) => `
+        skill${index}: object(oid: "${reference.sha}") {
+          ... on Blob { oid text }
         }
       `,
     )
     .join("\n");
   const response = await octokit.graphql<{
-    repository: (Record<string, BlobData | null> & { __typename?: string }) | null;
+    repository: Record<string, BlobTextData | null> | null;
   }>(
-    `query SkillSources($owner: String!, $repo: String!) {
+    `query SkillSourceTexts($owner: String!, $repo: String!) {
       repository(owner: $owner, name: $repo) {
-        ${fields}
+        ${textFields}
       }
     }`,
     { owner: repository.owner, repo: repository.name },
   );
-  const sources = new Map<string, BlobData>();
+  const texts = new Map<string, string | null>();
 
   for (const blob of Object.values(response.repository ?? {})) {
-    if (blob && typeof blob === "object" && "oid" in blob) {
-      sources.set(blob.oid, blob);
+    if (blob) {
+      texts.set(blob.oid, blob.text);
     }
   }
 
-  return sources;
+  return texts;
 }
 
 function createSkill(
@@ -245,16 +288,6 @@ function createSkill(
       diagnostics: parsed.metadata.diagnostics,
     },
   };
-}
-
-function createSkillPathPattern(libraryPath: string): string {
-  const prefix = libraryPath === "" ? "" : `${escapeRegex(libraryPath)}\\/`;
-
-  return `^${prefix}[^\\/]+\\/SKILL\\.md$`;
-}
-
-function escapeRegex(value: string): string {
-  return value.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
 }
 
 function readDirectoryName(path: string): string {

@@ -1,5 +1,6 @@
+import { authClient } from "@/app/auth-client";
 import type { SkillLibrary } from "@/domain/skill-libraries/types";
-import { getSkillPage } from "@/server/skill-libraries/functions";
+import { getGithubAppConfig, getSkillPage } from "@/server/skill-libraries/functions";
 import {
   Sheet,
   SheetContent,
@@ -20,6 +21,8 @@ import {
   SkillsErrorState,
   SkillsLoadingState,
 } from "../skills/skills-manager-states";
+import { formatSkillLibraryError, getSkillLibraryErrorAction } from "./skill-library-errors";
+import { MAX_SKILL_SEARCH_QUERY_LENGTH, normalizeSkillSearchQuery } from "./skill-search";
 
 const COLUMN_LAYOUT_QUERY = "(max-width: 1023px)";
 const SEARCH_DEBOUNCE_MS = 500;
@@ -51,6 +54,13 @@ export function GithubSkillsManager({
     placeholderData: keepPreviousData,
     retry: false,
   });
+  const errorAction = getSkillLibraryErrorAction(skillsQuery.error);
+  const appConfigQuery = useQuery({
+    queryKey: ["github-app-config"],
+    queryFn: () => getGithubAppConfig(),
+    enabled: Boolean(skillsQuery.error) && errorAction === "manage-access",
+    staleTime: Number.POSITIVE_INFINITY,
+  });
   const skillPage = skillsQuery.data;
   const skills = skillPage?.items ?? [];
   const selectedSkill = useMemo(
@@ -65,9 +75,9 @@ export function GithubSkillsManager({
   }, [query]);
 
   useEffect(() => {
-    const normalizedQuery = inputQuery.trim();
+    const normalizedQuery = normalizeSkillSearchQuery(inputQuery);
 
-    if (normalizedQuery === query || normalizedQuery.length === 1) {
+    if (normalizedQuery === query) {
       return;
     }
 
@@ -113,17 +123,44 @@ export function GithubSkillsManager({
     onSearchChange("");
   }, [onSearchChange]);
 
+  const handleErrorAction = useCallback(() => {
+    if (errorAction === "login") {
+      void authClient.signOut().finally(() => window.location.assign("/login"));
+      return;
+    }
+
+    if (errorAction === "manage-access") {
+      const installationUrl = appConfigQuery.data?.installationUrl;
+
+      if (installationUrl) {
+        window.location.assign(installationUrl);
+      } else {
+        void appConfigQuery.refetch();
+      }
+      return;
+    }
+
+    void skillsQuery.refetch();
+  }, [appConfigQuery, errorAction, skillsQuery]);
+
   if (skillsQuery.isPending) {
     return <SkillsLoadingState />;
   }
 
-  if (skillsQuery.error && !skillPage) {
+  if (skillsQuery.error) {
+    const retryLabel =
+      errorAction === "login"
+        ? labels.error.signIn
+        : errorAction === "manage-access"
+          ? labels.error.manageAccess
+          : labels.error.retry;
+
     return (
       <SkillsErrorState
-        error={skillsQuery.error.message}
-        isPermissionRequired={false}
-        retryLabel={labels.list.rescan}
-        onRetry={() => void skillsQuery.refetch()}
+        error={formatSkillLibraryError(skillsQuery.error, i18n)}
+        isPermissionRequired={errorAction !== "retry"}
+        retryLabel={retryLabel}
+        onRetry={handleErrorAction}
       />
     );
   }
@@ -150,6 +187,7 @@ export function GithubSkillsManager({
           page={page}
           pageCount={pageCount}
           query={inputQuery}
+          queryMaxLength={MAX_SKILL_SEARCH_QUERY_LENGTH}
           rootName={skillLibrary.rootName}
           selectedSkillId={selectedSkill?.id ?? null}
           skills={skills}

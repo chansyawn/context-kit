@@ -16,7 +16,8 @@ import { useLingui } from "@lingui/react";
 import { Trans } from "@lingui/react/macro";
 import { useEffect, useState, type FormEvent } from "react";
 
-import { formatError, useSkillLibraries } from "./use-skill-libraries";
+import { formatSkillLibraryError } from "./skill-library-errors";
+import { useSkillLibraries } from "./use-skill-libraries";
 
 type SkillLibraryRenameDialogProps = {
   skillLibrary: SkillLibrary | null;
@@ -54,7 +55,7 @@ export function SkillLibraryRenameDialog({
       await renameSkillLibrary(skillLibrary.id, trimmedName);
       onOpenChange(false);
     } catch (renameError) {
-      setError(formatError(renameError));
+      setError(formatSkillLibraryError(renameError, i18n));
     } finally {
       setIsSaving(false);
     }

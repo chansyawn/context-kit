@@ -2,6 +2,14 @@ import type { I18n } from "@lingui/core";
 
 export function createSkillLabels(i18n: I18n) {
   return {
+    error: {
+      retry: i18n._({ id: "common.tryAgain", message: "Try again" }),
+      signIn: i18n._({ id: "auth.login.again", message: "Sign in again" }),
+      manageAccess: i18n._({
+        id: "skillLibraries.actions.manageGithubAccess",
+        message: "Manage GitHub access",
+      }),
+    },
     filters: {
       title: i18n._({ id: "skills.filters.title", message: "Filters" }),
       all: i18n._({ id: "skills.filters.all", message: "All" }),

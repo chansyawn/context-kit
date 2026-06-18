@@ -22,6 +22,7 @@ import {
 type SkillListProps = {
   isScanning: boolean;
   query: string;
+  queryMaxLength: number;
   rootName: string;
   selectedSkillId: string | null;
   skills: SkillPreview[];
@@ -65,6 +66,7 @@ export function SkillList({
   page,
   pageCount,
   query,
+  queryMaxLength,
   rootName,
   selectedSkillId,
   skills,
@@ -98,6 +100,7 @@ export function SkillList({
           <SearchIcon className="pointer-events-none absolute start-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             value={query}
+            maxLength={queryMaxLength}
             placeholder={labels.search}
             className="ps-8"
             onChange={(event) => onQueryChange(event.currentTarget.value)}

@@ -16,7 +16,8 @@ import { Trans } from "@lingui/react/macro";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { formatError, useSkillLibraries } from "./use-skill-libraries";
+import { formatSkillLibraryError } from "./skill-library-errors";
+import { useSkillLibraries } from "./use-skill-libraries";
 
 type SkillLibraryDeleteDialogProps = {
   skillLibrary: SkillLibrary | null;
@@ -66,7 +67,7 @@ export function SkillLibraryDeleteDialog({
         );
       }
     } catch (deleteError) {
-      setError(formatError(deleteError));
+      setError(formatSkillLibraryError(deleteError, i18n));
     } finally {
       setIsDeleting(false);
     }

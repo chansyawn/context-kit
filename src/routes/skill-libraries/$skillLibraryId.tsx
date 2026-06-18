@@ -1,4 +1,5 @@
 import { GithubSkillsManager } from "@/routes/-features/skill-libraries/github-skills-manager";
+import { normalizeSkillSearchQuery } from "@/routes/-features/skill-libraries/skill-search";
 import {
   NoSkillLibrariesState,
   SkillLibraryErrorState,
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/skill-libraries/$skillLibraryId")({
       typeof search.page === "number" && Number.isSafeInteger(search.page) && search.page > 0
         ? search.page
         : 1,
-    query: typeof search.query === "string" ? search.query.slice(0, 100) : "",
+    query: typeof search.query === "string" ? normalizeSkillSearchQuery(search.query) : "",
   }),
   component: SkillLibraryPage,
 });

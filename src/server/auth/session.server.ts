@@ -1,3 +1,7 @@
+import {
+  createSkillLibraryError,
+  skillLibraryErrorCodes,
+} from "@/domain/skill-libraries/error-codes";
 import { getRequestHeaders } from "@tanstack/react-start/server";
 
 import { auth } from "./auth.server";
@@ -24,12 +28,16 @@ export async function requireSession() {
 }
 
 export async function requireGithubAccessToken(): Promise<string> {
-  await requireSession();
+  try {
+    await requireSession();
 
-  const token = await auth.api.getAccessToken({
-    body: { providerId: "github" },
-    headers: getRequestHeaders(),
-  });
+    const token = await auth.api.getAccessToken({
+      body: { providerId: "github" },
+      headers: getRequestHeaders(),
+    });
 
-  return token.accessToken;
+    return token.accessToken;
+  } catch {
+    throw createSkillLibraryError(skillLibraryErrorCodes.authenticationRequired);
+  }
 }

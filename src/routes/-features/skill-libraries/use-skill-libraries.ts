@@ -5,14 +5,18 @@ import {
   listLibraries,
   renameLibrary,
 } from "@/server/skill-libraries/functions";
+import { useLingui } from "@lingui/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
+
+import { formatSkillLibraryError } from "./skill-library-errors";
 
 export const skillLibraryKeys = {
   all: ["skill-libraries"] as const,
 };
 
 export function useSkillLibraries() {
+  const { i18n } = useLingui();
   const queryClient = useQueryClient();
   const query = useQuery({
     queryKey: skillLibraryKeys.all,
@@ -53,7 +57,7 @@ export function useSkillLibraries() {
   return {
     skillLibraries,
     isLoading: query.isPending,
-    error: query.error ? formatError(query.error) : null,
+    error: query.error ? formatSkillLibraryError(query.error, i18n) : null,
     createSkillLibrary: createMutation.mutateAsync,
     renameSkillLibrary: (id: string, name: string) => renameMutation.mutateAsync({ id, name }),
     deleteSkillLibrary: deleteMutation.mutateAsync,
@@ -62,10 +66,4 @@ export function useSkillLibraries() {
       await query.refetch();
     },
   };
-}
-
-export function formatError(error: unknown): string {
-  return error instanceof Error && error.message.trim() !== ""
-    ? error.message
-    : "Unable to load skill libraries.";
 }

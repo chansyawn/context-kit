@@ -1,3 +1,7 @@
+import {
+  createSkillLibraryError,
+  skillLibraryErrorCodes,
+} from "@/domain/skill-libraries/error-codes";
 import type { SkillLibrary } from "@/domain/skill-libraries/types";
 import { requireSession } from "@/server/auth/session.server";
 import { db } from "@/server/db/client";
@@ -46,13 +50,13 @@ export async function createSkillLibrary(input: {
       .returning();
 
     if (!row) {
-      throw new Error("Unable to create the skill library.");
+      throw createSkillLibraryError(skillLibraryErrorCodes.libraryCreateFailed);
     }
 
     return mapSkillLibrary(row);
   } catch (error) {
     if (isUniqueConstraintError(error)) {
-      throw new Error("This repository path has already been added.");
+      throw createSkillLibraryError(skillLibraryErrorCodes.libraryAlreadyExists);
     }
 
     if (isGithubError(error)) {
@@ -72,7 +76,7 @@ export async function renameSkillLibrary(libraryId: string, name: string): Promi
     .returning();
 
   if (!row) {
-    throw new Error("Skill library was not found.");
+    throw createSkillLibraryError(skillLibraryErrorCodes.libraryNotFound);
   }
 
   return mapSkillLibrary(row);
@@ -86,7 +90,7 @@ export async function deleteSkillLibrary(libraryId: string): Promise<void> {
     .returning({ id: skillLibraries.id });
 
   if (rows.length === 0) {
-    throw new Error("Skill library was not found.");
+    throw createSkillLibraryError(skillLibraryErrorCodes.libraryNotFound);
   }
 }
 
@@ -99,7 +103,7 @@ export async function getOwnedSkillLibrary(libraryId: string): Promise<SkillLibr
     .limit(1);
 
   if (!row) {
-    throw new Error("Skill library was not found.");
+    throw createSkillLibraryError(skillLibraryErrorCodes.libraryNotFound);
   }
 
   return mapSkillLibrary(row);
