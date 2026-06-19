@@ -4,7 +4,7 @@ import {
 } from "@/domain/skill-libraries/error-codes";
 import type { I18n } from "@lingui/core";
 
-export type SkillLibraryErrorAction = "login" | "manage-access" | "retry";
+export type SkillLibraryErrorAction = "connect-github" | "login" | "manage-access" | "retry";
 
 export function getSkillLibraryErrorAction(error: unknown): SkillLibraryErrorAction {
   const code = readSkillLibraryErrorCode(error);
@@ -13,10 +13,11 @@ export function getSkillLibraryErrorAction(error: unknown): SkillLibraryErrorAct
     return "login";
   }
 
-  if (
-    code === skillLibraryErrorCodes.githubAuthorizationRequired ||
-    code === skillLibraryErrorCodes.githubResourceUnavailable
-  ) {
+  if (code === skillLibraryErrorCodes.githubAuthorizationRequired) {
+    return "connect-github";
+  }
+
+  if (code === skillLibraryErrorCodes.githubResourceUnavailable) {
     return "manage-access";
   }
 
@@ -28,12 +29,12 @@ export function formatSkillLibraryError(error: unknown, i18n: I18n): string {
     case skillLibraryErrorCodes.authenticationRequired:
       return i18n._({
         id: "skillLibraries.error.authenticationRequired",
-        message: "Your session or GitHub authorization has expired. Sign in again.",
+        message: "Your session has expired. Sign in again.",
       });
     case skillLibraryErrorCodes.githubAuthorizationRequired:
       return i18n._({
         id: "skillLibraries.error.githubAuthorizationRequired",
-        message: "GitHub denied access. Review this app's repository permissions.",
+        message: "Connect your GitHub account to access GitHub App installations.",
       });
     case skillLibraryErrorCodes.githubRateLimited:
       return i18n._({

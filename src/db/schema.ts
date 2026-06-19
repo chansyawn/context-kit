@@ -1,92 +1,13 @@
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { index, integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
 const timestampDefault = sql`(cast(unixepoch('subsecond') * 1000 as integer))`;
-
-export const user = sqliteTable("user", {
-  id: text("id").primaryKey(),
-  name: text("name").notNull(),
-  email: text("email").notNull().unique(),
-  emailVerified: integer("email_verified", { mode: "boolean" }).default(false).notNull(),
-  image: text("image"),
-  createdAt: integer("created_at", { mode: "timestamp_ms" }).default(timestampDefault).notNull(),
-  updatedAt: integer("updated_at", { mode: "timestamp_ms" })
-    .default(timestampDefault)
-    .$onUpdate(() => new Date())
-    .notNull(),
-});
-
-export const session = sqliteTable(
-  "session",
-  {
-    id: text("id").primaryKey(),
-    expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
-    token: text("token").notNull().unique(),
-    createdAt: integer("created_at", { mode: "timestamp_ms" }).default(timestampDefault).notNull(),
-    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
-      .default(timestampDefault)
-      .$onUpdate(() => new Date())
-      .notNull(),
-    ipAddress: text("ip_address"),
-    userAgent: text("user_agent"),
-    userId: text("user_id")
-      .notNull()
-      .references(() => user.id, { onDelete: "cascade" }),
-  },
-  (table) => [index("session_user_id_idx").on(table.userId)],
-);
-
-export const account = sqliteTable(
-  "account",
-  {
-    id: text("id").primaryKey(),
-    accountId: text("account_id").notNull(),
-    providerId: text("provider_id").notNull(),
-    userId: text("user_id")
-      .notNull()
-      .references(() => user.id, { onDelete: "cascade" }),
-    accessToken: text("access_token"),
-    refreshToken: text("refresh_token"),
-    idToken: text("id_token"),
-    accessTokenExpiresAt: integer("access_token_expires_at", { mode: "timestamp_ms" }),
-    refreshTokenExpiresAt: integer("refresh_token_expires_at", { mode: "timestamp_ms" }),
-    scope: text("scope"),
-    password: text("password"),
-    createdAt: integer("created_at", { mode: "timestamp_ms" }).default(timestampDefault).notNull(),
-    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
-      .default(timestampDefault)
-      .$onUpdate(() => new Date())
-      .notNull(),
-  },
-  (table) => [
-    index("account_user_id_idx").on(table.userId),
-    uniqueIndex("account_provider_account_idx").on(table.providerId, table.accountId),
-  ],
-);
-
-export const verification = sqliteTable(
-  "verification",
-  {
-    id: text("id").primaryKey(),
-    identifier: text("identifier").notNull(),
-    value: text("value").notNull(),
-    expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
-    createdAt: integer("created_at", { mode: "timestamp_ms" }).default(timestampDefault).notNull(),
-    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
-      .default(timestampDefault)
-      .$onUpdate(() => new Date())
-      .notNull(),
-  },
-  (table) => [index("verification_identifier_idx").on(table.identifier)],
-);
 
 export const skillLibraries = sqliteTable(
   "skill_libraries",
   {
     id: text("id").primaryKey(),
-    userId: text("user_id")
-      .notNull()
-      .references(() => user.id, { onDelete: "cascade" }),
+    clerkUserId: text("clerk_user_id").notNull(),
     name: text("name").notNull(),
     repositoryId: text("repository_id").notNull(),
     repositoryOwner: text("repository_owner").notNull(),
@@ -99,31 +20,31 @@ export const skillLibraries = sqliteTable(
       .notNull(),
   },
   (table) => [
-    index("skill_libraries_user_id_idx").on(table.userId),
+    index("skill_libraries_clerk_user_id_idx").on(table.clerkUserId),
     uniqueIndex("skill_libraries_user_repository_path_idx").on(
-      table.userId,
+      table.clerkUserId,
       table.repositoryId,
       table.path,
     ),
   ],
 );
 
-export const userRelations = relations(user, ({ many }) => ({
-  accounts: many(account),
-  sessions: many(session),
-  skillLibraries: many(skillLibraries),
-}));
-
-export const sessionRelations = relations(session, ({ one }) => ({
-  user: one(user, { fields: [session.userId], references: [user.id] }),
-}));
-
-export const accountRelations = relations(account, ({ one }) => ({
-  user: one(user, { fields: [account.userId], references: [user.id] }),
-}));
-
-export const skillLibraryRelations = relations(skillLibraries, ({ one }) => ({
-  user: one(user, { fields: [skillLibraries.userId], references: [user.id] }),
-}));
-
-export const authSchema = { account, session, user, verification };
+export const githubUserAuthorizations = sqliteTable(
+  "github_user_authorizations",
+  {
+    clerkUserId: text("clerk_user_id").primaryKey(),
+    githubUserId: text("github_user_id").notNull(),
+    githubLogin: text("github_login").notNull(),
+    githubAvatarUrl: text("github_avatar_url"),
+    encryptedAccessToken: text("encrypted_access_token").notNull(),
+    accessTokenExpiresAt: integer("access_token_expires_at", { mode: "timestamp_ms" }),
+    encryptedRefreshToken: text("encrypted_refresh_token"),
+    refreshTokenExpiresAt: integer("refresh_token_expires_at", { mode: "timestamp_ms" }),
+    createdAt: integer("created_at", { mode: "timestamp_ms" }).default(timestampDefault).notNull(),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(timestampDefault)
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [index("github_user_authorizations_github_user_id_idx").on(table.githubUserId)],
+);

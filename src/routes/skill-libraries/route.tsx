@@ -7,7 +7,7 @@ export const Route = createFileRoute("/skill-libraries")({
     const session = await getSession();
 
     if (!session) {
-      throw redirect({ to: "/login" });
+      throw redirect({ to: "/sign-in/$" });
     }
   },
   component: AppLayout,

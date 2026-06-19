@@ -1,4 +1,3 @@
-import { authClient } from "@/app/auth-client";
 import type { SkillLibrary } from "@/domain/skill-libraries/types";
 import { getGithubAppConfig, getSkillPage } from "@/server/skill-libraries/functions";
 import {
@@ -58,7 +57,9 @@ export function GithubSkillsManager({
   const appConfigQuery = useQuery({
     queryKey: ["github-app-config"],
     queryFn: () => getGithubAppConfig(),
-    enabled: Boolean(skillsQuery.error) && errorAction === "manage-access",
+    enabled:
+      Boolean(skillsQuery.error) &&
+      (errorAction === "connect-github" || errorAction === "manage-access"),
     staleTime: Number.POSITIVE_INFINITY,
   });
   const skillPage = skillsQuery.data;
@@ -125,7 +126,18 @@ export function GithubSkillsManager({
 
   const handleErrorAction = useCallback(() => {
     if (errorAction === "login") {
-      void authClient.signOut().finally(() => window.location.assign("/login"));
+      window.location.assign("/sign-in");
+      return;
+    }
+
+    if (errorAction === "connect-github") {
+      const authorizationUrl = appConfigQuery.data?.authorizationUrl;
+
+      if (authorizationUrl) {
+        window.location.assign(authorizationUrl);
+      } else {
+        void appConfigQuery.refetch();
+      }
       return;
     }
 
@@ -151,9 +163,11 @@ export function GithubSkillsManager({
     const retryLabel =
       errorAction === "login"
         ? labels.error.signIn
-        : errorAction === "manage-access"
-          ? labels.error.manageAccess
-          : labels.error.retry;
+        : errorAction === "connect-github"
+          ? labels.error.connectGithub
+          : errorAction === "manage-access"
+            ? labels.error.manageAccess
+            : labels.error.retry;
 
     return (
       <SkillsErrorState

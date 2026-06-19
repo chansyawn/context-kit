@@ -6,7 +6,7 @@ import { formatGithubError } from "./github-error";
 
 describe("GitHub error mapping", () => {
   it.each([
-    [401, skillLibraryErrorCodes.authenticationRequired],
+    [401, skillLibraryErrorCodes.githubAuthorizationRequired],
     [403, skillLibraryErrorCodes.githubAuthorizationRequired],
     [404, skillLibraryErrorCodes.githubResourceUnavailable],
     [422, skillLibraryErrorCodes.githubRequestInvalid],

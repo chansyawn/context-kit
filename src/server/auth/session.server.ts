@@ -2,42 +2,24 @@ import {
   createSkillLibraryError,
   skillLibraryErrorCodes,
 } from "@/domain/skill-libraries/error-codes";
-import { getRequestHeaders } from "@tanstack/react-start/server";
+import { auth } from "@clerk/tanstack-react-start/server";
 
-import { auth } from "./auth.server";
+export async function getRequestSession(): Promise<{ userId: string } | null> {
+  const { isAuthenticated, userId } = await auth();
 
-export class AuthenticationRequiredError extends Error {
-  constructor() {
-    super("Authentication required.");
-    this.name = "AuthenticationRequiredError";
+  if (!isAuthenticated || !userId) {
+    return null;
   }
+
+  return { userId };
 }
 
-export function getRequestSession() {
-  return auth.api.getSession({ headers: getRequestHeaders() });
-}
-
-export async function requireSession() {
+export async function requireClerkUserId(): Promise<string> {
   const session = await getRequestSession();
 
   if (!session) {
-    throw new AuthenticationRequiredError();
-  }
-
-  return session;
-}
-
-export async function requireGithubAccessToken(): Promise<string> {
-  try {
-    await requireSession();
-
-    const token = await auth.api.getAccessToken({
-      body: { providerId: "github" },
-      headers: getRequestHeaders(),
-    });
-
-    return token.accessToken;
-  } catch {
     throw createSkillLibraryError(skillLibraryErrorCodes.authenticationRequired);
   }
+
+  return session.userId;
 }

@@ -14,7 +14,7 @@ export function formatGithubError(error: unknown): Error {
   const status = readStatus(error);
 
   if (status === 401) {
-    return createSkillLibraryError(skillLibraryErrorCodes.authenticationRequired);
+    return createSkillLibraryError(skillLibraryErrorCodes.githubAuthorizationRequired);
   }
 
   if (status === 429 || (status === 403 && isRateLimited(error))) {

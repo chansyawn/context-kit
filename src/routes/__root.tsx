@@ -1,5 +1,6 @@
 import { AppProviders } from "@/app/app-providers";
 import "@/global.css";
+import { ClerkProvider } from "@clerk/tanstack-react-start";
 import { ClientOnly, createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
@@ -34,7 +35,15 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <HeadContent />
       </head>
       <body suppressHydrationWarning>
-        {children}
+        <ClerkProvider
+          signInUrl="/sign-in"
+          signUpUrl="/sign-up"
+          signInFallbackRedirectUrl="/skill-libraries"
+          signUpFallbackRedirectUrl="/skill-libraries"
+          afterSignOutUrl="/sign-in"
+        >
+          {children}
+        </ClerkProvider>
         <Scripts />
       </body>
     </html>

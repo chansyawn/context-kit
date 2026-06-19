@@ -5,6 +5,10 @@ export function createSkillLabels(i18n: I18n) {
     error: {
       retry: i18n._({ id: "common.tryAgain", message: "Try again" }),
       signIn: i18n._({ id: "auth.login.again", message: "Sign in again" }),
+      connectGithub: i18n._({
+        id: "skillLibraries.actions.connectGithub",
+        message: "Connect GitHub",
+      }),
       manageAccess: i18n._({
         id: "skillLibraries.actions.manageGithubAccess",
         message: "Manage GitHub access",

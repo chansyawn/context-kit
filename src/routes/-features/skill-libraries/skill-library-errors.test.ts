@@ -10,10 +10,15 @@ describe("skill library error actions", () => {
     ).toBe("login");
   });
 
-  it.each([
-    skillLibraryErrorCodes.githubAuthorizationRequired,
-    skillLibraryErrorCodes.githubResourceUnavailable,
-  ])("opens GitHub access management for %s", (code) => {
+  it("connects GitHub when the GitHub user authorization is missing", () => {
+    expect(
+      getSkillLibraryErrorAction(new Error(skillLibraryErrorCodes.githubAuthorizationRequired)),
+    ).toBe("connect-github");
+  });
+
+  it("opens GitHub access management when repository access is unavailable", () => {
+    const code = skillLibraryErrorCodes.githubResourceUnavailable;
+
     expect(getSkillLibraryErrorAction(new Error(code))).toBe("manage-access");
   });
 

@@ -9,19 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as SkillLibrariesRouteRouteImport } from './routes/skill-libraries/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SkillLibrariesIndexRouteImport } from './routes/skill-libraries/index'
 import { Route as SkillLibrariesSkillLibraryIdRouteImport } from './routes/skill-libraries/$skillLibraryId'
-import { Route as GithubSetupRouteImport } from './routes/github/setup'
-import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as SignUpSplatRouteImport } from './routes/sign-up.$'
+import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
+import { Route as ApiGithubCallbackRouteImport } from './routes/api/github/callback'
+import { Route as ApiGithubAuthorizeRouteImport } from './routes/api/github/authorize'
 
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SkillLibrariesRouteRoute = SkillLibrariesRouteRouteImport.update({
   id: '/skill-libraries',
   path: '/skill-libraries',
@@ -43,90 +39,100 @@ const SkillLibrariesSkillLibraryIdRoute =
     path: '/$skillLibraryId',
     getParentRoute: () => SkillLibrariesRouteRoute,
   } as any)
-const GithubSetupRoute = GithubSetupRouteImport.update({
-  id: '/github/setup',
-  path: '/github/setup',
+const SignUpSplatRoute = SignUpSplatRouteImport.update({
+  id: '/sign-up/$',
+  path: '/sign-up/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
+const SignInSplatRoute = SignInSplatRouteImport.update({
+  id: '/sign-in/$',
+  path: '/sign-in/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGithubCallbackRoute = ApiGithubCallbackRouteImport.update({
+  id: '/api/github/callback',
+  path: '/api/github/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGithubAuthorizeRoute = ApiGithubAuthorizeRouteImport.update({
+  id: '/api/github/authorize',
+  path: '/api/github/authorize',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/skill-libraries': typeof SkillLibrariesRouteRouteWithChildren
-  '/login': typeof LoginRoute
-  '/github/setup': typeof GithubSetupRoute
+  '/sign-in/$': typeof SignInSplatRoute
+  '/sign-up/$': typeof SignUpSplatRoute
   '/skill-libraries/$skillLibraryId': typeof SkillLibrariesSkillLibraryIdRoute
   '/skill-libraries/': typeof SkillLibrariesIndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/github/authorize': typeof ApiGithubAuthorizeRoute
+  '/api/github/callback': typeof ApiGithubCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/github/setup': typeof GithubSetupRoute
+  '/sign-in/$': typeof SignInSplatRoute
+  '/sign-up/$': typeof SignUpSplatRoute
   '/skill-libraries/$skillLibraryId': typeof SkillLibrariesSkillLibraryIdRoute
   '/skill-libraries': typeof SkillLibrariesIndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/github/authorize': typeof ApiGithubAuthorizeRoute
+  '/api/github/callback': typeof ApiGithubCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/skill-libraries': typeof SkillLibrariesRouteRouteWithChildren
-  '/login': typeof LoginRoute
-  '/github/setup': typeof GithubSetupRoute
+  '/sign-in/$': typeof SignInSplatRoute
+  '/sign-up/$': typeof SignUpSplatRoute
   '/skill-libraries/$skillLibraryId': typeof SkillLibrariesSkillLibraryIdRoute
   '/skill-libraries/': typeof SkillLibrariesIndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/github/authorize': typeof ApiGithubAuthorizeRoute
+  '/api/github/callback': typeof ApiGithubCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/skill-libraries'
-    | '/login'
-    | '/github/setup'
+    | '/sign-in/$'
+    | '/sign-up/$'
     | '/skill-libraries/$skillLibraryId'
     | '/skill-libraries/'
-    | '/api/auth/$'
+    | '/api/github/authorize'
+    | '/api/github/callback'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/login'
-    | '/github/setup'
+    | '/sign-in/$'
+    | '/sign-up/$'
     | '/skill-libraries/$skillLibraryId'
     | '/skill-libraries'
-    | '/api/auth/$'
+    | '/api/github/authorize'
+    | '/api/github/callback'
   id:
     | '__root__'
     | '/'
     | '/skill-libraries'
-    | '/login'
-    | '/github/setup'
+    | '/sign-in/$'
+    | '/sign-up/$'
     | '/skill-libraries/$skillLibraryId'
     | '/skill-libraries/'
-    | '/api/auth/$'
+    | '/api/github/authorize'
+    | '/api/github/callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SkillLibrariesRouteRoute: typeof SkillLibrariesRouteRouteWithChildren
-  LoginRoute: typeof LoginRoute
-  GithubSetupRoute: typeof GithubSetupRoute
-  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  SignInSplatRoute: typeof SignInSplatRoute
+  SignUpSplatRoute: typeof SignUpSplatRoute
+  ApiGithubAuthorizeRoute: typeof ApiGithubAuthorizeRoute
+  ApiGithubCallbackRoute: typeof ApiGithubCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/skill-libraries': {
       id: '/skill-libraries'
       path: '/skill-libraries'
@@ -155,18 +161,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SkillLibrariesSkillLibraryIdRouteImport
       parentRoute: typeof SkillLibrariesRouteRoute
     }
-    '/github/setup': {
-      id: '/github/setup'
-      path: '/github/setup'
-      fullPath: '/github/setup'
-      preLoaderRoute: typeof GithubSetupRouteImport
+    '/sign-up/$': {
+      id: '/sign-up/$'
+      path: '/sign-up/$'
+      fullPath: '/sign-up/$'
+      preLoaderRoute: typeof SignUpSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatRouteImport
+    '/sign-in/$': {
+      id: '/sign-in/$'
+      path: '/sign-in/$'
+      fullPath: '/sign-in/$'
+      preLoaderRoute: typeof SignInSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/github/callback': {
+      id: '/api/github/callback'
+      path: '/api/github/callback'
+      fullPath: '/api/github/callback'
+      preLoaderRoute: typeof ApiGithubCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/github/authorize': {
+      id: '/api/github/authorize'
+      path: '/api/github/authorize'
+      fullPath: '/api/github/authorize'
+      preLoaderRoute: typeof ApiGithubAuthorizeRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -188,19 +208,21 @@ const SkillLibrariesRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SkillLibrariesRouteRoute: SkillLibrariesRouteRouteWithChildren,
-  LoginRoute: LoginRoute,
-  GithubSetupRoute: GithubSetupRoute,
-  ApiAuthSplatRoute: ApiAuthSplatRoute,
+  SignInSplatRoute: SignInSplatRoute,
+  SignUpSplatRoute: SignUpSplatRoute,
+  ApiGithubAuthorizeRoute: ApiGithubAuthorizeRoute,
+  ApiGithubCallbackRoute: ApiGithubCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }

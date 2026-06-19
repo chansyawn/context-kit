@@ -3,7 +3,7 @@ import {
   skillLibraryErrorCodes,
 } from "@/domain/skill-libraries/error-codes";
 import type { SkillLibrary } from "@/domain/skill-libraries/types";
-import { requireSession } from "@/server/auth/session.server";
+import { requireClerkUserId } from "@/server/auth/session.server";
 import { db } from "@/db/client";
 import { skillLibraries } from "@/db/schema";
 import { createUserOctokit } from "@/server/github/client.server";
@@ -14,11 +14,11 @@ import { and, asc, eq } from "drizzle-orm";
 import { normalizeRepositoryPath, validateLibraryName } from "./validation";
 
 export async function listSkillLibraries(): Promise<SkillLibrary[]> {
-  const { user } = await requireSession();
+  const userId = await requireClerkUserId();
   const rows = await db
     .select()
     .from(skillLibraries)
-    .where(eq(skillLibraries.userId, user.id))
+    .where(eq(skillLibraries.clerkUserId, userId))
     .orderBy(asc(skillLibraries.createdAt), asc(skillLibraries.name));
 
   return rows.map(mapSkillLibrary);
@@ -29,7 +29,7 @@ export async function createSkillLibrary(input: {
   repositoryId: string;
   path: string;
 }): Promise<SkillLibrary> {
-  const { user } = await requireSession();
+  const userId = await requireClerkUserId();
   const octokit = await createUserOctokit();
 
   try {
@@ -40,7 +40,7 @@ export async function createSkillLibrary(input: {
       .insert(skillLibraries)
       .values({
         id: crypto.randomUUID(),
-        userId: user.id,
+        clerkUserId: userId,
         name: validateLibraryName(input.name),
         repositoryId: repository.id,
         repositoryOwner: repository.owner,
@@ -68,11 +68,11 @@ export async function createSkillLibrary(input: {
 }
 
 export async function renameSkillLibrary(libraryId: string, name: string): Promise<SkillLibrary> {
-  const { user } = await requireSession();
+  const userId = await requireClerkUserId();
   const [row] = await db
     .update(skillLibraries)
     .set({ name: validateLibraryName(name), updatedAt: new Date() })
-    .where(and(eq(skillLibraries.id, libraryId), eq(skillLibraries.userId, user.id)))
+    .where(and(eq(skillLibraries.id, libraryId), eq(skillLibraries.clerkUserId, userId)))
     .returning();
 
   if (!row) {
@@ -83,10 +83,10 @@ export async function renameSkillLibrary(libraryId: string, name: string): Promi
 }
 
 export async function deleteSkillLibrary(libraryId: string): Promise<void> {
-  const { user } = await requireSession();
+  const userId = await requireClerkUserId();
   const rows = await db
     .delete(skillLibraries)
-    .where(and(eq(skillLibraries.id, libraryId), eq(skillLibraries.userId, user.id)))
+    .where(and(eq(skillLibraries.id, libraryId), eq(skillLibraries.clerkUserId, userId)))
     .returning({ id: skillLibraries.id });
 
   if (rows.length === 0) {
@@ -95,11 +95,11 @@ export async function deleteSkillLibrary(libraryId: string): Promise<void> {
 }
 
 export async function getOwnedSkillLibrary(libraryId: string): Promise<SkillLibrary> {
-  const { user } = await requireSession();
+  const userId = await requireClerkUserId();
   const [row] = await db
     .select()
     .from(skillLibraries)
-    .where(and(eq(skillLibraries.id, libraryId), eq(skillLibraries.userId, user.id)))
+    .where(and(eq(skillLibraries.id, libraryId), eq(skillLibraries.clerkUserId, userId)))
     .limit(1);
 
   if (!row) {

@@ -14,11 +14,12 @@
   ],
   "secrets": {
     "required": [
-      "BETTER_AUTH_SECRET",
-      "BETTER_AUTH_URL",
-      "GITHUB_CLIENT_ID",
-      "GITHUB_CLIENT_SECRET",
+      "CLERK_PUBLISHABLE_KEY",
+      "CLERK_SECRET_KEY",
       "GITHUB_APP_SLUG",
+      "GITHUB_APP_CLIENT_ID",
+      "GITHUB_APP_CLIENT_SECRET",
+      "GITHUB_TOKEN_ENCRYPTION_KEY",
     ],
   },
   "observability": {

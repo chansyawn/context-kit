@@ -36,7 +36,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 
-import { formatSkillLibraryError } from "./skill-library-errors";
+import { formatSkillLibraryError, getSkillLibraryErrorAction } from "./skill-library-errors";
 import { useSkillLibraries } from "./use-skill-libraries";
 
 type SkillLibraryCreateDialogProps = {
@@ -88,6 +88,7 @@ export function SkillLibraryCreateDialog({
     message: "Add skill library",
   });
   const closeLabel = i18n._({ id: "common.close", message: "Close" });
+  const installationsErrorAction = getSkillLibraryErrorAction(installationsQuery.error);
 
   useEffect(() => {
     const firstInstallation = installationsQuery.data?.[0];
@@ -241,6 +242,18 @@ export function SkillLibraryCreateDialog({
               >
                 <ExternalLinkIcon />
                 <Trans id="skillLibraries.actions.installApp">Install GitHub App</Trans>
+              </Button>
+            ) : null}
+            {installationsQuery.error &&
+            installationsErrorAction === "connect-github" &&
+            appConfigQuery.data ? (
+              <Button
+                type="button"
+                variant="outline"
+                render={<a href={appConfigQuery.data.authorizationUrl} />}
+              >
+                <ExternalLinkIcon />
+                <Trans id="skillLibraries.actions.connectGithub">Connect GitHub</Trans>
               </Button>
             ) : null}
           </fieldset>

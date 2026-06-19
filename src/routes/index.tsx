@@ -6,7 +6,7 @@ export const Route = createFileRoute("/")({
     const session = await getSession();
 
     throw redirect({
-      to: session ? "/skill-libraries" : "/login",
+      to: session ? "/skill-libraries" : "/sign-in/$",
       replace: true,
     });
   },

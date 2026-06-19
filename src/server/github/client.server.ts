@@ -1,6 +1,7 @@
-import { requireGithubAccessToken } from "@/server/auth/session.server";
 import { Octokit } from "octokit";
 
+import { getGithubAccessToken } from "./oauth.server";
+
 export async function createUserOctokit(): Promise<Octokit> {
-  return new Octokit({ auth: await requireGithubAccessToken() });
+  return new Octokit({ auth: await getGithubAccessToken() });
 }
