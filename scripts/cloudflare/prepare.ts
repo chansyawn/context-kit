@@ -3,19 +3,28 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { parseEnv } from "node:util";
 
 const placeholderD1DatabaseId = "00000000-0000-0000-0000-000000000000";
 const prepareStateVersion = 1;
-const cloudflareEnvironmentVariable = "CONTEXT_KIT_CLOUDFLARE_ENV";
-const productionD1DatabaseIdVariable = "CONTEXT_KIT_PRODUCTION_D1_DATABASE_ID";
+const appEnvironmentVariable = "CONTEXT_KIT_ENV";
+const d1DatabaseIdVariable = "CONTEXT_KIT_D1_DATABASE_ID";
 
+const dotenvPath = ".env";
 const wranglerTemplatePath = "wrangler.template.jsonc";
 const wranglerConfigPath = "wrangler.jsonc";
-const envExamplePath = ".env.example";
 const generatedTypesPath = ".wrangler/types/worker-configuration.d.ts";
+const typegenEnvPath = ".wrangler/types/typegen.env";
 const prepareStatePath = ".wrangler/cloudflare-prepare-state.json";
 
 export type CloudflareEnvironment = "development" | "production";
+
+export type CloudflareTarget = {
+  environment: CloudflareEnvironment;
+  databaseName: string;
+  databaseId: string;
+  migrationMode: "local" | "remote";
+};
 
 type WranglerConfigValues = {
   databaseName: string;
@@ -52,12 +61,18 @@ function hashString(value: string): string {
   return createHash("sha256").update(value).digest("hex");
 }
 
-function hashFileIfExists(path: string): string | null {
-  if (!existsSync(path)) {
-    return null;
+function loadDotenvFile(): void {
+  if (!existsSync(dotenvPath)) {
+    return;
   }
 
-  return hashString(readFileSync(path, "utf8"));
+  const parsedEnv = parseEnv(readFileSync(dotenvPath, "utf8"));
+
+  for (const [key, value] of Object.entries(parsedEnv)) {
+    if (process.env[key] === undefined) {
+      process.env[key] = value;
+    }
+  }
 }
 
 function parseCloudflareEnvironment(value: string | undefined): CloudflareEnvironment {
@@ -69,39 +84,45 @@ function parseCloudflareEnvironment(value: string | undefined): CloudflareEnviro
     return value;
   }
 
-  throw new Error(`Expected ${cloudflareEnvironmentVariable} to be "development" or "production".`);
+  throw new Error(`Expected ${appEnvironmentVariable} to be "development" or "production".`);
 }
 
 export function readCloudflareEnvironmentFromProcess(): CloudflareEnvironment {
-  return parseCloudflareEnvironment(process.env[cloudflareEnvironmentVariable]?.trim());
+  return parseCloudflareEnvironment(process.env[appEnvironmentVariable]?.trim());
 }
 
-function readCloudflareEnvironmentFromArgv(argv: string[]): CloudflareEnvironment {
-  const envFlagIndex = argv.indexOf("--env");
-  const envValue = envFlagIndex === -1 ? undefined : argv.at(envFlagIndex + 1);
-
-  return parseCloudflareEnvironment(envValue);
-}
-
-function readWranglerConfigValues(environment: CloudflareEnvironment): WranglerConfigValues {
+export function readCloudflareTarget(
+  environment = readCloudflareEnvironmentFromProcess(),
+): CloudflareTarget {
   if (environment === "development") {
     return {
+      environment,
       databaseName: "context-kit-local",
       databaseId: placeholderD1DatabaseId,
+      migrationMode: "local",
     };
   }
 
-  const databaseId = process.env[productionD1DatabaseIdVariable]?.trim() ?? "";
+  const databaseId = process.env[d1DatabaseIdVariable]?.trim() ?? "";
 
   if (databaseId === "" || databaseId === placeholderD1DatabaseId) {
-    throw new Error(
-      `${productionD1DatabaseIdVariable} must be set to the production D1 database id.`,
-    );
+    throw new Error(`${d1DatabaseIdVariable} must be set to the production D1 database id.`);
   }
 
   return {
+    environment,
     databaseName: "context-kit-production",
     databaseId,
+    migrationMode: "remote",
+  };
+}
+
+function readWranglerConfigValues(environment: CloudflareEnvironment): WranglerConfigValues {
+  const target = readCloudflareTarget(environment);
+
+  return {
+    databaseName: target.databaseName,
+    databaseId: target.databaseId,
   };
 }
 
@@ -199,7 +220,6 @@ function createTypesFingerprint(config: WranglerConfigResult): string {
       version: prepareStateVersion,
       environment: config.environment,
       wranglerConfigHash: config.contentHash,
-      envExampleHash: hashFileIfExists(envExamplePath),
       wranglerPackageVersion: readWranglerPackageVersion(),
       outputPath: generatedTypesPath,
     }),
@@ -220,13 +240,18 @@ function areGeneratedTypesCurrent(fingerprint: string, state: PrepareState): boo
 
 function runWranglerTypes(config: WranglerConfigResult): void {
   mkdirSync(dirname(generatedTypesPath), { recursive: true });
+  writeFileSync(typegenEnvPath, "");
 
-  const args = ["exec", "wrangler", "types", generatedTypesPath, "--config", config.path];
-
-  // Typegen should be stable in CI, where real local secrets are intentionally absent.
-  if (existsSync(envExamplePath)) {
-    args.push("--env-file", envExamplePath);
-  }
+  const args = [
+    "exec",
+    "wrangler",
+    "types",
+    generatedTypesPath,
+    "--config",
+    config.path,
+    "--env-file",
+    typegenEnvPath,
+  ];
 
   const result = spawnSync("vp", args, {
     encoding: "utf8",
@@ -288,11 +313,20 @@ function isDirectRun(): boolean {
   return pathToFileURL(resolve(scriptPath)).href === import.meta.url;
 }
 
+function assertNoCliArguments(argv: string[]): void {
+  if (argv.length === 0) {
+    return;
+  }
+
+  throw new Error(`Set ${appEnvironmentVariable}=development|production instead of passing args.`);
+}
+
+loadDotenvFile();
+
 if (isDirectRun()) {
   try {
-    prepareCloudflare({
-      environment: readCloudflareEnvironmentFromArgv(process.argv.slice(2)),
-    });
+    assertNoCliArguments(process.argv.slice(2));
+    prepareCloudflare();
   } catch (error) {
     console.error(error instanceof Error ? error.message : error);
     process.exitCode = 1;
