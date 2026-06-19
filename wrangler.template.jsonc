@@ -12,6 +12,15 @@
       "migrations_dir": "src/db/drizzle",
     },
   ],
+  "secrets": {
+    "required": [
+      "BETTER_AUTH_SECRET",
+      "BETTER_AUTH_URL",
+      "GITHUB_CLIENT_ID",
+      "GITHUB_CLIENT_SECRET",
+      "GITHUB_APP_SLUG",
+    ],
+  },
   "observability": {
     "enabled": true,
   },

@@ -5,9 +5,20 @@ import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
+import {
+  prepareCloudflare,
+  readCloudflareEnvironmentFromProcess,
+} from "./scripts/cloudflare/prepare.ts";
 import { defineConfig } from "vite-plus";
 
 const isTest = process.env.VITEST === "true" || process.env.NODE_ENV === "test";
+const isViteTaskRun = process.argv.includes("run");
+
+prepareCloudflare({
+  environment: readCloudflareEnvironmentFromProcess(),
+  includeTypes: !isViteTaskRun,
+  silent: true,
+});
 
 export default defineConfig({
   server: {
