@@ -21,10 +21,22 @@ jobs:
       - run: vp install
       - run: vp check
       - run: vp test
-      - run: vp build
+
+      - name: Build production Worker
+        run: vp run build:production
+        env:
+          CONTEXT_KIT_PRODUCTION_D1_DATABASE_ID: ${{ secrets.CONTEXT_KIT_PRODUCTION_D1_DATABASE_ID }}
+
+      - name: Apply production D1 migrations
+        run: vp run db:migrate:production
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CONTEXT_KIT_PRODUCTION_D1_DATABASE_ID: ${{ secrets.CONTEXT_KIT_PRODUCTION_D1_DATABASE_ID }}
 
       - name: Deploy Worker
         run: vp exec wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CONTEXT_KIT_PRODUCTION_D1_DATABASE_ID: ${{ secrets.CONTEXT_KIT_PRODUCTION_D1_DATABASE_ID }}

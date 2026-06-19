@@ -7,8 +7,8 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "context-kit-local",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_name": "__D1_DATABASE_NAME__",
+      "database_id": "__D1_DATABASE_ID__",
       "migrations_dir": "src/db/drizzle",
     },
   ],
