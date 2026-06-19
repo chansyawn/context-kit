@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "vp config",
-    "dev": "node scripts/wrangler/build-config.ts --env development && vp dev --host localhost --port 5173 --strictPort",
+    "dev": "node scripts/wrangler/build-config.ts --env development && vp dev --host localhost --port 6173 --strictPort",
     "build": "node scripts/wrangler/build-config.ts --env development && tsc && vp build",
     "build:production": "node scripts/wrangler/build-config.ts --env production && tsc && vp build",
     "check": "vp check",

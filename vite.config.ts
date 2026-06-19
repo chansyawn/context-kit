@@ -12,7 +12,7 @@ const isTest = process.env.VITEST === "true" || process.env.NODE_ENV === "test";
 export default defineConfig({
   server: {
     host: "localhost",
-    port: 5173,
+    port: 6173,
     strictPort: true,
   },
   staged: {
