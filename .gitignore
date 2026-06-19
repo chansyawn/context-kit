@@ -10,7 +10,6 @@ lerna-debug.log*
 .env*
 .dev.vars*
 !.env.example
-!.dev.vars.example
 wrangler.jsonc
 
 node_modules

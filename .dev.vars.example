@@ -1,5 +1,0 @@
-BETTER_AUTH_SECRET=replace-with-at-least-32-random-characters
-BETTER_AUTH_URL=http://localhost:5173
-GITHUB_CLIENT_ID=replace-with-dev-app-client-id
-GITHUB_CLIENT_SECRET=replace-with-dev-app-client-secret
-GITHUB_APP_SLUG=contextkit-dev
