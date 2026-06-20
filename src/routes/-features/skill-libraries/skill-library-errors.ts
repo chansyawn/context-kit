@@ -36,6 +36,11 @@ export function formatSkillLibraryError(error: unknown, i18n: I18n): string {
         id: "skillLibraries.error.githubAuthorizationRequired",
         message: "Connect your GitHub account to access GitHub App installations.",
       });
+    case skillLibraryErrorCodes.githubConfigurationInvalid:
+      return i18n._({
+        id: "skillLibraries.error.githubConfigurationInvalid",
+        message: "The GitHub integration is not configured correctly.",
+      });
     case skillLibraryErrorCodes.githubRateLimited:
       return i18n._({
         id: "skillLibraries.error.githubRateLimited",

@@ -177,6 +177,7 @@ export function SkillLibraryCreateDialog({
 
   const displayedError =
     error ??
+    (appConfigQuery.error ? formatSkillLibraryError(appConfigQuery.error, i18n) : null) ??
     (installationsQuery.error ? formatSkillLibraryError(installationsQuery.error, i18n) : null) ??
     (repositoriesQuery.error ? formatSkillLibraryError(repositoriesQuery.error, i18n) : null) ??
     (directoriesQuery.error ? formatSkillLibraryError(directoriesQuery.error, i18n) : null);
@@ -236,7 +237,7 @@ export function SkillLibraryCreateDialog({
             </div>
             {installationsQuery.data?.length === 0 && appConfigQuery.data ? (
               <Button
-                type="button"
+                nativeButton={false}
                 variant="outline"
                 render={<a href={appConfigQuery.data.installationUrl} />}
               >
@@ -248,7 +249,7 @@ export function SkillLibraryCreateDialog({
             installationsErrorAction === "connect-github" &&
             appConfigQuery.data ? (
               <Button
-                type="button"
+                nativeButton={false}
                 variant="outline"
                 render={<a href={appConfigQuery.data.authorizationUrl} />}
               >

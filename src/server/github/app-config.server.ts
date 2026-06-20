@@ -1,10 +1,11 @@
-import { env } from "cloudflare:workers";
-
+import { getGithubServerConfig } from "./github-config.server";
 import { getGithubAuthorizationUrl } from "./oauth.server";
 
 export function getGithubAppConfig() {
+  const config = getGithubServerConfig();
+
   return {
     authorizationUrl: getGithubAuthorizationUrl(),
-    installationUrl: `https://github.com/apps/${env.GITHUB_APP_SLUG}/installations/new`,
+    installationUrl: `https://github.com/apps/${config.appSlug}/installations/new`,
   };
 }

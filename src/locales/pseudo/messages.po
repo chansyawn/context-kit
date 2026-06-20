@@ -47,7 +47,7 @@ msgid "auth.logout"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:370
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:371
 #: src/routes/-features/skill-libraries/skill-library-delete-dialog.tsx:98
 #: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:87
 msgid "common.cancel"
@@ -63,19 +63,19 @@ msgid "common.close"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:296
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:297
 #: src/routes/-features/skills/skill-labels.ts:41
 msgid "common.next"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:285
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:286
 #: src/routes/-features/skills/skill-labels.ts:40
 msgid "common.previous"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:382
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:383
 #: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:90
 msgid "common.save"
 msgstr ""
@@ -138,7 +138,7 @@ msgid "skillLibraries.actions.add"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:256
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:257
 #: src/routes/-features/skills/skill-labels.ts:8
 msgid "skillLibraries.actions.connectGithub"
 msgstr ""
@@ -150,7 +150,7 @@ msgid "skillLibraries.actions.delete"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:244
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:245
 msgid "skillLibraries.actions.installApp"
 msgstr ""
 
@@ -160,12 +160,12 @@ msgid "skillLibraries.actions.manageGithubAccess"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:328
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:329
 msgid "skillLibraries.actions.openPath"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:316
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:317
 msgid "skillLibraries.actions.parent"
 msgstr ""
 
@@ -175,12 +175,12 @@ msgid "skillLibraries.actions.rename"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:213
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:214
 msgid "skillLibraries.create.githubDescription"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:210
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:211
 msgid "skillLibraries.create.title"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgid "skillLibraries.empty.title"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:60
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:65
 msgid "skillLibraries.error.alreadyExists"
 msgstr ""
 
@@ -215,7 +215,7 @@ msgid "skillLibraries.error.authenticationRequired"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:65
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:70
 msgid "skillLibraries.error.createFailed"
 msgstr ""
 
@@ -226,16 +226,21 @@ msgstr ""
 
 #. js-lingui-explicit-id
 #: src/routes/-features/skill-libraries/skill-library-errors.ts:40
-msgid "skillLibraries.error.githubRateLimited"
-msgstr ""
-
-#. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:50
-msgid "skillLibraries.error.githubRequestInvalid"
+msgid "skillLibraries.error.githubConfigurationInvalid"
 msgstr ""
 
 #. js-lingui-explicit-id
 #: src/routes/-features/skill-libraries/skill-library-errors.ts:45
+msgid "skillLibraries.error.githubRateLimited"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:55
+msgid "skillLibraries.error.githubRequestInvalid"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:50
 msgid "skillLibraries.error.githubResourceUnavailable"
 msgstr ""
 
@@ -245,7 +250,7 @@ msgid "skillLibraries.error.githubSelectionRequired"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:55
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:60
 msgid "skillLibraries.error.githubUnavailable"
 msgstr ""
 
@@ -255,33 +260,33 @@ msgid "skillLibraries.error.loadTitle"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:70
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:75
 msgid "skillLibraries.error.notFound"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:75
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:80
 msgid "skillLibraries.error.unknown"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:309
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:310
 msgid "skillLibraries.form.directory"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:221
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:222
 msgid "skillLibraries.form.installation"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:351
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:352
 #: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:80
 msgid "skillLibraries.form.name"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:264
+#: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:265
 msgid "skillLibraries.form.repository"
 msgstr ""
 

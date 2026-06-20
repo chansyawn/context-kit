@@ -1,6 +1,7 @@
 export const skillLibraryErrorCodes = {
   authenticationRequired: "skill-library.authentication-required",
   githubAuthorizationRequired: "skill-library.github-authorization-required",
+  githubConfigurationInvalid: "skill-library.github-configuration-invalid",
   githubRateLimited: "skill-library.github-rate-limited",
   githubResourceUnavailable: "skill-library.github-resource-unavailable",
   githubRequestInvalid: "skill-library.github-request-invalid",

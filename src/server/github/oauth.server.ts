@@ -1,18 +1,19 @@
 import {
   createSkillLibraryError,
+  readSkillLibraryErrorCode,
   skillLibraryErrorCodes,
 } from "@/domain/skill-libraries/error-codes";
 import { getRequestSession, requireClerkUserId } from "@/server/auth/session.server";
 import { db } from "@/db/client";
 import { githubUserAuthorizations } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { env } from "cloudflare:workers";
 
+import { getGithubServerConfig } from "./github-config.server";
+import { fetchGithubUserProfile } from "./github-user";
 import { decryptToken, encryptToken } from "./token-crypto";
 
 const githubAuthorizeUrl = "https://github.com/login/oauth/authorize";
 const githubTokenUrl = "https://github.com/login/oauth/access_token";
-const githubUserUrl = "https://api.github.com/user";
 const oauthCookieName = "context-kit.github-oauth";
 const oauthCookieMaxAgeSeconds = 10 * 60;
 const tokenRefreshSkewMs = 5 * 60 * 1000;
@@ -30,12 +31,6 @@ type GithubTokenResponse = {
   refreshTokenExpiresAt: Date | null;
 };
 
-type GithubUserProfile = {
-  id: string;
-  login: string;
-  avatarUrl: string | null;
-};
-
 type GithubAuthorizationRow = typeof githubUserAuthorizations.$inferSelect;
 
 export function getGithubAuthorizationUrl(): string {
@@ -43,18 +38,31 @@ export function getGithubAuthorizationUrl(): string {
 }
 
 export async function startGithubAuthorization(request: Request): Promise<Response> {
+  try {
+    return await startGithubAuthorizationRequest(request);
+  } catch (error) {
+    if (isGithubConfigurationError(error)) {
+      return createGithubConfigurationErrorResponse();
+    }
+
+    throw error;
+  }
+}
+
+async function startGithubAuthorizationRequest(request: Request): Promise<Response> {
   const session = await getRequestSession();
 
   if (!session) {
     return createRedirectResponse(new URL("/sign-in", request.url), {});
   }
 
+  const config = getGithubServerConfig();
   const state = createRandomToken();
   const verifier = createRandomToken();
   const url = new URL(githubAuthorizeUrl);
   const redirectUri = getGithubCallbackUrl(request);
 
-  url.searchParams.set("client_id", env.GITHUB_APP_CLIENT_ID);
+  url.searchParams.set("client_id", config.clientId);
   url.searchParams.set("redirect_uri", redirectUri);
   url.searchParams.set("state", state);
   url.searchParams.set("code_challenge", await createCodeChallenge(verifier));
@@ -70,6 +78,18 @@ export async function startGithubAuthorization(request: Request): Promise<Respon
 }
 
 export async function completeGithubAuthorization(request: Request): Promise<Response> {
+  try {
+    return await completeGithubAuthorizationRequest(request);
+  } catch (error) {
+    if (isGithubConfigurationError(error)) {
+      return createGithubConfigurationErrorResponse();
+    }
+
+    return createGithubAuthorizationErrorResponse(request, error);
+  }
+}
+
+async function completeGithubAuthorizationRequest(request: Request): Promise<Response> {
   const session = await getRequestSession();
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
@@ -147,7 +167,11 @@ export async function getGithubAccessToken(): Promise<string> {
     }
 
     return await refreshGithubAccessToken(authorization);
-  } catch {
+  } catch (error) {
+    if (isGithubConfigurationError(error)) {
+      throw error;
+    }
+
     await deleteGithubAuthorization(authorization.clerkUserId);
     throw createSkillLibraryError(skillLibraryErrorCodes.githubAuthorizationRequired);
   }
@@ -183,7 +207,11 @@ async function refreshGithubAccessToken(authorization: GithubAuthorizationRow): 
       .where(eq(githubUserAuthorizations.clerkUserId, authorization.clerkUserId));
 
     return token.accessToken;
-  } catch {
+  } catch (error) {
+    if (isGithubConfigurationError(error)) {
+      throw error;
+    }
+
     await deleteGithubAuthorization(authorization.clerkUserId);
     throw createSkillLibraryError(skillLibraryErrorCodes.githubAuthorizationRequired);
   }
@@ -208,9 +236,10 @@ async function exchangeCodeForToken(
 }
 
 async function requestGithubToken(values: Record<string, string>): Promise<GithubTokenResponse> {
+  const config = getGithubServerConfig();
   const body = new URLSearchParams({
-    client_id: env.GITHUB_APP_CLIENT_ID,
-    client_secret: env.GITHUB_APP_CLIENT_SECRET,
+    client_id: config.clientId,
+    client_secret: config.clientSecret,
     ...values,
   });
   const response = await fetch(githubTokenUrl, {
@@ -225,7 +254,7 @@ async function requestGithubToken(values: Record<string, string>): Promise<Githu
 
   if (isGithubOAuthError(data)) {
     throw Object.assign(new Error(data.error_description ?? data.error), {
-      status: response.status,
+      status: data.error === "bad_verification_code" ? 400 : 502,
     });
   }
 
@@ -241,35 +270,12 @@ async function requestGithubToken(values: Record<string, string>): Promise<Githu
   };
 }
 
-async function fetchGithubUserProfile(accessToken: string): Promise<GithubUserProfile> {
-  const response = await fetch(githubUserUrl, {
-    headers: {
-      Accept: "application/vnd.github+json",
-      Authorization: `Bearer ${accessToken}`,
-      "X-GitHub-Api-Version": "2026-03-10",
-    },
-  });
-  const data = await readJson(response);
-
-  if (!response.ok || !isGithubUserProfile(data)) {
-    throw Object.assign(new Error("GitHub user profile request failed."), {
-      status: response.status,
-    });
-  }
-
-  return {
-    id: String(data.id),
-    login: data.login,
-    avatarUrl: typeof data.avatar_url === "string" ? data.avatar_url : null,
-  };
-}
-
 async function encryptGithubToken(token: string): Promise<string> {
-  return encryptToken(token, env.GITHUB_TOKEN_ENCRYPTION_KEY);
+  return encryptToken(token, getGithubServerConfig().tokenEncryptionKey);
 }
 
 async function decryptGithubToken(token: string): Promise<string> {
-  return decryptToken(token, env.GITHUB_TOKEN_ENCRYPTION_KEY);
+  return decryptToken(token, getGithubServerConfig().tokenEncryptionKey);
 }
 
 function getGithubCallbackUrl(request: Request): string {
@@ -312,7 +318,7 @@ function encodeBase64Url(bytes: Uint8Array): string {
 
 async function readJson(response: Response): Promise<unknown> {
   try {
-    return response.json();
+    return await response.json();
   } catch {
     return null;
   }
@@ -332,14 +338,6 @@ function isGithubOAuthError(value: unknown): value is {
   error_description?: string;
 } {
   return isRecord(value) && typeof value.error === "string";
-}
-
-function isGithubUserProfile(value: unknown): value is {
-  id: number;
-  login: string;
-  avatar_url?: string | null;
-} {
-  return isRecord(value) && typeof value.id === "number" && typeof value.login === "string";
 }
 
 function readOAuthCookie(request: Request): GithubOAuthCookie | null {
@@ -443,4 +441,37 @@ function createRedirectResponse(url: URL, headers: HeadersInit): Response {
     headers: responseHeaders,
     status: 302,
   });
+}
+
+function createGithubConfigurationErrorResponse(): Response {
+  return new Response("GitHub integration is not configured correctly.", {
+    status: 500,
+  });
+}
+
+function createGithubAuthorizationErrorResponse(request: Request, error: unknown): Response {
+  console.error("[github-oauth] GitHub authorization callback failed.", error);
+  const errorStatus = readErrorStatus(error);
+  const status = errorStatus === 400 ? 400 : errorStatus === null ? 500 : 502;
+  const message =
+    status === 400
+      ? "GitHub authorization failed or expired. Return to ContextKit and try again."
+      : "Unable to connect GitHub. Return to ContextKit and try again.";
+
+  return new Response(message, {
+    headers: { "Set-Cookie": clearCookie(request, oauthCookieName) },
+    status,
+  });
+}
+
+function readErrorStatus(error: unknown): number | null {
+  if (typeof error !== "object" || error === null || !("status" in error)) {
+    return null;
+  }
+
+  return typeof error.status === "number" ? error.status : null;
+}
+
+function isGithubConfigurationError(error: unknown): boolean {
+  return readSkillLibraryErrorCode(error) === skillLibraryErrorCodes.githubConfigurationInvalid;
 }

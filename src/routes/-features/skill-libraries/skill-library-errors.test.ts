@@ -23,6 +23,7 @@ describe("skill library error actions", () => {
   });
 
   it.each([
+    skillLibraryErrorCodes.githubConfigurationInvalid,
     skillLibraryErrorCodes.githubRateLimited,
     skillLibraryErrorCodes.githubRequestInvalid,
     skillLibraryErrorCodes.githubUnavailable,
