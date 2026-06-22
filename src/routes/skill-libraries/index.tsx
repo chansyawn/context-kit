@@ -1,4 +1,9 @@
 import {
+  parseGithubOAuthErrorCode,
+  type GithubOAuthErrorCode,
+} from "@/domain/skill-libraries/error-codes";
+import {
+  GithubOAuthErrorState,
   NoSkillLibrariesState,
   SkillLibraryErrorState,
   SkillLibraryLoadingState,
@@ -7,12 +12,25 @@ import { useSkillLibraries } from "@/routes/-features/skill-libraries/use-skill-
 import { createFileRoute, Navigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/skill-libraries/")({
+  validateSearch: (search: Record<string, unknown>): SkillLibrariesIndexSearch => {
+    const githubError = parseGithubOAuthErrorCode(search.githubError);
+    return githubError ? { githubError } : {};
+  },
   component: SkillLibrariesIndexPage,
 });
 
+interface SkillLibrariesIndexSearch {
+  githubError?: GithubOAuthErrorCode;
+}
+
 function SkillLibrariesIndexPage() {
+  const { githubError } = Route.useSearch();
   const { error, isLoading, refreshSkillLibraries, skillLibraries } = useSkillLibraries();
   const firstSkillLibrary = skillLibraries[0] ?? null;
+
+  if (githubError) {
+    return <GithubOAuthErrorState errorCode={githubError} />;
+  }
 
   if (isLoading) {
     return <SkillLibraryLoadingState />;

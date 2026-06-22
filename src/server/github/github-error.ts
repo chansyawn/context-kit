@@ -1,7 +1,9 @@
 import {
   createSkillLibraryError,
+  parseGithubOAuthErrorCode,
   readSkillLibraryErrorCode,
   skillLibraryErrorCodes,
+  type GithubOAuthErrorCode,
 } from "@/domain/skill-libraries/error-codes";
 
 export function formatGithubError(error: unknown): Error {
@@ -34,6 +36,18 @@ export function formatGithubError(error: unknown): Error {
   }
 
   return createSkillLibraryError(skillLibraryErrorCodes.githubUnavailable);
+}
+
+export function getGithubOAuthErrorCode(error: unknown): GithubOAuthErrorCode {
+  const existingCode = parseGithubOAuthErrorCode(readSkillLibraryErrorCode(error));
+
+  if (existingCode) {
+    return existingCode;
+  }
+
+  return readStatus(error) === 400
+    ? skillLibraryErrorCodes.githubAuthorizationFailed
+    : skillLibraryErrorCodes.githubUnavailable;
 }
 
 function readStatus(error: unknown): number | null {

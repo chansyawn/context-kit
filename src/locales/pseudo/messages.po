@@ -82,7 +82,7 @@ msgstr ""
 
 #. js-lingui-explicit-id
 #: src/app/app-error-boundary.tsx:39
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:54
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:60
 #: src/routes/-features/skills/skill-labels.ts:6
 msgid "common.tryAgain"
 msgstr ""
@@ -139,6 +139,7 @@ msgstr ""
 
 #. js-lingui-explicit-id
 #: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:257
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:86
 #: src/routes/-features/skills/skill-labels.ts:8
 msgid "skillLibraries.actions.connectGithub"
 msgstr ""
@@ -195,52 +196,57 @@ msgid "skillLibraries.delete.title"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:27
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:33
 msgid "skillLibraries.empty.githubDescription"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:24
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:30
 msgid "skillLibraries.empty.title"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:65
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:78
 msgid "skillLibraries.error.alreadyExists"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:30
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:38
 msgid "skillLibraries.error.authenticationRequired"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:70
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:83
 msgid "skillLibraries.error.createFailed"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:35
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:48
+msgid "skillLibraries.error.githubAuthorizationFailed"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:43
 msgid "skillLibraries.error.githubAuthorizationRequired"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:40
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:53
 msgid "skillLibraries.error.githubConfigurationInvalid"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:45
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:58
 msgid "skillLibraries.error.githubRateLimited"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:55
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:68
 msgid "skillLibraries.error.githubRequestInvalid"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:50
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:63
 msgid "skillLibraries.error.githubResourceUnavailable"
 msgstr ""
 
@@ -250,22 +256,22 @@ msgid "skillLibraries.error.githubSelectionRequired"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:60
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:73
 msgid "skillLibraries.error.githubUnavailable"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:47
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:53
 msgid "skillLibraries.error.loadTitle"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:75
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:88
 msgid "skillLibraries.error.notFound"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:80
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:93
 msgid "skillLibraries.error.unknown"
 msgstr ""
 
@@ -291,13 +297,18 @@ msgid "skillLibraries.form.repository"
 msgstr ""
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:66
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:99
 msgid "skillLibraries.loading"
 msgstr ""
 
 #. js-lingui-explicit-id
 #: src/routes/-features/skill-libraries/skill-library-sidebar-group.tsx:39
 msgid "skillLibraries.menu.label"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:78
+msgid "skillLibraries.oauth.errorTitle"
 msgstr ""
 
 #. js-lingui-explicit-id

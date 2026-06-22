@@ -1,15 +1,16 @@
 import {
   createSkillLibraryError,
-  readSkillLibraryErrorCode,
   skillLibraryErrorCodes,
+  type GithubOAuthErrorCode,
 } from "@/domain/skill-libraries/error-codes";
 import { getRequestSession, requireClerkUserId } from "@/server/auth/session.server";
 import { db } from "@/db/client";
 import { githubUserAuthorizations } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { Octokit } from "octokit";
 
 import { getGithubServerConfig } from "./github-config.server";
-import { fetchGithubUserProfile } from "./github-user";
+import { getGithubOAuthErrorCode } from "./github-error";
 import { decryptToken, encryptToken } from "./token-crypto";
 
 const githubAuthorizeUrl = "https://github.com/login/oauth/authorize";
@@ -31,6 +32,12 @@ type GithubTokenResponse = {
   refreshTokenExpiresAt: Date | null;
 };
 
+type GithubUserProfile = {
+  id: string;
+  login: string;
+  avatarUrl: string | null;
+};
+
 type GithubAuthorizationRow = typeof githubUserAuthorizations.$inferSelect;
 
 export function getGithubAuthorizationUrl(): string {
@@ -41,8 +48,10 @@ export async function startGithubAuthorization(request: Request): Promise<Respon
   try {
     return await startGithubAuthorizationRequest(request);
   } catch (error) {
-    if (isGithubConfigurationError(error)) {
-      return createGithubConfigurationErrorResponse();
+    const errorCode = getGithubOAuthErrorCode(error);
+
+    if (errorCode === skillLibraryErrorCodes.githubConfigurationInvalid) {
+      return createGithubAuthorizationErrorRedirect(request, errorCode);
     }
 
     throw error;
@@ -81,11 +90,9 @@ export async function completeGithubAuthorization(request: Request): Promise<Res
   try {
     return await completeGithubAuthorizationRequest(request);
   } catch (error) {
-    if (isGithubConfigurationError(error)) {
-      return createGithubConfigurationErrorResponse();
-    }
+    console.error("[github-oauth] GitHub authorization callback failed.", error);
 
-    return createGithubAuthorizationErrorResponse(request, error);
+    return createGithubAuthorizationErrorRedirect(request, getGithubOAuthErrorCode(error));
   }
 }
 
@@ -103,14 +110,14 @@ async function completeGithubAuthorizationRequest(request: Request): Promise<Res
   }
 
   if (!code || !state || !cookie || state !== cookie.state) {
-    return new Response("GitHub authorization request is invalid.", {
-      headers: { "Set-Cookie": clearCookie(request, oauthCookieName) },
-      status: 400,
-    });
+    return createGithubAuthorizationErrorRedirect(
+      request,
+      skillLibraryErrorCodes.githubAuthorizationFailed,
+    );
   }
 
   const token = await exchangeCodeForToken(code, cookie.verifier, getGithubCallbackUrl(request));
-  const profile = await fetchGithubUserProfile(token.accessToken);
+  const profile = await getGithubUserProfile(token.accessToken);
   const now = new Date();
   const encryptedAccessToken = await encryptGithubToken(token.accessToken);
   const encryptedRefreshToken = token.refreshToken
@@ -168,7 +175,7 @@ export async function getGithubAccessToken(): Promise<string> {
 
     return await refreshGithubAccessToken(authorization);
   } catch (error) {
-    if (isGithubConfigurationError(error)) {
+    if (getGithubOAuthErrorCode(error) === skillLibraryErrorCodes.githubConfigurationInvalid) {
       throw error;
     }
 
@@ -208,7 +215,7 @@ async function refreshGithubAccessToken(authorization: GithubAuthorizationRow): 
 
     return token.accessToken;
   } catch (error) {
-    if (isGithubConfigurationError(error)) {
+    if (getGithubOAuthErrorCode(error) === skillLibraryErrorCodes.githubConfigurationInvalid) {
       throw error;
     }
 
@@ -267,6 +274,17 @@ async function requestGithubToken(values: Record<string, string>): Promise<Githu
     expiresAt: secondsFromNow(data.expires_in),
     refreshToken: typeof data.refresh_token === "string" ? data.refresh_token : null,
     refreshTokenExpiresAt: secondsFromNow(data.refresh_token_expires_in),
+  };
+}
+
+async function getGithubUserProfile(accessToken: string): Promise<GithubUserProfile> {
+  const octokit = new Octokit({ auth: accessToken });
+  const { data } = await octokit.rest.users.getAuthenticated();
+
+  return {
+    id: String(data.id),
+    login: data.login,
+    avatarUrl: data.avatar_url,
   };
 }
 
@@ -443,35 +461,15 @@ function createRedirectResponse(url: URL, headers: HeadersInit): Response {
   });
 }
 
-function createGithubConfigurationErrorResponse(): Response {
-  return new Response("GitHub integration is not configured correctly.", {
-    status: 500,
+function createGithubAuthorizationErrorRedirect(
+  request: Request,
+  errorCode: GithubOAuthErrorCode,
+): Response {
+  const url = new URL("/skill-libraries", request.url);
+
+  url.searchParams.set("githubError", errorCode);
+
+  return createRedirectResponse(url, {
+    "Set-Cookie": clearCookie(request, oauthCookieName),
   });
-}
-
-function createGithubAuthorizationErrorResponse(request: Request, error: unknown): Response {
-  console.error("[github-oauth] GitHub authorization callback failed.", error);
-  const errorStatus = readErrorStatus(error);
-  const status = errorStatus === 400 ? 400 : errorStatus === null ? 500 : 502;
-  const message =
-    status === 400
-      ? "GitHub authorization failed or expired. Return to ContextKit and try again."
-      : "Unable to connect GitHub. Return to ContextKit and try again.";
-
-  return new Response(message, {
-    headers: { "Set-Cookie": clearCookie(request, oauthCookieName) },
-    status,
-  });
-}
-
-function readErrorStatus(error: unknown): number | null {
-  if (typeof error !== "object" || error === null || !("status" in error)) {
-    return null;
-  }
-
-  return typeof error.status === "number" ? error.status : null;
-}
-
-function isGithubConfigurationError(error: unknown): boolean {
-  return readSkillLibraryErrorCode(error) === skillLibraryErrorCodes.githubConfigurationInvalid;
 }

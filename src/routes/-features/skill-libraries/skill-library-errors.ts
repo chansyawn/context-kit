@@ -6,15 +6,23 @@ import type { I18n } from "@lingui/core";
 
 export type SkillLibraryErrorAction = "connect-github" | "login" | "manage-access" | "retry";
 
-export function getSkillLibraryErrorAction(error: unknown): SkillLibraryErrorAction {
+export function getSkillLibraryErrorAction(error: unknown): SkillLibraryErrorAction | null {
   const code = readSkillLibraryErrorCode(error);
 
   if (code === skillLibraryErrorCodes.authenticationRequired) {
     return "login";
   }
 
-  if (code === skillLibraryErrorCodes.githubAuthorizationRequired) {
+  if (
+    code === skillLibraryErrorCodes.githubAuthorizationFailed ||
+    code === skillLibraryErrorCodes.githubAuthorizationRequired ||
+    code === skillLibraryErrorCodes.githubUnavailable
+  ) {
     return "connect-github";
+  }
+
+  if (code === skillLibraryErrorCodes.githubConfigurationInvalid) {
+    return null;
   }
 
   if (code === skillLibraryErrorCodes.githubResourceUnavailable) {
@@ -35,6 +43,11 @@ export function formatSkillLibraryError(error: unknown, i18n: I18n): string {
       return i18n._({
         id: "skillLibraries.error.githubAuthorizationRequired",
         message: "Connect your GitHub account to access GitHub App installations.",
+      });
+    case skillLibraryErrorCodes.githubAuthorizationFailed:
+      return i18n._({
+        id: "skillLibraries.error.githubAuthorizationFailed",
+        message: "GitHub authorization failed or expired. Connect GitHub again.",
       });
     case skillLibraryErrorCodes.githubConfigurationInvalid:
       return i18n._({

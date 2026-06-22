@@ -55,19 +55,19 @@ export function NoSkillsState({ onRescan }: NoSkillsStateProps) {
 }
 
 type SkillsErrorStateProps = {
+  actionLabel?: string;
   error: string;
-  isPermissionRequired: boolean;
-  retryLabel: string;
-  onRetry: () => void;
+  isPermissionRequired?: boolean;
+  onAction?: () => void;
 };
 
 export function SkillsErrorState({
+  actionLabel,
   error,
-  isPermissionRequired,
-  onRetry,
-  retryLabel,
+  isPermissionRequired = false,
+  onAction,
 }: SkillsErrorStateProps) {
-  const RetryIcon = isPermissionRequired ? KeyRoundIcon : RefreshCwIcon;
+  const ActionIcon = isPermissionRequired ? KeyRoundIcon : RefreshCwIcon;
 
   return (
     <Empty role="alert" className="min-h-0 border bg-card">
@@ -80,12 +80,14 @@ export function SkillsErrorState({
         </EmptyTitle>
         <EmptyDescription>{error}</EmptyDescription>
       </EmptyHeader>
-      <EmptyContent>
-        <Button type="button" onClick={onRetry}>
-          <RetryIcon data-icon="inline-start" />
-          {retryLabel}
-        </Button>
-      </EmptyContent>
+      {actionLabel && onAction ? (
+        <EmptyContent>
+          <Button type="button" onClick={onAction}>
+            <ActionIcon data-icon="inline-start" />
+            {actionLabel}
+          </Button>
+        </EmptyContent>
+      ) : null}
     </Empty>
   );
 }

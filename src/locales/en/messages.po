@@ -82,7 +82,7 @@ msgstr "Save"
 
 #. js-lingui-explicit-id
 #: src/app/app-error-boundary.tsx:39
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:54
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:60
 #: src/routes/-features/skills/skill-labels.ts:6
 msgid "common.tryAgain"
 msgstr "Try again"
@@ -139,6 +139,7 @@ msgstr "Add skill library"
 
 #. js-lingui-explicit-id
 #: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:257
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:86
 #: src/routes/-features/skills/skill-labels.ts:8
 msgid "skillLibraries.actions.connectGithub"
 msgstr "Connect GitHub"
@@ -195,52 +196,57 @@ msgid "skillLibraries.delete.title"
 msgstr "Delete skill library?"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:27
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:33
 msgid "skillLibraries.empty.githubDescription"
 msgstr "Add a repository directory from your GitHub App installations."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:24
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:30
 msgid "skillLibraries.empty.title"
 msgstr "No skill libraries yet"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:65
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:78
 msgid "skillLibraries.error.alreadyExists"
 msgstr "This repository directory has already been added."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:30
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:38
 msgid "skillLibraries.error.authenticationRequired"
 msgstr "Your session has expired. Sign in again."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:70
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:83
 msgid "skillLibraries.error.createFailed"
 msgstr "Unable to create the skill library."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:35
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:48
+msgid "skillLibraries.error.githubAuthorizationFailed"
+msgstr "GitHub authorization failed or expired. Connect GitHub again."
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:43
 msgid "skillLibraries.error.githubAuthorizationRequired"
 msgstr "Connect your GitHub account to access GitHub App installations."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:40
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:53
 msgid "skillLibraries.error.githubConfigurationInvalid"
 msgstr "The GitHub integration is not configured correctly."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:45
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:58
 msgid "skillLibraries.error.githubRateLimited"
 msgstr "GitHub's API rate limit was reached. Try again later."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:55
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:68
 msgid "skillLibraries.error.githubRequestInvalid"
 msgstr "GitHub rejected this repository request."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:50
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:63
 msgid "skillLibraries.error.githubResourceUnavailable"
 msgstr "The repository or directory moved, was removed, or is no longer authorized."
 
@@ -250,22 +256,22 @@ msgid "skillLibraries.error.githubSelectionRequired"
 msgstr "Select an accessible repository directory before saving."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:60
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:73
 msgid "skillLibraries.error.githubUnavailable"
 msgstr "GitHub data is temporarily unavailable."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:47
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:53
 msgid "skillLibraries.error.loadTitle"
 msgstr "Unable to load skill libraries"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:75
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:88
 msgid "skillLibraries.error.notFound"
 msgstr "The skill library was not found."
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:80
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:93
 msgid "skillLibraries.error.unknown"
 msgstr "Unable to load skill library data."
 
@@ -291,7 +297,7 @@ msgid "skillLibraries.form.repository"
 msgstr "Repository"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:66
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:99
 msgid "skillLibraries.loading"
 msgstr "Loading skill libraries..."
 
@@ -299,6 +305,11 @@ msgstr "Loading skill libraries..."
 #: src/routes/-features/skill-libraries/skill-library-sidebar-group.tsx:39
 msgid "skillLibraries.menu.label"
 msgstr "Skill library actions"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:78
+msgid "skillLibraries.oauth.errorTitle"
+msgstr "Unable to connect GitHub"
 
 #. js-lingui-explicit-id
 #: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:73

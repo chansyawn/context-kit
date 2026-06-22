@@ -1,3 +1,7 @@
+import {
+  skillLibraryErrorCodes,
+  type GithubOAuthErrorCode,
+} from "@/domain/skill-libraries/error-codes";
 import { Button } from "@/ui/components/button";
 import {
   Empty,
@@ -8,9 +12,11 @@ import {
   EmptyTitle,
 } from "@/ui/components/empty";
 import { Skeleton } from "@/ui/components/skeleton";
+import { useLingui } from "@lingui/react";
 import { Trans } from "@lingui/react/macro";
-import { AlertTriangleIcon, FolderGit2Icon, RefreshCwIcon } from "lucide-react";
+import { AlertTriangleIcon, FolderGit2Icon, KeyRoundIcon, RefreshCwIcon } from "lucide-react";
 
+import { formatSkillLibraryError } from "./skill-library-errors";
 import { SkillLibraryCreateDialog } from "./skill-library-create-dialog";
 
 export function NoSkillLibrariesState() {
@@ -54,6 +60,33 @@ export function SkillLibraryErrorState({ error, onRetry }: { error: string; onRe
           <Trans id="common.tryAgain">Try again</Trans>
         </Button>
       </EmptyContent>
+    </Empty>
+  );
+}
+
+export function GithubOAuthErrorState({ errorCode }: { errorCode: GithubOAuthErrorCode }) {
+  const { i18n } = useLingui();
+  const canReconnect = errorCode !== skillLibraryErrorCodes.githubConfigurationInvalid;
+
+  return (
+    <Empty role="alert" className="min-h-0 border bg-card">
+      <EmptyHeader>
+        <EmptyMedia variant="icon" className="bg-destructive/10 text-destructive">
+          <AlertTriangleIcon />
+        </EmptyMedia>
+        <EmptyTitle>
+          <Trans id="skillLibraries.oauth.errorTitle">Unable to connect GitHub</Trans>
+        </EmptyTitle>
+        <EmptyDescription>{formatSkillLibraryError(new Error(errorCode), i18n)}</EmptyDescription>
+      </EmptyHeader>
+      {canReconnect ? (
+        <EmptyContent>
+          <Button nativeButton={false} render={<a href="/api/github/authorize" />}>
+            <KeyRoundIcon />
+            <Trans id="skillLibraries.actions.connectGithub">Connect GitHub</Trans>
+          </Button>
+        </EmptyContent>
+      ) : null}
     </Empty>
   );
 }

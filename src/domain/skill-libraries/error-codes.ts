@@ -1,5 +1,6 @@
 export const skillLibraryErrorCodes = {
   authenticationRequired: "skill-library.authentication-required",
+  githubAuthorizationFailed: "skill-library.github-authorization-failed",
   githubAuthorizationRequired: "skill-library.github-authorization-required",
   githubConfigurationInvalid: "skill-library.github-configuration-invalid",
   githubRateLimited: "skill-library.github-rate-limited",
@@ -14,7 +15,16 @@ export const skillLibraryErrorCodes = {
 export type SkillLibraryErrorCode =
   (typeof skillLibraryErrorCodes)[keyof typeof skillLibraryErrorCodes];
 
+const githubOAuthErrorCodes = [
+  skillLibraryErrorCodes.githubAuthorizationFailed,
+  skillLibraryErrorCodes.githubConfigurationInvalid,
+  skillLibraryErrorCodes.githubUnavailable,
+] as const;
+
+export type GithubOAuthErrorCode = (typeof githubOAuthErrorCodes)[number];
+
 const knownErrorCodes = new Set<SkillLibraryErrorCode>(Object.values(skillLibraryErrorCodes));
+const knownGithubOAuthErrorCodes = new Set<GithubOAuthErrorCode>(githubOAuthErrorCodes);
 
 export function createSkillLibraryError(code: SkillLibraryErrorCode): Error {
   return new Error(code);
@@ -25,6 +35,12 @@ export function readSkillLibraryErrorCode(error: unknown): SkillLibraryErrorCode
 
   return message && knownErrorCodes.has(message as SkillLibraryErrorCode)
     ? (message as SkillLibraryErrorCode)
+    : null;
+}
+
+export function parseGithubOAuthErrorCode(value: unknown): GithubOAuthErrorCode | null {
+  return typeof value === "string" && knownGithubOAuthErrorCodes.has(value as GithubOAuthErrorCode)
+    ? (value as GithubOAuthErrorCode)
     : null;
 }
 

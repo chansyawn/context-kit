@@ -125,6 +125,10 @@ export function GithubSkillsManager({
   }, [onSearchChange]);
 
   const handleErrorAction = useCallback(() => {
+    if (errorAction === null) {
+      return;
+    }
+
     if (errorAction === "login") {
       window.location.assign("/sign-in");
       return;
@@ -160,21 +164,23 @@ export function GithubSkillsManager({
   }
 
   if (skillsQuery.error) {
-    const retryLabel =
-      errorAction === "login"
-        ? labels.error.signIn
-        : errorAction === "connect-github"
-          ? labels.error.connectGithub
-          : errorAction === "manage-access"
-            ? labels.error.manageAccess
-            : labels.error.retry;
+    const actionLabel =
+      errorAction === null
+        ? undefined
+        : errorAction === "login"
+          ? labels.error.signIn
+          : errorAction === "connect-github"
+            ? labels.error.connectGithub
+            : errorAction === "manage-access"
+              ? labels.error.manageAccess
+              : labels.error.retry;
 
     return (
       <SkillsErrorState
+        actionLabel={actionLabel}
         error={formatSkillLibraryError(skillsQuery.error, i18n)}
-        isPermissionRequired={errorAction !== "retry"}
-        retryLabel={retryLabel}
-        onRetry={handleErrorAction}
+        isPermissionRequired={errorAction !== null && errorAction !== "retry"}
+        onAction={errorAction === null ? undefined : handleErrorAction}
       />
     );
   }

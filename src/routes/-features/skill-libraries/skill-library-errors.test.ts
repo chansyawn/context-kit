@@ -16,18 +16,34 @@ describe("skill library error actions", () => {
     ).toBe("connect-github");
   });
 
+  it("connects GitHub when authorization fails or expires", () => {
+    expect(
+      getSkillLibraryErrorAction(new Error(skillLibraryErrorCodes.githubAuthorizationFailed)),
+    ).toBe("connect-github");
+  });
+
+  it("connects GitHub when GitHub is temporarily unavailable", () => {
+    expect(getSkillLibraryErrorAction(new Error(skillLibraryErrorCodes.githubUnavailable))).toBe(
+      "connect-github",
+    );
+  });
+
+  it("does not offer an action for invalid server configuration", () => {
+    expect(
+      getSkillLibraryErrorAction(new Error(skillLibraryErrorCodes.githubConfigurationInvalid)),
+    ).toBeNull();
+  });
+
   it("opens GitHub access management when repository access is unavailable", () => {
     const code = skillLibraryErrorCodes.githubResourceUnavailable;
 
     expect(getSkillLibraryErrorAction(new Error(code))).toBe("manage-access");
   });
 
-  it.each([
-    skillLibraryErrorCodes.githubConfigurationInvalid,
-    skillLibraryErrorCodes.githubRateLimited,
-    skillLibraryErrorCodes.githubRequestInvalid,
-    skillLibraryErrorCodes.githubUnavailable,
-  ])("retries transient request error %s", (code) => {
-    expect(getSkillLibraryErrorAction(new Error(code))).toBe("retry");
-  });
+  it.each([skillLibraryErrorCodes.githubRateLimited, skillLibraryErrorCodes.githubRequestInvalid])(
+    "retries transient request error %s",
+    (code) => {
+      expect(getSkillLibraryErrorAction(new Error(code))).toBe("retry");
+    },
+  );
 });

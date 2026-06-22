@@ -82,7 +82,7 @@ msgstr "保存"
 
 #. js-lingui-explicit-id
 #: src/app/app-error-boundary.tsx:39
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:54
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:60
 #: src/routes/-features/skills/skill-labels.ts:6
 msgid "common.tryAgain"
 msgstr "重试"
@@ -139,6 +139,7 @@ msgstr "添加技能库"
 
 #. js-lingui-explicit-id
 #: src/routes/-features/skill-libraries/skill-library-create-dialog.tsx:257
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:86
 #: src/routes/-features/skills/skill-labels.ts:8
 msgid "skillLibraries.actions.connectGithub"
 msgstr "连接 GitHub"
@@ -195,52 +196,57 @@ msgid "skillLibraries.delete.title"
 msgstr "删除技能库？"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:27
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:33
 msgid "skillLibraries.empty.githubDescription"
 msgstr "从你的 GitHub App 安装中添加仓库目录。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:24
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:30
 msgid "skillLibraries.empty.title"
 msgstr "还没有技能库"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:65
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:78
 msgid "skillLibraries.error.alreadyExists"
 msgstr "此仓库目录已添加。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:30
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:38
 msgid "skillLibraries.error.authenticationRequired"
 msgstr "你的会话已过期，请重新登录。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:70
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:83
 msgid "skillLibraries.error.createFailed"
 msgstr "无法创建技能库。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:35
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:48
+msgid "skillLibraries.error.githubAuthorizationFailed"
+msgstr "GitHub 授权失败或已过期，请重新连接 GitHub。"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:43
 msgid "skillLibraries.error.githubAuthorizationRequired"
 msgstr "请连接你的 GitHub 账号以访问 GitHub App 安装。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:40
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:53
 msgid "skillLibraries.error.githubConfigurationInvalid"
 msgstr "GitHub 集成配置不正确。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:45
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:58
 msgid "skillLibraries.error.githubRateLimited"
 msgstr "已达到 GitHub API 速率限制，请稍后重试。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:55
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:68
 msgid "skillLibraries.error.githubRequestInvalid"
 msgstr "GitHub 拒绝了此仓库请求。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:50
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:63
 msgid "skillLibraries.error.githubResourceUnavailable"
 msgstr "仓库或目录已移动、删除或不再授权。"
 
@@ -250,22 +256,22 @@ msgid "skillLibraries.error.githubSelectionRequired"
 msgstr "保存前请选择可访问的仓库目录。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:60
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:73
 msgid "skillLibraries.error.githubUnavailable"
 msgstr "GitHub 数据暂时不可用。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:47
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:53
 msgid "skillLibraries.error.loadTitle"
 msgstr "无法加载技能库"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:75
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:88
 msgid "skillLibraries.error.notFound"
 msgstr "未找到技能库。"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-errors.ts:80
+#: src/routes/-features/skill-libraries/skill-library-errors.ts:93
 msgid "skillLibraries.error.unknown"
 msgstr "无法加载技能库数据。"
 
@@ -291,7 +297,7 @@ msgid "skillLibraries.form.repository"
 msgstr "仓库"
 
 #. js-lingui-explicit-id
-#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:66
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:99
 msgid "skillLibraries.loading"
 msgstr "正在加载技能库..."
 
@@ -299,6 +305,11 @@ msgstr "正在加载技能库..."
 #: src/routes/-features/skill-libraries/skill-library-sidebar-group.tsx:39
 msgid "skillLibraries.menu.label"
 msgstr "技能库操作"
+
+#. js-lingui-explicit-id
+#: src/routes/-features/skill-libraries/skill-library-route-states.tsx:78
+msgid "skillLibraries.oauth.errorTitle"
+msgstr "无法连接 GitHub"
 
 #. js-lingui-explicit-id
 #: src/routes/-features/skill-libraries/skill-library-rename-dialog.tsx:73
